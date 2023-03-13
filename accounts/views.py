@@ -59,7 +59,7 @@ def account_edit_view(request):
         return redirect('user_login')
 
     if request.POST:
-        form = forms.AccountEditForm(request.POST)
+        form = forms.AccountEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
     else:
