@@ -62,6 +62,7 @@ def account_edit_view(request):
         form = forms.AccountEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            return redirect('account_details')
     else:
         form = forms.AccountEditForm(
             initial={
