@@ -4,4 +4,6 @@
     <h3>Username : {{ user.username }}</h3>
     <p>Phone Number : {{ user.phone_number }}</p>
     <p>Email : {{ user.email }}</p>
+    <hr>
+    <a href="{% url 'account_edit' %}">Edit Account</a>
 {% endblock %}

@@ -52,3 +52,38 @@ def logout_view(request):
 
 def account_details_view(request):
     return render(request, 'accounts/account_details.html')
+
+
+def account_edit_view(request):
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+
+    if request.POST:
+        form = forms.AccountEditForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = forms.AccountEditForm(
+            initial={
+                "username": request.user.username,
+                "phone_number": request.user.phone_number,
+                "email": request.user.email,
+            }
+        )
+    return render(request, 'accounts/account_details.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
