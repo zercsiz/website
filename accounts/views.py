@@ -70,7 +70,7 @@ def account_edit_view(request):
                 "email": request.user.email,
             }
         )
-    return render(request, 'accounts/account_details.html', {'form': form})
+    return render(request, 'accounts/account_edit.html', {'form': form})
 
 
 
