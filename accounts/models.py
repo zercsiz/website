@@ -30,8 +30,8 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
 
     phone_number = models.CharField(verbose_name='Phone Number', max_length=11, unique=True)
-    username = models.CharField(max_length=250, unique=True, blank=True)
-    email = models.CharField(verbose_name='Email', max_length=250, unique=True, blank=True)
+    username = models.CharField(max_length=250, unique=True, null=True)
+    email = models.CharField(verbose_name='Email', max_length=250, unique=True, null=True)
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     is_admin = models.BooleanField(default=False)
