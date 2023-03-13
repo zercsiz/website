@@ -4,16 +4,17 @@ from django.contrib.auth import login, authenticate, logout
 from django.views.decorators.csrf import csrf_protect
 
 
+
 @csrf_protect
 def user_registration_view(request):
     if request.method == 'POST':
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            phone_number = form.cleaned_data.get('phone_number')
-            raw_password = form.cleaned_data.get('password')
-            account = authenticate(phone_number=phone_number, password=raw_password)
-            login(request, account)
+            user = form.save()
+            # phone_number = form.cleaned_data.get('phone_number')
+            # raw_password = form.cleaned_data.get('password')
+            # account = authenticate(phone_number=phone_number, password=raw_password)
+            login(request, user)
             return redirect('home')
         else:
             form = forms.RegistrationForm()
