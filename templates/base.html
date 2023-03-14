@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+{#    added custom css for navbar#}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <header>
@@ -143,7 +147,10 @@
         </div>
     </div>
 
+{#added js file for navbar transition    #}
+<script src="{% static 'js/navbar.js' %}"></script>
 
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
 </body>
 </html>

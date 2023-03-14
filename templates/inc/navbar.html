@@ -1,9 +1,3 @@
-{% load static %}
-
-{#linked css for scroll transition#}
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-
-
 <nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top navbar-scrolled">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">MYSITE</a>
@@ -36,6 +30,3 @@
         </div>
     </div>
 </nav>
-
-{#added js file for transition animation#}
-<script src="{% static 'js/navbar.js' %}"></script>
