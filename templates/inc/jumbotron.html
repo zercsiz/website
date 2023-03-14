@@ -1,18 +1,10 @@
 {% load static %}
-<div class="d-flex justify-content-center align-items-center border-primary img-fluid"
-     style="background-image: url({% static 'img/laptop_book_aesthetics_214147_2560x1080.jpg' %});
-             max-width: 100%;
-             height: auto;
-             ">
-    <div class="mask mask-custom">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <h3 class="text-white mb-0">Can you see me?</h3>
-        </div>
-    </div>
+<div class="d-flex flex-column p-0 bg-secondary justify-content-center align-items-center"
+     style="height: 400px;
+            background-image: url({% static 'img/laptop_book_aesthetics_214147_2560x1080.jpg'%});
+             width: auto;">
+
+    <h3 class="col-md-5 text-center text-light">Learn whatever you want, wherever you want!</h3>
+    <br>
+    <a class="btn btn-outline-light btn-lg" href="">Start Learning Now!</a>
 </div>
-<style>
-    .mask-custom {
-        backdrop-filter: blur(5px);
-        background-color: rgba(0,0,0,0.2);
-    }
-</style>
