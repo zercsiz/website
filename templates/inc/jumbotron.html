@@ -1,13 +1,27 @@
 {% load static %}
-<div class="d-flex flex-column p-0 bg-secondary shadow-lg justify-content-center align-items-center"
-     style="height: 500px;
-             background-image: url({% static 'img/laptop_book_aesthetics_214147_2560x1080.jpg'%});
-             width: auto;
-             background-repeat: no-repeat;
-             background-position: center;
-             background-size: cover">
-
-    <h3 class="col-md-5 text-center text-light">Learn whatever you want, whenever you want!</h3>
-    <br>
-    <a class="btn btn-outline-light btn-lg" href="">Start Learning Now!</a>
+{#<div class="d-flex flex-column p-0 bg-secondary shadow-lg justify-content-center align-items-center"#}
+{#     style="height: 500px;#}
+{#             background-image: url({% static 'img/laptop_book_aesthetics_214147_2560x1080.jpg'%});#}
+{#             width: auto;#}
+{#             background-repeat: no-repeat;#}
+{#             background-position: center;#}
+{#             background-size: cover">#}
+{##}
+{#    <h3 class="col-md-5 text-center text-light">Learn whatever you want, whenever you want!</h3>#}
+{#    <br>#}
+{#    <a class="btn btn-outline-light btn-lg" href="">Start Learning Now!</a>#}
+{#</div>#}
+<div class="container-fluid p-0" style="height: 500px;
+            overflow-x: hidden;
+            ">
+    <img src="{% static 'img/laptop_book_aesthetics_214147_2560x1080.jpg'%}" alt="Bg image"
+         style="
+                width: 100vw;
+                height: 500px;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+        ">
 </div>
