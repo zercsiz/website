@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="d-flex flex-column justify-content-center align-items-center p-0 border "
+         style="height: 100vh; width: 100vw; object-fit: cover; background-color: #CECECE">
+        <h2>Login</h2>
+        <div class="card" style="box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15)">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-        {% for field in form %}
-            {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-            {% endfor %}
-        {% endfor %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
 
-        {% if form.non_field_errors %}
-            <div>
-                <p style="color: red"> {{ form.non_field_errors }}</p>
+                    {% if form.non_field_errors %}
+                        <div>
+                            <p style="color: red"> {{ form.non_field_errors }}</p>
+                        </div>
+                    {% endif %}
+                    <button type="submit">Login</button>
+                </form>
             </div>
-        {% endif %}
-        <button type="submit">Login</button>
-    </form>
-
+        </div>
+    </div>
 {% endblock %}
