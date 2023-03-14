@@ -1,4 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top">
+{% load static %}
+
+{#linked css for scroll transition#}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow fixed-top navbar-scrolled">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">MYSITE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +18,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                 </li>
-
             </ul>
             <ul class="navbar-nav col-md-4 justify-content-end offset-md-4">
                 {% if user.is_authenticated %}
@@ -31,3 +36,6 @@
         </div>
     </div>
 </nav>
+
+{#added js file for transition animation#}
+<script src="{% static 'js/navbar.js' %}"></script>
