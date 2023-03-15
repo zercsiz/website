@@ -9,4 +9,5 @@
     <p>Email : {{ user.email }}</p>
     <hr>
     <a href="{% url 'account_edit' %}">Edit Account</a>
+    {% include "inc/time_table.html" %}
 {% endblock %}
