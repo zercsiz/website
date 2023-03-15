@@ -5,28 +5,60 @@
         <title>Login</title>
     </head>
     <div class="d-flex flex-column justify-content-center align-items-center p-0 border "
-         style="height: 100vh; width: 100vw; object-fit: cover; background-color: #CECECE">
-        <h2>Login</h2>
-        <div class="card" style="box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15)">
-            <div class="card-body">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
+         style="height: 100vh; width: 100vw; object-fit: cover; background-color: #fafafa">
+        <main class="form-signin w-100 m-auto text-center">
+          <form method="post"> {% csrf_token %}
 
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    {% endfor %}
+            <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
 
-                    {% if form.non_field_errors %}
-                        <div>
-                            <p style="color: red"> {{ form.non_field_errors }}</p>
-                        </div>
-                    {% endif %}
-                    <button type="submit">Login</button>
-                </form>
+            <div class="form-floating">
+              <input type="phone_number" name="phone_number" class="form-control" id="floatingInput" placeholder="09---------">
             </div>
-        </div>
+            <div class="form-floating">
+              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+            </div>
+
+            <div class="checkbox mb-3">
+              <label class="justify-content-center">
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+              {% for field in form %}
+                  {% for error in field.errors %}
+                      <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+              {% endfor %}
+
+              {% if form.non_field_errors %}
+                  <div>
+                      <p style="color: red"> {{ form.non_field_errors }}</p>
+                  </div>
+              {% endif %}
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+          </form>
+        </main>
     </div>
+
+    <style>
+        .form-signin {
+          max-width: 330px;
+          padding: 15px;
+        }
+        .form-signin .form-floating:focus-within {
+          z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+          margin-bottom: -1px;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+          margin-bottom: 10px;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+    </style>
 {% endblock %}
