@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Course
+from courses.models import Course
 from accounts.models import Account
 
 
