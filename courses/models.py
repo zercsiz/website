@@ -27,8 +27,8 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
-    date = models.DateField()
-    start = models.TimeField()
-    end = models.TimeField()
+    date = models.DateField(null=True)
+    start = models.TimeField(null=True)
+    end = models.TimeField(null=True)
 
 
