@@ -9,8 +9,15 @@ def create_time(request):
         for n in range(int((end_date - start_date).days)):
             yield start_date + timedelta(n)
 
+    #this function adds 1:30 to start time
+    def calculate_endtime(start):
+        start = start
+        hour = int(start[0:2])
+        minute = int(start[3:])
+        end = timedelta(hours=hour, minutes=minute) + timedelta(hours=1, minutes=30)
+        return end
+
     if request.method == "POST":
-        date_list = []
         teacher_time_list = request.POST.getlist('times')
 
         start_date = date.today()
@@ -19,8 +26,9 @@ def create_time(request):
         for single_date in daterange(start_date, end_date):
             d = single_date.strftime("%Y-%m-%d")
             for t in teacher_time_list:
+                end_time = str(calculate_endtime(t[2:]))
                 if single_date.weekday() == int(t[0]):
-                    t_time = TeacherTime.objects.create(date=d, start=t[2:])
+                    t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time)
                     t_time.save()
 
         return redirect('account_details')
