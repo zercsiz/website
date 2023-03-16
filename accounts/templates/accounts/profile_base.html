@@ -8,11 +8,10 @@
         <div class="row">
             {% include 'inc/account_details_sidebar.html' %}
             <div class="col border border-primary">
-                <h3>پنل کاربری</h3>
-                <hr>
-                <p> نام کاربری : {{ user.username }}</p>
-                <p>شماره تلفن همراه : {{ user.phone_number }}</p>
-                <p>ایمیل : {{ user.email }}</p>
+                {% block profile_content %}
+
+                {% endblock %}
+
             </div>
 
         </div>

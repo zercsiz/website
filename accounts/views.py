@@ -51,7 +51,7 @@ def logout_view(request):
 
 
 def account_details_view(request):
-    return render(request, 'accounts/account_details.html')
+    return render(request, 'accounts/account_information.html')
 
 
 def account_edit_view(request):
