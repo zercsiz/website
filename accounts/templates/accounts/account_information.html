@@ -6,4 +6,18 @@
     <p> نام کاربری : {{ user.username }}</p>
     <p>شماره تلفن همراه : {{ user.phone_number }}</p>
     <p>ایمیل : {{ user.email }}</p>
+    <hr>
+    <div class="container-fluid p-0 m-0">
+        <h3>تایم های رزرو شده</h3>
+        {% for t in teacher_time %}
+            {% if t.is_reserved %}
+                <div class="card m-1">
+                    <div class="card-body">
+                        {{ t.date }} - from {{ t.start }} to {{ t.end }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
 {% endblock %}

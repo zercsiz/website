@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.views.decorators.csrf import csrf_protect
+from courses.models import TeacherTime
 
 
 
@@ -51,7 +52,9 @@ def logout_view(request):
 
 
 def account_details_view(request):
-    return render(request, 'accounts/account_information.html')
+    teacher_time_list = TeacherTime.objects.all()
+    context = {'teacher_time': teacher_time_list}
+    return render(request, 'accounts/account_information.html', context)
 
 
 def account_edit_view(request):
