@@ -2,14 +2,14 @@
 
 {% block content %}
     <head>
-        <title>Login</title>
+        <title>ورود</title>
     </head>
     <div class="d-flex flex-column justify-content-center align-items-center p-0 border "
          style="height: 100vh; width: 100vw; object-fit: cover; background-color: #fafafa">
         <main class="form-signin w-100 m-auto text-center">
           <form method="post"> {% csrf_token %}
 
-            <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+            <h1 class="h3 mb-3 fw-normal text-center">ورود به حساب کاربری</h1>
 
             <div class="form-floating">
               <input type="phone_number" name="phone_number" class="form-control" id="floatingInput" placeholder="09---------">
@@ -34,7 +34,7 @@
                       <p style="color: red"> {{ form.non_field_errors }}</p>
                   </div>
               {% endif %}
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">ورود</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
           </form>
         </main>
