@@ -12,7 +12,7 @@ def create_time(request):
     if request.method == "POST":
         date_list = []
         start_date = date.today()
-        end_date = date(2025, 1, 1)
+        end_date = date(2024, 1, 1)
         for single_date in daterange(start_date, end_date):
             date_list.append(single_date.strftime("%Y-%m-%d"))
             print(date_list)
