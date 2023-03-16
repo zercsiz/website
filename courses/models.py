@@ -30,6 +30,7 @@ class TeacherTime(models.Model):
     date = models.DateField(null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
+    is_reserved = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.date}-{self.start}-{self.end}"
