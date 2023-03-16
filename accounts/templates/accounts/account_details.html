@@ -4,11 +4,19 @@
     <head>
         <title>Profile</title>
     </head>
-    <h3>Username : {{ user.username }}</h3>
-    <p>Phone Number : {{ user.phone_number }}</p>
-    <p>Email : {{ user.email }}</p>
-    <hr>
-    <a href="{% url 'account_edit' %}">Edit Account</a>
+    <div class="contailer-fluid">
+        <div class="row">
+            {% include 'inc/account_details_sidebar.html' %}
+            <div class="col border border-primary">
+                <h3>پنل کاربری</h3>
+                <hr>
+                <p> نام کاربری : {{ user.username }}</p>
+                <p>شماره تلفن همراه : {{ user.phone_number }}</p>
+                <p>ایمیل : {{ user.email }}</p>
+            </div>
 
-    <a class="btn btn-outline-primary" href="{% url 'time_checkbox' %}">My Free Times</a>
+        </div>
+    </div>
+
+
 {% endblock %}
