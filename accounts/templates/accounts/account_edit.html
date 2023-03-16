@@ -4,11 +4,12 @@
     <head>
         <title>Edit Account Information</title>
     </head>
-    <h2>Registration</h2>
+    <h2>ویرایش اطلاعات کاربری</h2>
+    <br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save Changes</button>
+        <button type="submit">ثبت تغییرات</button>
     </form>
 
 
