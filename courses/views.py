@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from . import models
 
-# Create your views here.
+
+def create_time(request):
+    if request.method == "POST":
+        time = request.POST.getlist('times')
+        print(time)
