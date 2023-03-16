@@ -33,4 +33,4 @@ class TeacherTime(models.Model):
     is_reserved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.date}-{self.start}-{self.end}"
+        return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"
