@@ -25,3 +25,10 @@ class Course(models.Model):
         verbose_name = "Course"
         verbose_name_plural = "Courses"
 
+
+class TeacherTime(models.Model):
+    date = models.DateField()
+    start = models.TimeField()
+    end = models.TimeField()
+
+
