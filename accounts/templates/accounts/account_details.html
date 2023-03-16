@@ -9,5 +9,6 @@
     <p>Email : {{ user.email }}</p>
     <hr>
     <a href="{% url 'account_edit' %}">Edit Account</a>
-    {% include "inc/time_table.html" %}
+
+    <a class="btn btn-outline-primary" href="{% url 'time_checkbox' %}">My Free Times</a>
 {% endblock %}
