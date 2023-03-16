@@ -21,7 +21,7 @@ def create_time(request):
         teacher_time_list = request.POST.getlist('times')
 
         start_date = date.today()
-        end_date = date(2024, 1, 1)
+        end_date = date(2023, 12, 1)
 
         for single_date in daterange(start_date, end_date):
             d = single_date.strftime("%Y-%m-%d")
