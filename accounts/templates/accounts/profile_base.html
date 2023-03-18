@@ -8,10 +8,10 @@
     <br>
     <br>
 
-    <div class="contailer-fluid">
-        <div class="row">
+    <div class="d-flex flex-column " style="height: 100vh">
+        <div class="row border border-primary" style="height: 100vh">
             {% include 'inc/profile_base_sidebar.html' %}
-            <div class="col">
+            <div class="col border border-dark">
                 {% block profile_content %}
 
                 {% endblock %}
