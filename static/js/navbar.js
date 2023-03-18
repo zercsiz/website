@@ -1,7 +1,8 @@
 
 const navFl = document.querySelector('.navbar')
 
-window.addEventListener('scroll',
+if(window.location.pathname==='/') {
+    window.addEventListener('scroll',
     () => {
         if (window.scrollY >= 56) {
             navFl.classList.add('navbar-scrolled');
@@ -9,3 +10,7 @@ window.addEventListener('scroll',
             navFl.classList.remove('navbar-scrolled');
         }
     });
+} else {
+     navFl.classList.add('navbar-scrolled');
+}
+
