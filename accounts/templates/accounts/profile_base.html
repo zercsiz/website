@@ -12,12 +12,11 @@
         <div class="row border border-primary" style="height: 100vh">
             {% include 'inc/profile_base_sidebar.html' %}
             <div class="col border border-dark">
-                {% block profile_content %}
-
-                {% endblock %}
-
+                <div class="d-flex flex-column justify-content-center align-items-center p-0">
+                    {% block profile_content %}
+                    {% endblock %}
+                </div>
             </div>
-
         </div>
     </div>
 
