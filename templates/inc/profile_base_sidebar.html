@@ -7,34 +7,18 @@
               پنل کاربری
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'time_checkbox' %}">
-              <span data-feather="file" class="align-text-bottom"></span>
-              تایم های خالی من
-            </a>
-          </li>
+            {% if user.is_teacher %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'time_checkbox' %}">
+                  <span data-feather="file" class="align-text-bottom"></span>
+                  تایم های خالی من
+                </a>
+              </li>
+            {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_edit' %}">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               ویرایش اطلاعات
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users" class="align-text-bottom"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
             </a>
           </li>
         </ul>
