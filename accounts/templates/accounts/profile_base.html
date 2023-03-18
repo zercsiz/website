@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <head>
         <title>Profile</title>
+        <link rel="stylesheet" href="{% static 'css/profile_base_sidebar.css' %}">
     </head>
 
     <div class="d-flex flex-column" style="height: 100vh; margin-top: 56px">
@@ -17,5 +19,5 @@
         </div>
     </div>
 
-
+    <script src="{% static 'js/profile_base_sidebar.js' %}"></script>
 {% endblock %}
