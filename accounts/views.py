@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import views as auth_views
 from django.views.decorators.csrf import csrf_protect
 from courses.models import TeacherTime
 
