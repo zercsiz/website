@@ -2,14 +2,14 @@ const sideNL1 = document.querySelector('.sidebar-nav-link1')
 const sideNL2 = document.querySelector('.sidebar-nav-link2')
 const sideNL3 = document.querySelector('.sidebar-nav-link3')
 const sideNL4 = document.querySelector('.sidebar-nav-link4')
-const sideNL5 = document.querySelector('.sidebar-nav-link5')
+
 
 if(window.location.pathname==='/accounts/details/') {
     sideNL1.classList.add('nav-link-active');
     sideNL2.classList.add('nav-link-deactive');
     sideNL3.classList.add('nav-link-deactive');
     sideNL4.classList.add('nav-link-deactive');
-    sideNL5.classList.add('nav-link-deactive');
+
 
 }
 if (window.location.pathname==='/courses/time_checkbox') {
@@ -17,12 +17,12 @@ if (window.location.pathname==='/courses/time_checkbox') {
     sideNL1.classList.add('nav-link-deactive');
     sideNL3.classList.add('nav-link-deactive');
     sideNL4.classList.add('nav-link-deactive');
-    sideNL5.classList.add('nav-link-deactive');
+
 }
 if (window.location.pathname==='/accounts/edit/') {
     sideNL3.classList.add('nav-link-active');
     sideNL2.classList.add('nav-link-deactive');
     sideNL1.classList.add('nav-link-deactive');
     sideNL4.classList.add('nav-link-deactive');
-    sideNL5.classList.add('nav-link-deactive');
+
 }
