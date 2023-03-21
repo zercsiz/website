@@ -29,7 +29,7 @@ def create_time(request):
                 for t in teacher_time_list:
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
-                        t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time, google_meet_link=google_meet_link)
+                        t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time, google_meet_link=google_meet_link[0])
                         t_time.save()
 
             return redirect('account_details')
