@@ -33,6 +33,7 @@ class TeacherTime(models.Model):
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
     is_reserved = models.BooleanField(default=False)
+    google_meet_link = models.CharField(null=True)
 
     def __str__(self):
         return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"
