@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 languages = [
@@ -27,6 +28,7 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField(null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
