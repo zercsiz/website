@@ -328,6 +328,8 @@
                     </tr>
                   </tbody>
             </table>
+            <h5>لطفا لینک گوگل میت را وارد کنید.</h5>
+            <input class="m-auto" name="google_meet_link" placeholder="لینک گوگل میت" required="True">
             <button class="btn btn-outline-primary m-auto" type="submit">تایید</button>
         </div>
     </form>
@@ -337,7 +339,6 @@
     </p>
     <hr>
     <form action="" method="post">{% csrf_token %}
-        <h5>لطفا لینک گوگل میت را وارد کنید.</h5>
-        <input name="google_meet_link" placeholder="لینک گوگل میت">
+
     </form>
 {% endblock %}
