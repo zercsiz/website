@@ -19,6 +19,7 @@ def create_time(request):
 
         if request.method == "POST":
             teacher_time_list = request.POST.getlist('times')
+            google_meet_link = request.POST.getlist('google_meet_link')
 
             start_date = date.today()
             end_date = date(2023, 12, 1)
@@ -28,7 +29,7 @@ def create_time(request):
                 for t in teacher_time_list:
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
-                        t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time)
+                        t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time, google_meet_link=google_meet_link)
                         t_time.save()
 
             return redirect('account_details')
