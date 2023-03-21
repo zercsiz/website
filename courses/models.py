@@ -28,12 +28,12 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     date = models.DateField(null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
     is_reserved = models.BooleanField(default=False)
-    google_meet_link = models.CharField(null=True)
+    google_meet_link = models.CharField(null=True, max_length=250)
 
     def __str__(self):
         return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"
