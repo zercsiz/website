@@ -21,7 +21,7 @@ class create_time(View):
             end = timedelta(hours=hour, minutes=minute) + timedelta(hours=1, minutes=30)
             return end
 
-        if request.method == "POST":
+        if request.user.is_teacher:
             teacher_time_list = request.POST.getlist('times')
             google_meet_link = request.POST.getlist('google_meet_link')
 
@@ -39,9 +39,16 @@ class create_time(View):
                         t_time.save()
 
             return redirect('account_details')
+        else:
+            return redirect('home')
 
     def get(self, request):
-        return render(request, 'courses/time_checkbox.html')
+        if request.user.is_authenticated:
+            if request.user.is_teacher:
+                return render(request, 'courses/time_checkbox.html')
+            else:
+                return redirect('home')
 
-
+        else:
+            return redirect('home')
 
