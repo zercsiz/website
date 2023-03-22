@@ -5,7 +5,7 @@ from accounts.models import Account
 from django.views import View
 
 
-class create_time(View):
+class CreateTime(View):
 
     def post(self,request):
 
