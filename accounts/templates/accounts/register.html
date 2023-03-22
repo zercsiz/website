@@ -7,25 +7,25 @@
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px"></div>
     <h2 class="text-center">ثبت نام</h2>
     <form method="post" class="m-auto text-center mt-5">{% csrf_token %}
-        <div class="row mb-3 border border-primary m-auto justify-content-center">
+        <div class="row mb-3 m-auto justify-content-center">
             <label for="inputUsername" class="col-sm-2 col-form-label">نام کاربری</label>
             <div class="col-lg-3">
                 <input type="text" name="username" class="form-control" id="inputUsername" required>
             </div>
         </div>
-        <div class="row mb-3 border border-primary m-auto justify-content-center">
+        <div class="row mb-3 m-auto justify-content-center">
             <label for="inputPhoneNumber" class="col-sm-2 col-form-label">شماره تلفن</label>
             <div class="col-lg-3">
                 <input type="tel" name="phone_number" class="form-control" id="inputPhoneNumber" maxlength="11" required>
             </div>
         </div>
-        <div class="row mb-3 border border-primary m-auto justify-content-center">
+        <div class="row mb-3 m-auto justify-content-center">
             <label for="inputPass1" class="col-sm-2 col-form-label">رمز ورود</label>
             <div class="col-lg-3">
                 <input type="password" name="password1" class="form-control" id="inputPass1" required>
             </div>
         </div>
-        <div class="row mb-3 border border-primary m-auto justify-content-center">
+        <div class="row mb-3 m-auto justify-content-center">
             <label for="inputPass2" class="col-sm-2 col-form-label">تکرار رمز ورود</label>
             <div class="col-lg-3">
                 <input type="password" name="password2" class="form-control" id="inputPass2" required>
