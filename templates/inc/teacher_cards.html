@@ -1,25 +1,25 @@
-{#<h2 class="text-center">Our Teachers</h2>#}
-{#    <div class="container-fluid p-0">#}
-{#        <div class="row justify-content-center">#}
-{#            {% for t in teachers %}#}
-{#                <div class="col-lg-3 col-md-4 col-sm-4 m-4">#}
-{#                    <div class="card text-center" style="box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15)">#}
-{#                        <div class="card-header">#}
-{#                            <h4>{{ t.username }}</h4>#}
-{#                        </div>#}
-{#                        <div class="card-body" style="height: 100px">#}
-{#                            <p class="card-text text-center">{{ t.email}}</p>#}
-{#                        </div>#}
-{#                        <div class="card-footer">#}
-{#                            <a href="" class="btn">kelas bardar!</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#    <div class="d-flex flex-column p-0 justify-content-center">#}
-{#        <a href="" class="btn btn-outline-dark m-auto">Out complete list of teachers</a>#}
-{#    </div>#}
-{##}
-{#    </div>#}
-{#<hr>#}
+<h2 class="text-center">معلم های ما</h2>
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            {% for t in teachers %}
+                <div class="col-lg-3 col-md-4 col-sm-4 m-4">
+                    <div class="card text-center" style="box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15)">
+                        <div class="card-header">
+                            <h4>{{ t.username }}</h4>
+                        </div>
+                        <div class="card-body" style="height: 100px">
+                            <p class="card-text text-center">{{ t.email}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn">kelas bardar!</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    <div class="d-flex flex-column p-0 justify-content-center">
+        <a href="" class="btn btn-outline-dark m-auto">لیست کامل معلم ها</a>
+    </div>
+
+    </div>
+<hr>
