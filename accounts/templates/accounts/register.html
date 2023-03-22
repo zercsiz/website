@@ -4,14 +4,37 @@
     <head>
         <title>ثبت نام</title>
     </head>
-    <h2>Registration</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="d-flex flex-column justify-content-center" style="margin-top: 100px"></div>
+    <h2 class="text-center">ثبت نام</h2>
+    <form method="post" class="m-auto text-center mt-5">{% csrf_token %}
+        <div class="row mb-3 border border-primary m-auto justify-content-center">
+            <label for="floatingInput" class="col-sm-2 col-form-label">نام کاربری</label>
+            <div class="col-lg-3">
+                <input type="text" name="username" class="form-control" id="floatingInput">
+            </div>
+        </div>
+        <div class="row mb-3 border border-primary m-auto justify-content-center">
+            <label for="floatingInput" class="col-sm-2 col-form-label">شماره تلفن</label>
+            <div class="col-lg-3">
+                <input type="tel" name="phone_number" class="form-control" id="floatingInput" maxlength="11">
+            </div>
+        </div>
+        <div class="row mb-3 border border-primary m-auto justify-content-center">
+            <label for="floatingInput" class="col-sm-2 col-form-label">رمز ورود</label>
+            <div class="col-lg-3">
+                <input type="password" name="password1" class="form-control" id="floatingInput">
+            </div>
+        </div>
+        <div class="row mb-3 border border-primary m-auto justify-content-center">
+            <label for="floatingInput" class="col-sm-2 col-form-label">تکرار رمز ورود</label>
+            <div class="col-lg-3">
+                <input type="password" name="password2" class="form-control" id="floatingInput">
+            </div>
+        </div>
         {% if form.errors %}
             {{ form.errors }}
         {% endif %}
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">ارسال</button>
     </form>
 
 
