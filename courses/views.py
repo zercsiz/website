@@ -50,5 +50,5 @@ class CreateTime(View):
                 return redirect('home')
 
         else:
-            return redirect('home')
+            return redirect('user_login')
 
