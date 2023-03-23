@@ -6,21 +6,22 @@
     </head>
     {% include 'inc/jumbotron.html' %}
     <br>
-    <a href="" class="btn btn-floating m-4 fixed-top shadow-sm invisible"
-       style="background-color: #db6204;
-              outline: None; color: white;
-              width: 190px; transition: all 0.1s">یادگیری رو شروع کن</a>
+    <a href="#" class="btn btn-floating m-4 fixed-top shadow-sm opacity-0 disabled"
+       style="background-color: #db6204; color: white;
+              width: 190px;outline-color: #db6204; transition: opacity 0.25s">یادگیری رو شروع کن</a>
 
     {% include 'inc/course_cards.html' %}
     {% include 'inc/teacher_cards.html' %}
+
+    <!-- added java script for btn-floating transition -->
     <script>
         const btnFl = document.querySelector('.btn-floating')
         window.addEventListener('scroll',
         () => {
         if (window.scrollY > 800) {
-            btnFl.classList.remove('invisible');
+            btnFl.classList.remove('opacity-0','disabled');
         } else if (window.scrollY <= 800) {
-            btnFl.classList.add('invisible');
+            btnFl.classList.add('opacity-0','disabled');
         }
         });
     </script>
