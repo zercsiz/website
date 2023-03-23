@@ -6,6 +6,24 @@
     </head>
     {% include 'inc/jumbotron.html' %}
     <br>
+    <a href="" class="btn btn-floating m-4 fixed-top"
+       style="background-color: #db6204;
+              outline: None; color: white; width: 190px; transition: visibility 0.1s">یادگیری رو شروع کن</a>
+
+    <style>
+        .btn-floating-invisible {
+            visibility: hidden;
+        }
+    </style>
+
+    <script>
+        const btnFl = document.querySelector('.btn-floating')
+        if (window.scrollY > 90) {
+            btnFl.classList.remove('btn-floating-invisible');
+        } else if (window.scrollY <= 90) {
+            btnFl.classList.add('btn-floating-invisible');
+        }
+    </script>
     {% include 'inc/course_cards.html' %}
     {% include 'inc/teacher_cards.html' %}
 {% endblock %}
