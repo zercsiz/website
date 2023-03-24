@@ -32,9 +32,9 @@ def login_view(request):
     if request.method == "POST":
         form = forms.UserLoginForm(request.POST)
         if form.is_valid():
-            phone_number = request.POST['phone_number']
+            email = request.POST['email']
             password = request.POST['password']
-            user = authenticate(phone_number=phone_number, password=password)
+            user = authenticate(email=email, password=password)
 
             if user:
                 login(request, user)

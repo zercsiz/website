@@ -3,33 +3,33 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, phone_number, password=None):
-        if not phone_number:
-            raise ValueError("Phone number is required!")
+    def create_user(self, email, password=None):
+        if not email:
+            raise ValueError("Email address is required!")
         user = self.model(
-            phone_number=phone_number,
-            password=password
+            email=self.normalize_email(email)
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone_number, password):
+    def create_superuser(self, email, password):
         user = self.create_user(
-            phone_number=phone_number,
+            email=self.normalize_email(email),
             password=password
         )
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
-        user.is_student = False
+        user.is_student = True
+        user.is_teacher = True
         user.save(using=self._db)
         return user
 
 
 class Account(AbstractBaseUser):
 
-    phone_number = models.CharField(verbose_name='Phone Number', max_length=11, unique=True)
+    phone_number = models.CharField(verbose_name='Phone Number', max_length=11, unique=True, null=True)
     username = models.CharField(max_length=250, unique=True, null=True)
     email = models.CharField(verbose_name='Email', max_length=250, unique=True, null=True)
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
@@ -41,7 +41,7 @@ class Account(AbstractBaseUser):
     is_student = models.BooleanField(default=True)
     is_teacher = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'phone_number'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = MyAccountManager()
