@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end">
+            <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end active">
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="#">دوره ها</a>
                 </li>
@@ -28,3 +28,14 @@
         </div>
     </div>
 </nav>
+<style>
+    .nav-colored {
+        background-color: #14436b;
+    }
+</style>
+<script>
+    const nav = document.querySelector('.navbar')
+    if(window.location.pathname !== '/') {
+        nav.classList.add('nav-colored')
+    }
+</script>
