@@ -11,11 +11,11 @@
 
             <h1 class="h3 mb-3 fw-normal text-center">ورود به حساب کاربری</h1>
 
-            <div class="form-floating">
-              <input type="phone_number" name="phone_number" class="form-control" id="floatingInput" placeholder="09---------">
+            <div class="mb-3">
+              <input type="email" name="phone_number" class="form-control" id="floatingInput" placeholder="آدرس ایمیل">
             </div>
-            <div class="form-floating">
-              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="رمز ورود">
             </div>
 
             <div class="checkbox mb-3">
@@ -34,7 +34,7 @@
                       <p style="color: red"> {{ form.non_field_errors }}</p>
                   </div>
               {% endif %}
-            <button class="w-100 btn btn-lg btn-primary" type="submit">ورود</button>
+            <button class="w-100 btn btn-primary" type="submit">ورود</button>
               <a href="{% url "password_reset" %}">نام کاربری یا رمز عبورم را فراموش کردم</a>
             <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
           </form>
@@ -46,20 +46,9 @@
           max-width: 330px;
           padding: 15px;
         }
-        .form-signin .form-floating:focus-within {
+        .form-signin:focus-within {
           z-index: 2;
         }
 
-        .form-signin input[type="email"] {
-          margin-bottom: -1px;
-          border-bottom-right-radius: 0;
-          border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-          margin-bottom: 10px;
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
-        }
     </style>
 {% endblock %}

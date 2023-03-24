@@ -6,36 +6,33 @@
     </head>
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px"></div>
     <h2 class="text-center">ثبت نام</h2>
-    <form method="post" class="m-auto text-center mt-5">{% csrf_token %}
-        <div class="row mb-3 m-auto justify-content-center">
-            <label for="inputUsername" class="col-sm-2 col-form-label">نام کاربری</label>
-            <div class="col-lg-3">
-                <input type="text" name="username" class="form-control" id="inputUsername" required>
+    <main class="form-signup w-100 m-auto text-center">
+        <form method="post">{% csrf_token %}
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" id="inputPhoneNumber" maxlength="250" placeholder="آدرس ایمیل" required>
             </div>
-        </div>
-        <div class="row mb-3 m-auto justify-content-center">
-            <label for="inputPhoneNumber" class="col-sm-2 col-form-label">شماره تلفن</label>
-            <div class="col-lg-3">
-                <input type="tel" name="phone_number" class="form-control" id="inputPhoneNumber" maxlength="11" required>
+            <div class="mb-3">
+                <input type="password" name="password1" class="form-control" id="inputPass1" placeholder="رمز ورود" required>
             </div>
-        </div>
-        <div class="row mb-3 m-auto justify-content-center">
-            <label for="inputPass1" class="col-sm-2 col-form-label">رمز ورود</label>
-            <div class="col-lg-3">
-                <input type="password" name="password1" class="form-control" id="inputPass1" required>
-            </div>
-        </div>
-        <div class="row mb-3 m-auto justify-content-center">
-            <label for="inputPass2" class="col-sm-2 col-form-label">تکرار رمز ورود</label>
-            <div class="col-lg-3">
-                <input type="password" name="password2" class="form-control" id="inputPass2" required>
-            </div>
-        </div>
-        {% if form.errors %}
-            {{ form.errors }}
-        {% endif %}
-        <button type="submit" class="btn btn-primary">ارسال</button>
-    </form>
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+            <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
+        </form>
+    </main>
 
+
+    <style>
+        .form-signup {
+          max-width: 330px;
+          padding: 15px;
+        }
+        .form-signup:focus-within {
+          z-index: 2;
+        }
+        .button-signup {
+            max-width: 330px
+        }
+    </style>
 
 {% endblock %}

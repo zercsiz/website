@@ -5,11 +5,17 @@ from accounts.models import Account
 
 
 class RegistrationForm(UserCreationForm):
-    phone_number = forms.CharField(max_length=11, help_text="Required. Please enter a valid phone number")
+    email = forms.EmailField(max_length=250, help_text="Required. Please enter a valid email address")
 
     class Meta:
         model = Account
-        fields = ("username", "phone_number", "password1", "password2")
+        fields = ('email', 'password1')
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        del self.fields['password2']
+        self.fields['password1'].help_text = None
+        self.fields['email'].help_text = None
 
 
 class UserLoginForm(forms.ModelForm):
@@ -18,13 +24,13 @@ class UserLoginForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ('phone_number', 'password')
+        fields = ('email', 'password')
 
     def clean(self):
         if self.is_valid():
-            phone_number = self.cleaned_data['phone_number']
+            email = self.cleaned_data['email']
             password = self.cleaned_data['password']
-            if not authenticate(phone_number=phone_number, password=password):
+            if not authenticate(email=email, password=password):
                 raise forms.ValidationError("Invalid Login!")
 
 
