@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
-from django.views.decorators.csrf import csrf_protect
 from courses.models import TeacherTime
+from django.views import View
 
 
 
-@csrf_protect
-def user_registration_view(request):
-    if request.method == 'POST':
+class UserRegistrationView(View):
+    def post(self, request):
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -19,12 +18,14 @@ def user_registration_view(request):
             return redirect('home')
         else:
             form = forms.RegistrationForm()
-    else:
+        return render(request, 'accounts/register.html', {'form': form})
+
+    def get(self, request):
         form = forms.RegistrationForm()
-    return render(request, 'accounts/register.html', {'form': form})
+        return render(request, 'accounts/register.html', {'form': form})
 
 
-@csrf_protect
+
 def login_view(request):
     user = request.user
     if user.is_authenticated:
