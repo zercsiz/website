@@ -23,16 +23,12 @@
                 <input type="checkbox" value="remember-me"> Remember me
               </label>
             </div>
-              {% for field in form %}
-                  {% for error in field.errors %}
-                      <p style="color: red">{{ error }}</p>
-                  {% endfor %}
-              {% endfor %}
-
               {% if form.non_field_errors %}
-                  <div>
-                      <p style="color: red"> {{ form.non_field_errors }}</p>
-                  </div>
+                <ul class='form-errors'>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
               {% endif %}
             <button class="w-100 btn btn-primary" type="submit">ورود</button>
               <a href="{% url "password_reset" %}">نام کاربری یا رمز عبورم را فراموش کردم</a>
