@@ -42,8 +42,11 @@ def login_view(request):
 
 
 def logout_view(request):
-    logout(request)
-    return redirect('home')
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('home')
+    else:
+        return redirect('home')
 
 
 def account_details_view(request):
