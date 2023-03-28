@@ -25,25 +25,21 @@ class UserRegistrationView(View):
         return render(request, 'accounts/register.html', {'form': form})
 
 
-
 def login_view(request):
-    user = request.user
-    if user.is_authenticated:
+    if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
-        form = forms.UserLoginForm(request.POST)
+        form = forms.UserLoginForm(request.POST or None)
         if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
-            user = authenticate(email=email, password=password)
-
+            # email = request.POST['email']
+            # password = request.POST['password']
+            # user = authenticate(email=email, password=password)
+            user = form.login(request)
             if user:
                 login(request, user)
                 return redirect('home')
-
     else:
         form = forms.UserLoginForm()
-
     return render(request, 'accounts/login.html', {'form': form})
 
 
