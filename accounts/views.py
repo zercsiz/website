@@ -55,7 +55,7 @@ def logout_view(request):
         return redirect('home')
 
 
-class AccountInfo(LoginRequiredMixin, View):
+class AccountInfoView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
     def get(self, request):
