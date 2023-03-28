@@ -3,11 +3,12 @@ from .models import TeacherTime
 from datetime import date, timedelta, datetime
 from accounts.models import Account
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CreateTime(View):
-
-    def post(self,request):
+class CreateTime(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+    def post(self, request):
 
         def daterange(start_date, end_date):
             for n in range(int((end_date - start_date).days)):
