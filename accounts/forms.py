@@ -28,10 +28,19 @@ class UserLoginForm(forms.ModelForm):
 
     def clean(self):
         if self.is_valid():
-            email = self.cleaned_data['email']
-            password = self.cleaned_data['password']
-            if not authenticate(email=email, password=password):
-                raise forms.ValidationError("Invalid Login!")
+            email = self.cleaned_data.get('email')
+            password = self.cleaned_data.get('password')
+            user = authenticate(email=email, password=password)
+            if not user or not user.is_active:
+                # massage for invalid login
+                raise forms.ValidationError("نام کاربری یا رمز ورود اشتباه است.")
+            return self.cleaned_data
+
+    def login(self, request):
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        user = authenticate(email=email, password=password)
+        return user
 
 
 class AccountEditForm(forms.ModelForm):
