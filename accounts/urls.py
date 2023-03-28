@@ -9,7 +9,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name='user_login'),
     path('logout/', login_required(views.logout_view), name='user_logout'),
     path('details/', views.AccountInfoView.as_view(), name='account_details'),
-    path('edit/', views.account_edit_view, name='account_edit'),
+    path('edit/', views.AccountEditView.as_view(), name='account_edit'),
 
     # password reset urls
     path('password_change/done/',

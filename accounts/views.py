@@ -64,16 +64,17 @@ class AccountInfoView(LoginRequiredMixin, View):
         return render(request, 'accounts/account_information.html', context)
 
 
-def account_edit_view(request):
-    if not request.user.is_authenticated:
-        return redirect('user_login')
+class AccountEditView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
-    if request.POST:
+    def post(self, request):
         form = forms.AccountEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('account_details')
-    else:
+        return render(request, 'accounts/account_edit.html', {'form': form})
+
+    def get(self, request):
         form = forms.AccountEditForm(
             initial={
                 "username": request.user.username,
@@ -81,7 +82,7 @@ def account_edit_view(request):
                 "email": request.user.email,
             }
         )
-    return render(request, 'accounts/account_edit.html', {'form': form})
+        return render(request, 'accounts/account_edit.html', {'form': form})
 
 
 
