@@ -3,6 +3,7 @@ from . import forms
 from django.contrib.auth import login, authenticate, logout
 from courses.models import TeacherTime
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class UserRegistrationView(View):
@@ -54,10 +55,13 @@ def logout_view(request):
         return redirect('home')
 
 
-def account_details_view(request):
-    teacher_time_list = TeacherTime.objects.all()
-    context = {'teacher_time': teacher_time_list}
-    return render(request, 'accounts/account_information.html', context)
+class AccountInfo(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+
+    def get(self, request):
+        teacher_time_list = TeacherTime.objects.all()
+        context = {'teacher_time': teacher_time_list}
+        return render(request, 'accounts/account_information.html', context)
 
 
 def account_edit_view(request):
