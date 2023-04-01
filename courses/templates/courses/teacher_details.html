@@ -11,7 +11,6 @@
                 <div class="card" style="height: 200px">
 
                 </div>
-
             </div>
             <div class="col">
                 <h3>{{ teacher.first_name }} {{ teacher.last_name }}</h3>
@@ -21,17 +20,39 @@
         </div>
     </div>
     <hr>
+    <h3 style="margin-bottom: 20px">تایم های قابل رزرو</h3>
+
+        {% for m in months %}
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ m }}" aria-expanded="False" aria-controls="collapse{{ m }}">
+                        {{ m }}
+                    </button>
+                    </h2>
+                </div>
+                <div id="collapse{{ m }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {% for t in teacher_time %}
+                            {% if t.date.month == m %}
+                                <div class="card m-1 col-4">
+                                    <div class="card-body m-auto">
+                                        {{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start.isoformat }} تا ساعت {{ t.end.isoformat }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <hr>
     <div class="d-flex flex-column">
         <div class="row m-auto">
-            <h3>تایم های قابل رزرو</h3>
-                {% for t in teacher_time %}
-                        <div class="card m-1 col-4">
-                            <div class="card-body m-auto">
-                                {{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start }} تا ساعت {{ t.end }}
-                            </div>
-                        </div>
-                {% endfor %}
+
+
         </div>
     </div>
-</div>
+
 {% endblock %}
