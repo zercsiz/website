@@ -56,6 +56,10 @@ class CreateTime(LoginRequiredMixin, View):
 
 class TeacherDetails(View):
     def get(self, request, teacher_id):
+        teacher_time = TeacherTime.objects.filter(teacher=teacher_id)
         teacher = Account.objects.get(id=teacher_id)
-        print(teacher)
-        return render(request, 'courses/teacher_details.html', {'teacher': teacher})
+        context = {
+            'teacher': teacher,
+            'teacher_time': teacher_time
+        }
+        return render(request, 'courses/teacher_details.html', context)
