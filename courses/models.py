@@ -31,6 +31,7 @@ class Course(models.Model):
 class TeacherTime(models.Model):
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     date = jmodels.jDateField(null=True)
+    week_day = models.CharField(max_length=50, null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
     is_reserved = models.BooleanField(default=False)

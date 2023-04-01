@@ -15,6 +15,12 @@ class CreateTime(LoginRequiredMixin, View):
             for n in range(int((end_date - start_date).days)):
                 yield start_date + timedelta(n)
 
+        # this function converts weekday number to farsi weekday names
+        def week_day_convert(day_number):
+            # here shanbe is 5
+            day_list = ['دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه','یکشنبه',]
+            return day_list[day_number]
+
         # this function adds 1:30 to start time
         def calculate_endtime(start):
             start = start
@@ -37,7 +43,7 @@ class CreateTime(LoginRequiredMixin, View):
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
                         teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
-                        t_time = TeacherTime.objects.create(date=d, start=t[2:], end=end_time,
+                        t_time = TeacherTime.objects.create(date=d, week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
                                                             google_meet_link=google_meet_link[0], teacher=teacher)
                         t_time.save()
 

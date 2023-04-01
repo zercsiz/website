@@ -27,7 +27,7 @@
                 {% for t in teacher_time %}
                         <div class="card m-1 col-4">
                             <div class="card-body m-auto">
-                                {{ t.date }} - از ساعت {{ t.start }} تا ساعت {{ t.end }}
+                                {{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start }} تا ساعت {{ t.end }}
                             </div>
                         </div>
                 {% endfor %}
