@@ -32,6 +32,11 @@ class Account(AbstractBaseUser):
     phone_number = models.CharField(verbose_name='Phone Number', max_length=11, unique=True, null=True)
     username = models.CharField(max_length=250, unique=True, null=True)
     email = models.CharField(verbose_name='Email', max_length=250, unique=True, null=True)
+    first_name = models.CharField(verbose_name="First Name", max_length=200, null=True)
+    last_name = models.CharField(verbose_name="Last Name", max_length=200, null=True)
+    description = models.TextField(verbose_name="Description", max_length=1000, null=True)
+    skill = models.CharField(verbose_name="Skill", max_length=200, null=True)
+
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     is_admin = models.BooleanField(default=False)
