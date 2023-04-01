@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    ###my apps
+    # jalali date app
+    'jalali_date',
+
+    # my apps
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'courses.apps.CoursesConfig',
