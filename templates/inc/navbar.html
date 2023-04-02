@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end active">
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="#" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
+                    <a class="nav-link mx-2" href="{% url 'cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item mx-2">
