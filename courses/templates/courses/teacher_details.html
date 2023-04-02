@@ -22,33 +22,17 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-4" style="overflow-y:scroll; max-height: 800px">
+        <div class="col-5" style="overflow-y:scroll; max-height: 800px">
             <h4 class="text-center" style="margin-bottom: 20px">تایم های قابل رزرو</h4>
-            {% for m in months %}
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ m }}" aria-expanded="False" aria-controls="collapse{{ m }}">
-                        {{ m }}
-                    </button>
-                    </h2>
-                </div>
-                <div id="collapse{{ m }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        {% for t in teacher_time %}
-                            {% if t.date.month == m %}
-                                <div class="card m-1">
-                                    <div class="card-body m-auto">
-                                        {{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start.isoformat }} تا ساعت {{ t.end.isoformat }}
-                                        <button class="btn" style="background-color: forestgreen; color: white">رزرو</button>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+            {% for t in teacher_time %}
+                <div class="card m-1">
+                    <div class="card-body m-auto text-center">
+                        <p class="">{{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start.isoformat }} تا ساعت {{ t.end.isoformat }}</p>
+                        <hr>
+                        <button class="btn" style="background-color: forestgreen; color: white">رزرو</button>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
         <div class="col" style="height: 500px">
             <div class="d-flex flex-column">
