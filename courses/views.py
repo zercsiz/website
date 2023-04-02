@@ -43,7 +43,7 @@ class CreateTime(LoginRequiredMixin, View):
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
                         teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
-                        t_time = TeacherTime.objects.create(date=d, week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
+                        t_time = TeacherTime.objects.create(date=d, gdate=single_date.strftime("%Y-%m-%d"), week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
                                                             google_meet_link=google_meet_link[0], teacher=teacher)
                         t_time.save()
 
@@ -76,7 +76,7 @@ class TeacherDetails(View):
                   10: 'دی',
                   11: 'بهمن',
                   12: 'اسفند'}
-        teacher_time = TeacherTime.objects.filter(teacher=teacher_id)
+        teacher_time = TeacherTime.objects.filter(teacher=teacher_id).filter(gdate__gt=date.today())
         teacher = Account.objects.get(id=teacher_id)
         context = {
             'teacher': teacher,
