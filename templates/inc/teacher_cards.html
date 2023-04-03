@@ -1,4 +1,4 @@
-<h2 class="text-center">معلم های ما</h2>
+<h2 class="text-center">اساتید ما</h2>
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             {% for t in teachers %}
@@ -12,7 +12,7 @@
                             <h4>{{ t.first_name }} {{ t.last_name }}</h4>
                             <small>{{ t.skill }}</small>
                             <p class="card-text">{{ t.description}}</p>
-                            <a href="{% url 'teacher_details' t.id %}" class="btn text-end" style="color:darkblue">جزعیات</a>
+                            <a href="{% url 'teacher_details' t.id %}" class="btn btn-teacher-details">جزعیات</a>
                         </div>
                     </div>
                 </div>
@@ -24,3 +24,14 @@
 
     </div>
 <hr>
+<style>
+    .btn-teacher-details {
+        justify-content: end;
+        color:#14436b;
+        border-color: #14436b
+    }
+    .btn-teacher-details:hover {
+        color:white;
+        background-color: #14436b;
+    }
+</style>
