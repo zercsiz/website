@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from courses.models import TeacherTime
 
 
 class Order(models.Model):
@@ -10,3 +11,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.transaction_id}"
+
+
+class OrderItem(models.Model):
+    teacherTime = models.ForeignKey(TeacherTime, on_delete=models.SET_NULL, null=True, blank=True, related_name="TeacherTime")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True, related_name="Order")
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.teacherTime}"
