@@ -44,7 +44,7 @@ class CreateTime(LoginRequiredMixin, View):
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
                         teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
-                        t_time = TeacherTime.objects.create(date=d, gdate=single_date.strftime("%Y-%m-%d"), week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
+                        t_time = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"), week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
                                                             price=price, google_meet_link=google_meet_link[0], teacher=teacher)
                         t_time.save()
 
