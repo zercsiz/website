@@ -9,7 +9,29 @@ for(var i = 0; i < updateBtns.length; i++) {
         if (user === 'AnonymousUser') {
             console.log('Not logged in')
         }else{
-            console.log('user is logged in, sending data...')
+            updateUseOrder(teacherTimeId, action)
         }
     })
+}
+
+function updateUseOrder(teacherTimeId, action) {
+    console.log('user is logged in, sending data...')
+
+    var url = '/shop/update_item/'
+
+    fetch(url, {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'teacherTimeId': teacherTimeId, 'action':action})
+    })
+
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log('data', data)
+        })
 }
