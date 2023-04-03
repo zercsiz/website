@@ -3,11 +3,19 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 import json
+from .models import *
 
 
 class CartView(View):
     def get(self, request):
-        return render(request, 'shop/cart.html')
+        if request.user.is_authenticated:
+            student = request.user
+            order, created = Order.objects.get_or_create(student=student, complete=False, )
+            items = order.orderitem_set.all()
+        else:
+            items = []
+        context = {'items': items}
+        return render(request, 'shop/cart.html', context)
 
 
 def updateItem(request):
