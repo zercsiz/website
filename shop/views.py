@@ -10,8 +10,8 @@ class CartView(View):
     def get(self, request):
         if request.user.is_authenticated:
             student = request.user
-            order, created = Order.objects.get_or_create(student=student, complete=False, )
-            items = order.orderitem_set.all()
+            order, created = Order.objects.get_or_create(student=student, complete=False)
+            items = OrderItem.objects.filter(order=order)
         else:
             items = []
         context = {'items': items}
