@@ -32,6 +32,7 @@ class CreateTime(LoginRequiredMixin, View):
         if request.user.is_teacher:
             teacher_time_list = request.POST.getlist('times')
             google_meet_link = request.POST.getlist('google_meet_link')
+            price = int(request.POST.get('price'))
 
             start_date = date.today()
             end_date = date(2023, 12, 1)
@@ -44,7 +45,7 @@ class CreateTime(LoginRequiredMixin, View):
                     if single_date.weekday() == int(t[0]):
                         teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
                         t_time = TeacherTime.objects.create(date=d, gdate=single_date.strftime("%Y-%m-%d"), week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
-                                                            google_meet_link=google_meet_link[0], teacher=teacher)
+                                                            price=price, google_meet_link=google_meet_link[0], teacher=teacher)
                         t_time.save()
 
             return redirect('account_details')

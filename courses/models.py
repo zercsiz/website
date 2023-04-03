@@ -36,6 +36,7 @@ class TeacherTime(models.Model):
     week_day = models.CharField(max_length=50, null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
+    price = models.BigIntegerField(null=True, blank=True)
     is_reserved = models.BooleanField(default=False)
     google_meet_link = models.CharField(null=True, max_length=250)
 
