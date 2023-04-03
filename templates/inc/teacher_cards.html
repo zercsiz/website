@@ -3,15 +3,16 @@
         <div class="row justify-content-center">
             {% for t in teachers %}
                 <div class="col-lg-3 col-md-4 col-sm-4 m-4">
-                    <div class="card text-center" style="box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15)">
-                        <div class="card-header">
-                            <h4>{{ t.username }}</h4>
+                    <div class="card" style="box-shadow: 0 10px 10px 0 rgba(0,0,0,0.1), 1px 1px 0 0 rgba(0,0,0,0.3);
+                                                            border-radius: 0">
+                        <div class="card-header" style="height: 200px">
+                            <img src="" alt="">
                         </div>
-                        <div class="card-body" style="height: 100px">
-                            <p class="card-text text-center">{{ t.email}}</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="{% url 'teacher_details' t.id %}" class="btn">جزعیات</a>
+                        <div class="card-body">
+                            <h4>{{ t.first_name }} {{ t.last_name }}</h4>
+                            <small>{{ t.skill }}</small>
+                            <p class="card-text">{{ t.description}}</p>
+                            <a href="{% url 'teacher_details' t.id %}" class="btn text-end" style="color:darkblue">جزعیات</a>
                         </div>
                     </div>
                 </div>
