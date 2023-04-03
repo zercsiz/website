@@ -6,5 +6,10 @@ for(var i = 0; i < updateBtns.length; i++) {
         var teacherTimeId = this.getAttribute("data-teacherTime")
         var action = this.dataset.action
         console.log('productId:', teacherTimeId, "action:", action)
+        if (user === 'AnonymousUser') {
+            console.log('Not logged in')
+        }else{
+            console.log('user is logged in, sending data...')
+        }
     })
 }
