@@ -11,4 +11,10 @@ class CartView(View):
 
 
 def updateItem(request):
+    data = json.loads(request.body)
+    teacherTimeId = data['teacherTimeId']
+    action = data['action']
+
+    print('Action', action)
+    print('teacherTimeId', teacherTimeId)
     return JsonResponse("Item was added", safe=False)
