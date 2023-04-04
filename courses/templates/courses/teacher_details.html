@@ -29,7 +29,7 @@
                     <div class="card-body m-auto text-center">
                         <p class="">{{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start.isoformat }} تا ساعت {{ t.end.isoformat }}</p>
                         <hr>
-                        <button data-teacherTime="{{ t.id }}" data-action="add" class="btn btn-reserve update-cart">رزرو</button>
+                        <p>هزینه کلاس : {{ t.price }} ریال</p><button data-teacherTime="{{ t.id }}" data-action="add" class="btn btn-reserve update-cart">رزرو</button>
                     </div>
                 </div>
             {% endfor %}
