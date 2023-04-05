@@ -20,4 +20,4 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.teacherTime}"
+        return f"{self.teacherTime} - id = {self.id}"
