@@ -10,13 +10,6 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=250, null=True)
     total = models.BigIntegerField(null=True)
 
-    # @property
-    # def total_price(self):
-    #     order = self.objects.get(id=self.id)
-    #     orderitems = order.children.all()
-    #     total = sum([orderitems.teacherTime.price for item in orderitems])
-    #     return total
-
     def __str__(self):
         return f"{self.student.email} - {self.transaction_id}"
 
