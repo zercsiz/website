@@ -2,6 +2,7 @@
 
 {% block content %}
     {% load humanize %}
+    {% load static %}
 <head>
 <title>
     سبد خرید
@@ -12,12 +13,19 @@
             <h3 class="text-center my-2">سبد خرید</h3>
             <hr>
             <div class="row">
-                <div class="col-5 mx-3" style="overflow-y:scroll">
+                <div class="col-5 mx-3" style="overflow-y:scroll; max-height: 690px">
                     {% for item in items %}
                         <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
-                            <div class="card-body m-auto text-center">
-                                <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start.isoformat }} تا ساعت {{ item.teacherTime.end.isoformat }}</p>
-                                <p>هزینه کلاس : {{ item.teacherTime.price|intcomma }} ریال</p>
+                            <div class="card-body text-center">
+                                <div class="row">
+                                    <div class="col-1 m-auto">
+                                        <a href=""><img src="{% static 'img/remove_icon.png' %}" href="#" alt="" style="aspect-ratio: auto; height:17px"></a>
+                                    </div>
+                                    <div class="col">
+                                        <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start.isoformat }} تا ساعت {{ item.teacherTime.end.isoformat }}</p>
+                                        <p>هزینه جلسه : {{ item.teacherTime.price|intcomma }} ریال</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
@@ -30,13 +38,10 @@
                             <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
                             <hr>
                             <a href="" class="btn btn-primary my-3">پرداخت</a>
-
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </body>
 {% endblock %}
