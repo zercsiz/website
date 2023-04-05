@@ -16,6 +16,7 @@ class CartView(View):
             order.save()
         else:
             items = []
+            order = {'total': 0}
         context = {'items': items, 'order': order}
         return render(request, 'shop/cart.html', context)
 
