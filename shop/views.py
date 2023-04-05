@@ -28,4 +28,10 @@ def updateItem(request):
 
     print('Action', action)
     print('teacherTimeId', teacherTimeId)
+
+    student = request.user
+    teacherTime = TeacherTime.objects.get(id=teacherTimeId)
+    order, created = Order.objects.get_or_create(student=student, complete=False)
+    orderItem, created = OrderItem.objects.get_or_create(order=order, teacherTime=teacherTime)
+
     return JsonResponse("Item was added", safe=False)

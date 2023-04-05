@@ -33,5 +33,6 @@ function updateUseOrder(teacherTimeId, action) {
         })
         .then((data) => {
             console.log('data', data)
+            location.reload()
         })
 }
