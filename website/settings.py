@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     # jalali date app
     'jalali_date',
 
+    # humanize app
+    'django.contrib.humanize',
+
     # my apps
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',

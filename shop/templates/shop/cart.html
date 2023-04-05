@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% load humanize %}
 <head>
 <title>
     سبد خرید
@@ -16,7 +17,7 @@
                         <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
                             <div class="card-body m-auto text-center">
                                 <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start.isoformat }} تا ساعت {{ item.teacherTime.end.isoformat }}</p>
-                                <p>هزینه کلاس : {{ item.teacherTime.price }} ریال</p>
+                                <p>هزینه کلاس : {{ item.teacherTime.price|intcomma }} ریال</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -24,7 +25,7 @@
                 <div class="col-5 mx-3 my-2">
                     <div class="card">
                         <div class="card-body">
-                            <h5> هزینه کل: {{ order.total }} ریال</h5>
+                            <h5> هزینه کل: {{ order.total|intcomma }} ریال</h5>
                             <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
                             <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
                             <hr>
