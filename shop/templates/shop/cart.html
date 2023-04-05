@@ -10,8 +10,8 @@
         <div class="dflex flex-column">
             <h3 class="text-center my-2">سبد خرید</h3>
             <hr>
-            <div class="ro">
-                <div class="col-5 mx-3">
+            <div class="row">
+                <div class="col-5 mx-3" style="overflow-y:scroll">
                     {% for item in items %}
                         <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
                             <div class="card-body m-auto text-center">
@@ -21,7 +21,19 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div class="col-5 mx-3 my-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5> هزینه کل: {{ order.total }} ریال</h5>
+                            <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
+                            <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
+                            <hr>
+                            <a href="" class="btn btn-primary my-3">پرداخت</a>
 
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>

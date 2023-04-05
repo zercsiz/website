@@ -12,9 +12,11 @@ class CartView(View):
             student = request.user
             order, created = Order.objects.get_or_create(student=student, complete=False)
             items = OrderItem.objects.filter(order=order)
+            order.total = sum([item.teacherTime.price for item in items])
+            order.save()
         else:
             items = []
-        context = {'items': items}
+        context = {'items': items, 'order': order}
         return render(request, 'shop/cart.html', context)
 
 
