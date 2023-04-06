@@ -1,22 +1,13 @@
-
-.nav-link-active {
-    color: black;
-    font-size: larger;
+.sidebar-link{
+    color:black;
+    transition: 0.1ms;
+    font-size: large;
 
 }
-
-.nav-link-active:hover {
-    color: black;
-    font-size: larger;
-    transition: all 0.1s;
+.sidebar-link:hover{
+    color:black;
 }
-
-.nav-link-deactive {
-    color: white;
-}
-
-.nav-link-deactive:hover {
-    color: white;
-
-
+.sidebar-link[aria-current="page"]{
+    text-decoration: underline black 0.15rem;
+    text-underline-offset: 0.5rem;
 }
