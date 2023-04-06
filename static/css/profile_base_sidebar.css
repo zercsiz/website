@@ -1,12 +1,12 @@
 
 .nav-link-active {
-    color: #ffcd39;
+    color: black;
     font-size: larger;
 
 }
 
 .nav-link-active:hover {
-    color: #ffcd39;
+    color: black;
     font-size: larger;
     transition: all 0.1s;
 }
@@ -17,6 +17,6 @@
 
 .nav-link-deactive:hover {
     color: white;
-    font-size: larger;
-    transition: all 0.1s;
+
+
 }
