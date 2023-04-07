@@ -33,14 +33,13 @@ class CreateTime(LoginRequiredMixin, View):
             teacher_time_list = request.POST.getlist('times')
             google_meet_link = request.POST.getlist('google_meet_link')
             price = int(request.POST.get('price'))
-            teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
+            teacher = request.user
 
             start_date = date.today()
             end_date = date(2023, 12, 1)
 
             # TeacherPlan creation
-            t_plan = TeacherPlan.objects.get_or_create(teacher=teacher)
-            t_plan.save()
+            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher)
 
             for single_date in daterange(start_date, end_date):
                 d = date2jalali(single_date).strftime("%Y-%m-%d")
@@ -50,12 +49,11 @@ class CreateTime(LoginRequiredMixin, View):
                     if single_date.weekday() == int(t[0]):
 
                         # PlanTime creation
-                        p_time = PlanTime(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
+                        p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
                                           start=t[2:], end=end_time)
-                        p_time.save()
 
                         # TeacherTime creation
-                        t_time = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                        t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
                                                                    week_day=week_day_convert(int(t[0])), start=t[2:],
                                                                    end=end_time, price=price,
                                                                    google_meet_link=google_meet_link[0], teacher=teacher)
