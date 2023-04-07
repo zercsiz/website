@@ -1,13 +1,13 @@
 .sidebar-link{
-    color: white;
+    color: black;
     transition: 0.1ms;
     font-size: large;
 
 }
 .sidebar-link:hover{
-    color: white;
+    color: black;
 }
 .sidebar-link[aria-current="page"]{
-    text-decoration: underline white 0.15rem;
+    text-decoration: underline black 0.15rem;
     text-underline-offset: 0.5rem;
 }
