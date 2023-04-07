@@ -42,3 +42,14 @@ class TeacherTime(models.Model):
 
     def __str__(self):
         return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"
+
+
+class TeacherPlan(models.Model):
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="Teacher")
+
+
+class PlanTime(models.Model):
+    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name="TeacherPlan")
+    week_day = models.IntegerField(null=True)
+    start = models.TimeField(null=True)
+    end = models.TimeField(null=True)

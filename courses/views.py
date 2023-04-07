@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import TeacherTime
+from .models import *
 from datetime import date, timedelta, datetime
 from accounts.models import Account
 from django.views import View
@@ -33,9 +33,14 @@ class CreateTime(LoginRequiredMixin, View):
             teacher_time_list = request.POST.getlist('times')
             google_meet_link = request.POST.getlist('google_meet_link')
             price = int(request.POST.get('price'))
+            teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
 
             start_date = date.today()
             end_date = date(2023, 12, 1)
+
+            # TeacherPlan creation
+            t_plan = TeacherPlan.objects.get_or_create(teacher=teacher)
+            t_plan.save()
 
             for single_date in daterange(start_date, end_date):
                 d = date2jalali(single_date).strftime("%Y-%m-%d")
@@ -43,9 +48,17 @@ class CreateTime(LoginRequiredMixin, View):
                 for t in teacher_time_list:
                     end_time = str(calculate_endtime(t[2:]))
                     if single_date.weekday() == int(t[0]):
-                        teacher = Account.objects.filter(phone_number=request.user.phone_number).first()
-                        t_time = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"), week_day=week_day_convert(int(t[0])), start=t[2:], end=end_time,
-                                                            price=price, google_meet_link=google_meet_link[0], teacher=teacher)
+
+                        # PlanTime creation
+                        p_time = PlanTime(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
+                                          start=t[2:], end=end_time)
+                        p_time.save()
+
+                        # TeacherTime creation
+                        t_time = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                                                                   week_day=week_day_convert(int(t[0])), start=t[2:],
+                                                                   end=end_time, price=price,
+                                                                   google_meet_link=google_meet_link[0], teacher=teacher)
                         t_time.save()
 
             return redirect('account_details')

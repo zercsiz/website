@@ -4,5 +4,8 @@ from . import models
 
 admin.site.register(models.Course)
 admin.site.register(models.TeacherTime)
+admin.site.register(models.TeacherPlan)
+admin.site.register(models.PlanTime)
+
 
 
