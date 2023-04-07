@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
-from courses.models import TeacherTime
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from courses.models import *
 
 
 class UserRegistrationView(View):
@@ -59,8 +59,15 @@ class AccountInfoView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
     def get(self, request):
-        teacher_time_list = TeacherTime.objects.all()
-        context = {'teacher_time': teacher_time_list}
+        if request.user.is_teacher:
+            teacher = request.user
+            t_plan = TeacherPlan.objects.get(teacher=teacher)
+            p_time = PlanTime.objects.filter(teacherplan=t_plan)
+            teacher_time_list = TeacherTime.objects.all()
+            context = {'teacher_time': teacher_time_list,
+                       'plan_times': p_time}
+        else:
+            context = {}
         return render(request, 'accounts/account_information.html', context)
 
 

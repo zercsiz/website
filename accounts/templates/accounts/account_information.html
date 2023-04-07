@@ -19,6 +19,15 @@
                 </div>
             {% endif %}
         {% endfor %}
+            <hr>
+            <h3>برنامه هفتگی</h3>
+            {% if plan_times %}
+                {% for p_time in plan_times %}
+                    <p>{{ p_time.week_day }} - {{ p_time.start.isoformat }} - {{ p_time.end.isoformat }}</p>
+                {% endfor %}
+                {% else %}
+                <p>هنوز برنامه ای اعلام نشده است.</p>
+            {% endif %}
         {% endif %}
     </div>
 
