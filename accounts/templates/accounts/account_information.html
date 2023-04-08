@@ -23,13 +23,22 @@
             <h3>برنامه هفتگی</h3>
             <br>
             {% if plan_times %}
-                {% for p_time in plan_times %}
-                    <div class="card my-2 p-2">
-                        <p>{{ p_time.week_day }} - {{ p_time.start.isoformat }} - {{ p_time.end.isoformat }}
+                <div class="row">
+                {% for w_day in week_days %}
+                    <div class="card col-3 m-2 p-2 text-center">
+                    <div class="card-header">
+                    <h5>{{ w_day }}</h5>
+                    </div>
+                    {% for p_time in plan_times %}
+                        {% if p_time.week_day == w_day %}
+                            <p>{{ p_time.start.isoformat }} - {{ p_time.end.isoformat }}</p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 {% endfor %}
                 {% else %}
                 <p>هنوز برنامه ای اعلام نشده است.</p>
+                </div>
             {% endif %}
         {% endif %}
     </div>

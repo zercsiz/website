@@ -61,6 +61,8 @@ class AccountInfoView(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_teacher:
             teacher = request.user
+            # week days in farsi for plan
+            w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", )
             try:
                 t_plan = TeacherPlan.objects.get(teacher=teacher)
             except TeacherPlan.DoesNotExist:
@@ -70,7 +72,8 @@ class AccountInfoView(LoginRequiredMixin, View):
                 p_time = PlanTime.objects.filter(teacherplan=t_plan)
                 teacher_time_list = TeacherTime.objects.all()
                 context = {'teacher_time': teacher_time_list,
-                           'plan_times': p_time}
+                           'plan_times': p_time,
+                           'week_days': w_days}
             else:
                 teacher_time_list = TeacherTime.objects.all()
                 context = {'teacher_time': teacher_time_list}
