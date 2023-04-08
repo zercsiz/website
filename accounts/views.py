@@ -61,11 +61,20 @@ class AccountInfoView(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_teacher:
             teacher = request.user
-            t_plan = TeacherPlan.objects.get(teacher=teacher)
-            p_time = PlanTime.objects.filter(teacherplan=t_plan)
-            teacher_time_list = TeacherTime.objects.all()
-            context = {'teacher_time': teacher_time_list,
-                       'plan_times': p_time}
+            try:
+                t_plan = TeacherPlan.objects.get(teacher=teacher)
+            except TeacherPlan.DoesNotExist:
+                t_plan = None
+
+            if t_plan:
+                p_time = PlanTime.objects.filter(teacherplan=t_plan)
+                teacher_time_list = TeacherTime.objects.all()
+                context = {'teacher_time': teacher_time_list,
+                           'plan_times': p_time}
+            else:
+                teacher_time_list = TeacherTime.objects.all()
+                context = {'teacher_time': teacher_time_list}
+
         else:
             context = {}
         return render(request, 'accounts/account_information.html', context)
