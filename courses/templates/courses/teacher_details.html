@@ -4,7 +4,7 @@
     <head>
         <title>جزعیات</title>
     </head>
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3 p-0">
 {#    teacher information#}
     <div class="d-flex flex-column">
         <div class="row">
@@ -21,47 +21,40 @@
         </div>
     </div>
     <hr>
-    <div class="row">
-    <h4 class="text-center" style="margin-bottom: 20px">تایم های قابل رزرو</h4>
-        <div class="col justify-content-center" style="overflow-y:scroll; max-height: 800px">
-            {% for t in teacher_time %}
-                <div class="card my-2" style="border-radius: 0.3em;width: 500px; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
-                    <div class="card-body m-auto text-center">
-                        <p class="">{{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start.isoformat }} تا ساعت {{ t.end.isoformat }}</p>
-                        <hr>
-                        <p>هزینه کلاس : {{ t.price }} ریال</p><button data-teacherTime="{{ t.id }}" data-action="add" class="btn btn-reserve update-cart">رزرو</button>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="col">
-            <form action="" method="post">
-                {% csrf_token %}
-                {% if plan_times %}
-                    <div class="row">
+    <div class="d-flex flex-column">
+        <h4 class="text-center m-2">تایم های قابل رزرو</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% if plan_times %}
+                <div class="row justify-content-center">
                     {% for w_day in week_days %}
-                        <div class="card col-3 m-2 p-2 text-center">
-                        <div class="card-header">
+                    <div class="card col-lg-2 col-md-3 m-2 m-sm-2 p-2 text-center" style="border-radius: 0">
+                        <div class="card-header" style="background-color: white">
                         <h5>{{ w_day }}</h5>
                         </div>
-                        {% for p_time in plan_times %}
-                            {% if p_time.week_day == w_day %}
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="{{ p_time.id }}" id="flexCheckDefault" name="p_time_id">
-                                </div>
-                                <p>{{ p_time.start.isoformat }} - {{ p_time.end.isoformat }}</p>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="card-body">
+                            {% for p_time in plan_times %}
+                                {% if p_time.week_day == w_day %}
+                                    <div class="form-check justify-content-center" style="direction: ltr">
+                                        <input class="form-check-input border border-dark" type="checkbox" value="check-{{ p_time.id }}" id="{{ p_time.id }}" name="p_time_id">
+                                        <label class="form-check-label" for="check-{{ p_time.id }}">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                    {% endfor %}
-                        <input name="session_number" class="m-3" type="number" placeholder="تعداد جلسات">
-                    {% else %}
-                    <p>هنوز برنامه ای اعلام نشده است.</p>
                     </div>
+                    {% endfor %}
+                </div>
+                    <div class="d-flex justify-content-center">
+                        <input class="form-control m-3" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 300px">
+                        <button class="btn btn-primary m-3" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
+                    </div>
+
+                    {% else %}
+                    <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
+
                 {% endif %}
-                <button type="submit" class="btn btn-primary">افزودن به سبد رزرو</button>
-            </form>
-        </div>
+        </form>
     </div>
 </div>
     <style>
