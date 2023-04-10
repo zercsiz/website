@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from shop.models import *
 from datetime import date, timedelta, datetime
 from accounts.models import Account
 from django.views import View
@@ -99,3 +100,32 @@ class TeacherDetails(View):
                 'week_days': w_days
             }
         return render(request, 'courses/teacher_details.html', context)
+
+    def post(self, request, teacher_id):
+        order, created = Order.objects.get_or_create(student=request.user)
+        p_times_ids = request.POST.getlist('p_time_id')
+        p_times = []
+        for id in p_times_ids:
+            p_times.append(PlanTime.objects.get(id=id))
+
+        # this gets the teacher id from the first plan time
+        teacher = p_times[0].teacherplan.teacher
+
+        start_date = date.today()
+        teacher_times = TeacherTime.objects.filter(teacher=teacher).filter(gdate__gt=start_date).filter(is_reserved=False)
+        session_number = request.POST.get('session_number')
+        order_items = []
+
+        # these fors create orderItems based on days and start times
+        for t_time in teacher_times:
+            for p in p_times:
+                if p.week_day == t_time.week_day and p.start == t_time.start:
+                    order_item, created = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
+                    order_items.append(order_item)
+                    break
+            if len(order_items) == int(session_number):
+                break
+
+        context = {'order_items': order_items,
+                   'items': []}
+        return render(request, 'shop/cart.html', context)

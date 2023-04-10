@@ -19,7 +19,8 @@ class CartView(View):
             items = []
             order = {'total': 0}
         context = {'items': items, 'order': order}
-        return render(request, 'shop/cart.html', context)
+        return render(request, 'shop/cart.html')
+
 
 
 def updateItem(request):
