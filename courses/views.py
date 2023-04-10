@@ -40,25 +40,25 @@ class CreateTime(LoginRequiredMixin, View):
             end_date = date(2023, 12, 1)
 
             # TeacherPlan creation
-            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher)
+            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher, google_meet_link=google_meet_link, price=price)
 
-            for single_date in daterange(start_date, end_date):
-                d = date2jalali(single_date).strftime("%Y-%m-%d")
+            # for single_date in daterange(start_date, end_date):
+            #     d = date2jalali(single_date).strftime("%Y-%m-%d")
 
-                for t in teacher_time_list:
-                    end_time = str(calculate_endtime(t[2:]))
-                    if single_date.weekday() == int(t[0]):
+            for t in teacher_time_list:
+                end_time = str(calculate_endtime(t[2:]))
+                # if single_date.weekday() == int(t[0]):
 
-                        # PlanTime creation
-                        p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
-                                          start=t[2:], end=end_time)
+                # PlanTime creation
+                p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
+                                start=t[2:], end=end_time, week_day_number=int(t[0]))
 
-                        # TeacherTime creation
-                        t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
-                                                                   week_day=week_day_convert(int(t[0])), start=t[2:],
-                                                                   end=end_time, price=price,
-                                                                   google_meet_link=google_meet_link[0], teacher=teacher)
-                        t_time.save()
+                    # TeacherTime creation
+                    # t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                    #                                            week_day=week_day_convert(int(t[0])), start=t[2:],
+                    #                                            end=end_time, price=price,
+                    #                                            google_meet_link=google_meet_link[0], teacher=teacher)
+                    # t_time.save()
 
             return redirect('account_details')
         else:
@@ -102,7 +102,19 @@ class TeacherDetails(View):
         return render(request, 'courses/teacher_details.html', context)
 
     def post(self, request, teacher_id):
+        def daterange(start_date, end_date):
+            for n in range(int((end_date - start_date).days)):
+                yield start_date + timedelta(n)
+
+        # this function converts weekday number to farsi weekday names
+        def week_day_convert(day_number):
+            # here shanbe is 5
+            day_list = ['دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه','یکشنبه',]
+            return day_list[day_number]
+
+        # create order for student
         order, created = Order.objects.get_or_create(student=request.user)
+
         p_times_ids = request.POST.getlist('p_time_id')
         p_times = []
         for id in p_times_ids:
@@ -125,6 +137,14 @@ class TeacherDetails(View):
                     break
             if len(order_items) == int(session_number):
                 break
+
+        start_date = date.today()
+        end_date = date(2023, 12, 1)
+
+        for single_date in daterange(start_date, end_date):
+            d = date2jalali(single_date).strftime("%Y-%m-%d")
+            for item in order_items:
+                pass
 
         context = {'order_items': order_items,
                    'items': []}
