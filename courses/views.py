@@ -5,6 +5,7 @@ from datetime import date, timedelta, datetime
 from accounts.models import Account
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from jalali_date import date2jalali
 
 
@@ -103,7 +104,7 @@ class TeacherDetails(View):
             p_times.append(PlanTime.objects.get(id=i))
 
         # this gets the teacher id from the first plan time
-        teacher = p_times[0].teacherplan.teacher
+        teacher = Account.objects.get(id=teacher_id)
         plan = TeacherPlan.objects.get(teacher=teacher)
         session_number = request.POST.get('session_number')
         order_items = []
@@ -124,6 +125,7 @@ class TeacherDetails(View):
             if len(order_items) == int(session_number):
                 break
 
+        messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
         context = {'order_items': order_items,
-                   'items': []}
-        return render(request, 'shop/cart.html', context)
+                   'order': order}
+        return redirect('cart')
