@@ -36,8 +36,8 @@
                             {% for p_time in plan_times %}
                                 {% if p_time.week_day == w_day %}
                                     <div class="form-check justify-content-center" style="direction: ltr">
-                                        <input class="form-check-input border border-dark" type="checkbox" value="check-{{ p_time.id }}" id="{{ p_time.id }}" name="p_time_id">
-                                        <label class="form-check-label" for="check-{{ p_time.id }}">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</label>
+                                        <input class="form-check-input border border-dark" type="checkbox" value="{{ p_time.id }}" id="{{ p_time.id }}" name="p_time_id">
+                                        <label class="form-check-label" for="{{ p_time.id }}">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</label>
                                     </div>
                                 {% endif %}
                             {% endfor %}
