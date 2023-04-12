@@ -11,11 +11,8 @@ from jalali_date import date2jalali
 
 class CreateTime(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
-    def post(self, request):
 
-        def daterange(start_date, end_date):
-            for n in range(int((end_date - start_date).days)):
-                yield start_date + timedelta(n)
+    def post(self, request):
 
         # this function converts weekday number to farsi weekday names
         def week_day_convert(day_number):
