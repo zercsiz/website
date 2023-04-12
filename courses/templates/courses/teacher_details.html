@@ -62,6 +62,53 @@
         </form>
     </div>
 </div>
+    <div class="container">
+        {% if plan_times %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <h4 class="text-center m-2">تایم های قابل رزرو</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            {% for h in table_hours %}
+                                <th class="text-center" scope="col">{{ h }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for w_day in week_days %}
+                            <tr>
+                                <th scope="row">{{ w_day }}</th>
+                                {% for p_time in plan_times %}
+                                    {% if p_time.week_day == w_day %}
+                                        {% for h in hours %}
+                                            <td></td>
+{#                                            {% if p_time.start|date:"H:i" == h %}#}
+{#                                                <td class="text-center table-success"><input class="form-check-input border border-dark" type="checkbox" value="{{ p_time.id }}" id="{{ p_time.id }}" name="p_time_id"></td>#}
+{#                                            {% else %}#}
+{#                                                <td></td>#}
+{#                                            {% endif %}#}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <div class="form-check">
+                        <lable for="start_date">تاریخ شروع جلسات</lable>
+                        <input class="form-control m-3" id="start_date" name="start_date" type="date" placeholder="تاریخ شروع جلسات" style="width: 300px">
+                    </div>
+                    <input class="form-control m-3" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 300px">
+                    <button class="btn btn-primary m-3" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
+                </div>
+            </form>
+            {% else %}
+            <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
+        {% endif %}
+    </div>
+
     <style>
         .btn-reserve {
             background-color: forestgreen;

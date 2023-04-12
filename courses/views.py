@@ -63,27 +63,26 @@ class CreateTime(LoginRequiredMixin, View):
 
 class TeacherDetails(View):
     def get(self, request, teacher_id):
-        teacher_time = TeacherTime.objects.filter(teacher=teacher_id).filter(gdate__gt=date.today())
         teacher = Account.objects.get(id=teacher_id)
         w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
+        table_hours = ("", "09:00-10:30", "10:30-12:00", "12:00-13:30", "13:30-15:00", "15:00-16:30", "16:30-18:00", "18:00-19:30", "19:30-21:00")
+        hours = ("09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30")
         try:
             t_plan = TeacherPlan.objects.get(teacher=teacher)
         except TeacherPlan.DoesNotExist:
             t_plan = None
         if t_plan:
             p_time = PlanTime.objects.filter(teacherplan=t_plan)
-            teacher_time_list = TeacherTime.objects.all()
             context = {
                 'teacher': teacher,
-                'teacher_time': teacher_time,
                 'plan_times': p_time,
-                'week_days': w_days
+                'week_days': w_days,
+                'table_hours': table_hours,
+                'hours': hours
             }
         else:
             context = {
                 'teacher': teacher,
-                'teacher_time': teacher_time,
-                'week_days': w_days
             }
         return render(request, 'courses/teacher_details.html', context)
 
