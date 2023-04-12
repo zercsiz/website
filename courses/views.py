@@ -72,10 +72,10 @@ class TeacherDetails(View):
         except TeacherPlan.DoesNotExist:
             t_plan = None
         if t_plan:
-            p_time = PlanTime.objects.filter(teacherplan=t_plan)
+            p_times = PlanTime.objects.filter(teacherplan=t_plan)
             context = {
                 'teacher': teacher,
-                'plan_times': p_time,
+                'plan_times': p_times,
                 'week_days': w_days,
                 'table_hours': table_hours,
                 'hours': hours
