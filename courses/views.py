@@ -71,7 +71,6 @@ class TeacherDetails(View):
     def get(self, request, teacher_id):
         teacher = Account.objects.get(id=teacher_id)
         w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
-        table_hours = ("", "09:00-10:30", "10:30-12:00", "12:00-13:30", "13:30-15:00", "15:00-16:30", "16:30-18:00", "18:00-19:30", "19:30-21:00")
         hours = ("09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30")
         try:
             t_plan = TeacherPlan.objects.get(teacher=teacher)
@@ -83,7 +82,6 @@ class TeacherDetails(View):
                 'teacher': teacher,
                 'plan_times': p_times,
                 'week_days': w_days,
-                'table_hours': table_hours,
                 'hours': hours
             }
         else:
@@ -135,8 +133,6 @@ class TeacherDetails(View):
                     break
 
             messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
-            context = {'order_items': order_items,
-                       'order': order}
             return redirect('cart')
 
 
