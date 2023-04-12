@@ -53,7 +53,16 @@ class CreateTime(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_authenticated:
             if request.user.is_teacher:
-                return render(request, 'courses/time_checkbox.html')
+                try:
+                    plan = TeacherPlan.objects.get(teacher=request.user)
+                except TeacherPlan.DoesNotExist:
+                    plan = None
+                if plan:
+                    context = {'plan': plan}
+                else:
+                    context = {'plan': None}
+
+                return render(request, 'courses/time_checkbox.html', context)
             else:
                 return redirect('home')
 
@@ -132,3 +141,26 @@ class TeacherDetails(View):
             context = {'order_items': order_items,
                        'order': order}
             return redirect('cart')
+
+
+# this view deletes teacher's plan for creating a new one
+
+
+class DeleteTeacherPlanView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+
+    def get(self, request, plan_id):
+        if request.user.is_teacher:
+            teacher_plan = TeacherPlan.objects.get(id=plan_id)
+            plan_times = PlanTime.objects.filter(teacherplan=teacher_plan)
+            teacher_times = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=False)
+            for t_time in teacher_times:
+                for p_time in plan_times:
+                    if t_time.week_day == p_time.week_day and t_time.start == p_time.start:
+                        t_time.delete()
+
+            teacher_plan.delete()
+            messages.success(request, "برنامه شما با موفقیت حذف شد", 'success')
+            return redirect('time_checkbox')
+        else:
+            return redirect('home')
