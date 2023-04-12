@@ -15,7 +15,7 @@
                 {% if t.is_reserved %}
                     <div class="card m-1">
                         <div class="card-body">
-                            {{ t.date }} - از ساعت {{ t.start }} تا ساعت {{ t.end }} - لینک گوگل میت {{ t.google_meet_link }}
+                            {{ t.date }} - {{ t.week_day }} - از ساعت {{ t.start|date:"H:i" }} تا ساعت {{ t.end|date:"H:i" }} - لینک گوگل میت {{ t.google_meet_link }}
                         </div>
                     </div>
                 {% endif %}
