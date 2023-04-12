@@ -102,19 +102,3 @@ class AccountEditView(LoginRequiredMixin, View):
             }
         )
         return render(request, 'accounts/account_edit.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -39,6 +39,7 @@ class TeacherTime(models.Model):
     price = models.BigIntegerField(null=True, blank=True)
     is_reserved = models.BooleanField(default=False)
     google_meet_link = models.CharField(null=True, max_length=250)
+    report = models.TextField(null=True)
 
     def __str__(self):
         return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"

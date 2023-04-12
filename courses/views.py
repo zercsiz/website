@@ -156,3 +156,25 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
             return redirect('time_checkbox')
         else:
             return redirect('home')
+
+
+class TeacherTimeReportView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+
+    def get(self, request, teacher_time_id):
+        if request.user.is_teacher:
+            t_time = TeacherTime.objects.get(id=teacher_time_id)
+            context = {'teacher_time': t_time}
+            return render(request, 'courses/teacher_time_report.html', context)
+        else:
+            return redirect('home')
+
+    def post(self, request, teacher_time_id):
+        if request.user.is_teacher:
+            teacher_time_report = request.POST.get('report')
+            teacher_time = TeacherTime.objects.get(id=teacher_time_id)
+            teacher_time.report = teacher_time_report
+            teacher_time.save()
+            return redirect('account_details')
+        else:
+            return redirect('home')
