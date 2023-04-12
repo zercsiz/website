@@ -9,18 +9,22 @@
     <hr>
     <div class="container-fluid p-0 m-0">
         {% if user.is_teacher %}
-        <h3>تایم های رزرو شده</h3>
-        {% for t in teacher_time %}
-            {% if t.is_reserved %}
-                <div class="card m-1">
-                    <div class="card-body">
-                        {{ t.date }} - از ساعت {{ t.start }} تا ساعت {{ t.end }} - لینک گوگل میت {{ t.google_meet_link }}
+        <h5>تایم های رزرو شده</h5>
+        {% if teacher_time %}
+            {% for t in teacher_time %}
+                {% if t.is_reserved %}
+                    <div class="card m-1">
+                        <div class="card-body">
+                            {{ t.date }} - از ساعت {{ t.start }} تا ساعت {{ t.end }} - لینک گوگل میت {{ t.google_meet_link }}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+            {% else %}
+            <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>
+        {% endif %}
             <hr>
-            <h3>برنامه هفتگی</h3>
+            <h5>برنامه هفتگی</h5>
             <br>
             {% if plan_times %}
                 <div class="row">
@@ -31,7 +35,7 @@
                     </div>
                     {% for p_time in plan_times %}
                         {% if p_time.week_day == w_day %}
-                            <p>{{ p_time.start.isoformat }} - {{ p_time.end.isoformat }}</p>
+                            <p style="direction: ltr">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</p>
                         {% endif %}
                     {% endfor %}
                     </div>

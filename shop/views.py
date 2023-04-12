@@ -11,15 +11,21 @@ class CartView(View):
     def get(self, request):
         if request.user.is_authenticated:
             student = request.user
-            order, created = Order.objects.get_or_create(student=student, complete=False)
-            items = OrderItem.objects.filter(order=order)
-            order.total = sum([item.teacherTime.price for item in items])
-            order.save()
+            try:
+                order = Order.objects.get(student=student)
+                items = OrderItem.objects.filter(order=order)
+                order.total = sum([item.teacherTime.price for item in items])
+                order.save()
+            except Order.DoesNotExist:
+                order = None
+                items = None
+
         else:
             items = []
             order = {'total': 0}
-        context = {'items': items, 'order': order}
+        context = {'order_items': items, 'order': order}
         return render(request, 'shop/cart.html', context)
+
 
 
 def updateItem(request):

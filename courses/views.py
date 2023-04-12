@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import *
+from shop.models import *
 from datetime import date, timedelta, datetime
 from accounts.models import Account
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from jalali_date import date2jalali
 
 
@@ -35,29 +37,14 @@ class CreateTime(LoginRequiredMixin, View):
             price = int(request.POST.get('price'))
             teacher = request.user
 
-            start_date = date.today()
-            end_date = date(2023, 12, 1)
-
             # TeacherPlan creation
-            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher)
+            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher, google_meet_link=google_meet_link, price=price)
 
-            for single_date in daterange(start_date, end_date):
-                d = date2jalali(single_date).strftime("%Y-%m-%d")
-
-                for t in teacher_time_list:
-                    end_time = str(calculate_endtime(t[2:]))
-                    if single_date.weekday() == int(t[0]):
-
-                        # PlanTime creation
-                        p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
-                                          start=t[2:], end=end_time)
-
-                        # TeacherTime creation
-                        t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
-                                                                   week_day=week_day_convert(int(t[0])), start=t[2:],
-                                                                   end=end_time, price=price,
-                                                                   google_meet_link=google_meet_link[0], teacher=teacher)
-                        t_time.save()
+            # plantime creation
+            for t in teacher_time_list:
+                end_time = str(calculate_endtime(t[2:]))
+                p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
+                                start=t[2:], end=end_time, week_day_number=int(t[0]))
 
             return redirect('account_details')
         else:
@@ -76,23 +63,69 @@ class CreateTime(LoginRequiredMixin, View):
 
 class TeacherDetails(View):
     def get(self, request, teacher_id):
-        months = {1: 'فروردین',
-                  2: 'اردیبهشت',
-                  3: 'خرداد',
-                  4: 'تیر',
-                  5: 'مرداد',
-                  6: 'شهریور',
-                  7: 'مهر',
-                  8: 'آبان',
-                  9: 'آذر',
-                  10: 'دی',
-                  11: 'بهمن',
-                  12: 'اسفند'}
         teacher_time = TeacherTime.objects.filter(teacher=teacher_id).filter(gdate__gt=date.today())
         teacher = Account.objects.get(id=teacher_id)
-        context = {
-            'teacher': teacher,
-            'teacher_time': teacher_time,
-            'months': months,
-        }
+        w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
+        try:
+            t_plan = TeacherPlan.objects.get(teacher=teacher)
+        except TeacherPlan.DoesNotExist:
+            t_plan = None
+        if t_plan:
+            p_time = PlanTime.objects.filter(teacherplan=t_plan)
+            teacher_time_list = TeacherTime.objects.all()
+            context = {
+                'teacher': teacher,
+                'teacher_time': teacher_time,
+                'plan_times': p_time,
+                'week_days': w_days
+            }
+        else:
+            context = {
+                'teacher': teacher,
+                'teacher_time': teacher_time,
+                'week_days': w_days
+            }
         return render(request, 'courses/teacher_details.html', context)
+
+    def post(self, request, teacher_id):
+        def daterange(start_date, end_date):
+            for n in range(int((end_date - start_date).days)):
+                yield start_date + timedelta(n)
+
+        # create order for student
+        order, created = Order.objects.get_or_create(student=request.user)
+
+        p_times_ids = request.POST.getlist('p_time_id')
+        # start_date = request.POST.get('start_date')
+        start_date = date.today()
+        print(start_date)
+        p_times = []
+        for i in p_times_ids:
+            p_times.append(PlanTime.objects.get(id=i))
+
+        # this gets the teacher id from the first plan time
+        teacher = Account.objects.get(id=teacher_id)
+        plan = TeacherPlan.objects.get(teacher=teacher)
+        session_number = request.POST.get('session_number')
+        order_items = []
+
+        end_date = date(2023, 12, 1)
+
+        for single_date in daterange(start_date, end_date):
+            d = date2jalali(single_date).strftime("%Y-%m-%d")
+            for p in p_times:
+                if single_date.weekday() == p.week_day_number:
+                    t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                             week_day=p.week_day, start=p.start, end=p.end, price=plan.price,
+                             google_meet_link=plan.google_meet_link, teacher=teacher)
+                    item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
+                    order_items.append(item)
+                if len(order_items) == int(session_number):
+                    break
+            if len(order_items) == int(session_number):
+                break
+
+        messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
+        context = {'order_items': order_items,
+                   'order': order}
+        return redirect('cart')
