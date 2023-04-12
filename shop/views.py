@@ -43,6 +43,7 @@ def updateItem(request):
 class removeItem(View):
     def get(self, request, item_id):
         order_item = OrderItem.objects.get(id=item_id)
+        order_item.teacherTime.delete()
         order_item.delete()
         messages.success(request, "کلاس با موفقیت حذف شد", 'success')
         return redirect('cart')
