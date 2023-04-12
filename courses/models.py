@@ -56,6 +56,6 @@ class TeacherPlan(models.Model):
 class PlanTime(models.Model):
     teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name="TeacherPlan")
     week_day = models.CharField(max_length=50, null=True)
-    week_day_number = models.IntegerField(max_length=1, null=True)
+    week_day_number = models.IntegerField(null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)

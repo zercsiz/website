@@ -92,40 +92,44 @@ class TeacherDetails(View):
             for n in range(int((end_date - start_date).days)):
                 yield start_date + timedelta(n)
 
-        # create order for student
-        order, created = Order.objects.get_or_create(student=request.user)
+        if request.user.id == teacher_id:
+            messages.error(request, "رزرو کردن تایم های خود امکان پذیر نیست", 'danger')
+            return redirect('teacher_details', teacher_id)
+        else:
+            # create order for student
+            order, created = Order.objects.get_or_create(student=request.user)
 
-        p_times_ids = request.POST.getlist('p_time_id')
-        # start_date = request.POST.get('start_date')
-        start_date = date.today()
-        print(start_date)
-        p_times = []
-        for i in p_times_ids:
-            p_times.append(PlanTime.objects.get(id=i))
+            p_times_ids = request.POST.getlist('p_time_id')
+            # start_date = request.POST.get('start_date')
+            start_date = date.today()
+            print(start_date)
+            p_times = []
+            for i in p_times_ids:
+                p_times.append(PlanTime.objects.get(id=i))
 
-        # this gets the teacher id from the first plan time
-        teacher = Account.objects.get(id=teacher_id)
-        plan = TeacherPlan.objects.get(teacher=teacher)
-        session_number = request.POST.get('session_number')
-        order_items = []
+            # this gets the teacher id from the first plan time
+            teacher = Account.objects.get(id=teacher_id)
+            plan = TeacherPlan.objects.get(teacher=teacher)
+            session_number = request.POST.get('session_number')
+            order_items = []
 
-        end_date = date(2023, 12, 1)
+            end_date = date(2023, 12, 1)
 
-        for single_date in daterange(start_date, end_date):
-            d = date2jalali(single_date).strftime("%Y-%m-%d")
-            for p in p_times:
-                if single_date.weekday() == p.week_day_number:
-                    t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
-                             week_day=p.week_day, start=p.start, end=p.end, price=plan.price,
-                             google_meet_link=plan.google_meet_link, teacher=teacher)
-                    item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
-                    order_items.append(item)
+            for single_date in daterange(start_date, end_date):
+                d = date2jalali(single_date).strftime("%Y-%m-%d")
+                for p in p_times:
+                    if single_date.weekday() == p.week_day_number:
+                        t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                                 week_day=p.week_day, start=p.start, end=p.end, price=plan.price,
+                                 google_meet_link=plan.google_meet_link, teacher=teacher)
+                        item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
+                        order_items.append(item)
+                    if len(order_items) == int(session_number):
+                        break
                 if len(order_items) == int(session_number):
                     break
-            if len(order_items) == int(session_number):
-                break
 
-        messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
-        context = {'order_items': order_items,
-                   'order': order}
-        return redirect('cart')
+            messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
+            context = {'order_items': order_items,
+                       'order': order}
+            return redirect('cart')
