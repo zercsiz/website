@@ -158,7 +158,6 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
                 for p_time in plan_times:
                     if t_time.week_day == p_time.week_day and t_time.start == p_time.start:
                         t_time.delete()
-
             teacher_plan.delete()
             messages.success(request, "برنامه شما با موفقیت حذف شد", 'success')
             return redirect('time_checkbox')

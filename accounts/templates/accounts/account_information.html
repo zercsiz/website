@@ -23,28 +23,31 @@
             {% else %}
             <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>
         {% endif %}
+            <div class="container">
             <hr>
             <h5>برنامه هفتگی</h5>
             <br>
             {% if plan_times %}
-                <div class="row">
-                {% for w_day in week_days %}
-                    <div class="card col-3 m-2 p-2 text-center">
-                    <div class="card-header">
-                    <h5>{{ w_day }}</h5>
-                    </div>
-                    {% for p_time in plan_times %}
-                        {% if p_time.week_day == w_day %}
-                            <p style="direction: ltr">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</p>
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-                {% endfor %}
-                {% else %}
-                <p>هنوز برنامه ای اعلام نشده است.</p>
-                </div>
-            {% endif %}
+                <h4 class="text-center m-2">تایم های قابل رزرو</h4>
+                <table class="table table-bordered my-4">
+                    <tbody>
+                        {% for w_day in week_days %}
+                            <tr>
+                                <th scope="row" style="width: 100px">{{ w_day }}</th>
+                                {% for p_time in plan_times %}
+                                    {% if p_time.week_day == w_day %}
+                                        <td class="text-center table-primary">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
         {% endif %}
+    {% endif %}
+        </div>
     </div>
 
 {% endblock %}
