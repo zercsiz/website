@@ -21,6 +21,7 @@
             <hr>
             <div class="row">
                 <div class="col-lg-6 mx-3" style="max-height: 690px">
+                {% if order_items %}
                     {% for item in order_items %}
                         <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
                             <div class="card-body text-center">
@@ -32,15 +33,31 @@
                             </div>
                         </div>
                     {% endfor %}
+                    {% else %}
+                    <h5 class="text-center">سبد خرید شما خالی است.</h5>
+                {% endif %}
                 </div>
                 <div class="col-5 mx-3 my-2">
                     <div class="card">
                         <div class="card-body">
-                            <h5> هزینه کل: {{ order.total|intcomma }} ریال</h5>
+                            {% if order.total %}
+                            <h5>هزینه کل: {{ order.total|intcomma }} ریال</h5>
+                                {% else %}
+                                <h5>هزینه کل : 0 ریال</h5>
+                            {% endif %}
                             <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
+                            {% if order_items %}
                             <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
+                                {% else %}
+                                <a href="" class=" btn btn-outline-primary btn-sm disabled"> اعمال تخفیف</a>
+                            {% endif %}
+
                             <hr>
+                            {% if order_items %}
                             <a href="" class="btn btn-primary my-3">پرداخت</a>
+                                {% else %}
+                                <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
