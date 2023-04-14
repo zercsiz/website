@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col m-auto">
-                <h3>{{ teacher.first_name }} {{ teacher.last_name }}</h3>
+                <h5>{{ teacher.first_name }} {{ teacher.last_name }}</h5>
                 <small>{{ teacher.skill }}</small>
                 <p>{{ teacher.description }}</p>
             </div>
@@ -26,8 +26,8 @@
         {% if plan_times %}
             <form action="" method="post">
                 {% csrf_token %}
-                <h4 class="text-center m-2">تایم های قابل رزرو</h4>
-                <table class="table table-bordered my-4">
+                <h5 class="text-center m-2">زمان های قابل رزرو</h5>
+                <table class="table table-bordered table-striped-columns my-4">
                     <tbody>
                         {% for w_day in week_days %}
                             <tr>
