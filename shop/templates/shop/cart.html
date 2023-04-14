@@ -15,7 +15,7 @@
                     <input class="btn btn-outline-dark mx-2 mt-2" type=button value="&#8594; بازگشت" onClick="javascript:history.go(-1);">
                 </div>
                 <div class="col-2 position-absolute" style="justify-self: center">
-                    <h3 class="text-center my-2 m-auto">سبد خرید</h3>
+                    <h5 class="text-center my-2 m-auto">سبد خرید</h5>
                 </div>
             </div>
             <hr>
@@ -34,16 +34,16 @@
                         </div>
                     {% endfor %}
                     {% else %}
-                    <h5 class="text-center">سبد خرید شما خالی است.</h5>
+                    <h6 class="text-center">سبد خرید شما خالی است.</h6>
                 {% endif %}
                 </div>
                 <div class="col-5 mx-3 my-2">
                     <div class="card">
                         <div class="card-body">
                             {% if order.total %}
-                            <h5>هزینه کل: {{ order.total|intcomma }} ریال</h5>
+                            <h6>هزینه کل: {{ order.total|intcomma }} ریال</h6>
                                 {% else %}
-                                <h5>هزینه کل : 0 ریال</h5>
+                                <h6>هزینه کل : 0 ریال</h6>
                             {% endif %}
                             <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
                             {% if order_items %}
