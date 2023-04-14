@@ -5,12 +5,15 @@
         <title>وبسایت من</title>
     </head>
     {% include 'inc/jumbotron.html' %}
+{#    the floating button#}
     <a href="#" class="btn btn-floating m-4 fixed-top shadow-sm opacity-0 disabled"
        style="background-color: #db6204; color: white;
               width: 190px;outline-color: #db6204; transition: opacity 0.25s">یادگیری رو شروع کن</a>
+    <div class="d-flex flex-row" style="background: linear-gradient(90deg, #14436b 0%, #1c5d94 100%); height: 328px">
+        {% include 'inc/advantage1.html' %}
+        {% include 'inc/advantage2.html' %}
+    </div>
 
-    {% include 'inc/advantage1.html' %}
-    {% include 'inc/advantage2.html' %}
     {% include 'inc/teacher_cards.html' %}
     {% include 'inc/course_cards.html' %}
 
