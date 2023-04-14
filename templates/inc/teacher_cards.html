@@ -1,9 +1,9 @@
 <div class="container-fluid p-3" style="background-color: rgba(0,0,0,0.122)">
     <h4 class="text-center mt-2 p-0">اساتید ما</h4>
-        <div class="row justify-content-center mb-4">
+        <div class="row justify-content-center my-4">
             {% for t in teachers %}
-                <div class="col-lg-3 col-md-4 col-sm-4 m-4">
-                    <div class="card" style="box-shadow: 0 10px 10px 0 rgba(0,0,0,0.1), 1px 1px 0 0 rgba(0,0,0,0.3);
+                <div class="col-lg-3 col-md-5 col-sm-5 gap-2 mb-2">
+                    <div class="card" style="min-height:420px; box-shadow: 0 10px 10px 0 rgba(0,0,0,0.1), 1px 1px 0 0 rgba(0,0,0,0.3);
                                                             border-radius: 0">
                         <div class="card-header" style="height: 200px">
                             <img src="" alt="">
@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h4>{{ t.first_name }} {{ t.last_name }}</h4>
                             <small>{{ t.skill }}</small>
-                            <p class="card-text">{{ t.description}}</p>
+                            <p class="card-text" style="overflow: hidden">{{ t.description}}</p>
                             <a href="{% url 'teacher_details' t.id %}" class="btn btn-teacher-details">جزعیات</a>
                         </div>
                     </div>
@@ -24,7 +24,9 @@
     </div>
 <style>
     .btn-teacher-details {
-        justify-content: end;
+        position: absolute;
+        bottom:20px;
+        left:20px;
         color:#14436b;
         border-color: #14436b
     }
