@@ -42,12 +42,12 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <div class="form-check">
-                        <lable for="start_date">تاریخ شروع جلسات</lable>
-                        <input class="form-control m-3" id="start_date" name="start_date" type="date" placeholder="تاریخ شروع جلسات" style="width: 300px">
+                    <div class="row justify-content-center gap-3">
+                        <lable class="col-lg-3 text-center align-self-center" for="start_date">تاریخ شروع جلسات</lable>
+                        <input class="col-lg-2 form-control" id="start_date" name="start_date" type="date" placeholder="تاریخ شروع جلسات" style="width: 300px">
+                        <input class="col-2 form-control" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 300px; height: 50px">
+                        <button class="btn btn-primary" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
                     </div>
-                    <input class="form-control m-3" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 300px; height: 50px">
-                    <button class="btn btn-primary m-3" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
                 </div>
             </form>
             {% else %}
