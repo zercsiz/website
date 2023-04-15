@@ -30,7 +30,7 @@ class CreateTime(LoginRequiredMixin, View):
 
         if request.user.is_teacher:
             teacher_time_list = request.POST.getlist('times')
-            google_meet_link = request.POST.getlist('google_meet_link')
+            google_meet_link = request.POST.get('google_meet_link')
             price = int(request.POST.get('price'))
             teacher = request.user
 

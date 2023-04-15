@@ -60,26 +60,41 @@ class AccountInfoView(LoginRequiredMixin, View):
 
     def get(self, request):
         if request.user.is_teacher:
-            teacher = request.user
+            context = {}
             # week days in farsi for plan
             w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", )
+            context['week_days'] = w_days
+
             try:
-                t_plan = TeacherPlan.objects.get(teacher=teacher)
+                t_plan = TeacherPlan.objects.get(teacher=request.user)
             except TeacherPlan.DoesNotExist:
                 t_plan = None
+            try:
+                teacher_time_as_teacher_list = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=True)
+            except TeacherTime.DoesNotExist:
+                teacher_time_as_teacher_list = None
+            try:
+                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True)
+            except TeacherTime.DoesNotExist:
+                teacher_time_as_student_list = None
 
             if t_plan:
                 p_time = PlanTime.objects.filter(teacherplan=t_plan)
-                teacher_time_list = TeacherTime.objects.all()
-                context = {'teacher_time': teacher_time_list,
-                           'plan_times': p_time,
-                           'week_days': w_days}
-            else:
-                teacher_time_list = TeacherTime.objects.all()
-                context = {'teacher_time': teacher_time_list}
+                context['plan_times'] = p_time
+            if teacher_time_as_teacher_list:
+                context['teacher_times_as_teacher'] = teacher_time_as_teacher_list
+            if teacher_time_as_student_list:
+                context['teacher_times_as_student'] = teacher_time_as_student_list
 
         else:
             context = {}
+            try:
+                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True)
+            except TeacherTime.DoesNotExist:
+                teacher_time_as_student_list = None
+            if teacher_time_as_student_list:
+                context['teacher_times_as_teacher'] = teacher_time_as_student_list
+
         return render(request, 'accounts/account_information.html', context)
 
 

@@ -9,25 +9,48 @@
             <p>ایمیل : {{ user.email }}</p>
         </div>
     </div>
-
-
     <hr>
     <div class="container-fluid p-0 m-0">
-        {% if user.is_teacher %}
-        <h5>تایم های رزرو شده</h5>
-        {% if teacher_time %}
-            {% for t in teacher_time %}
-                {% if t.is_reserved %}
-                    <div class="card m-1">
-                        <div class="card-body">
-                            <h6>{{ t.date }} - {{ t.week_day }} - {{ t.start|date:"H:i" }} - {{ t.end|date:"H:i" }} - لینک گوگل میت {{ t.google_meet_link }}<a href="{% url 'teacher_time_report' t.id %}" class="btn btn-outline-primary mx-3">گزارش</a></h6>
-                        </div>
-                    </div>
+        <div class="d-flex flex-column">
+            {% if user.is_teacher %}
+                <h5>جلسات شما به عنوان استاد</h5>
+                <div class="row gap-2 justify-content-start position-relative mt-3 me-3 p-sm-4">
+                    {% if teacher_times_as_teacher %}
+                        {% for t in teacher_times_as_teacher %}
+                            {% if t.is_reserved %}
+                                <div class="card col-lg-5" style="border-radius: 0; background-color: steelblue">
+                                    <div class="card-body">
+                                        <p class="text-light">{{ t.date }} - {{ t.week_day }} - {{ t.end|date:"H:i" }} - {{ t.start|date:"H:i" }}</p>
+                                        <a class="btn btn-outline-light mx-2" href="{% url 'teacher_time_report' t.id %}">گزارش</a>
+                                        <a class="btn btn-outline-light mx-2" target=”_blank” href="{{ t.google_meet_link }}">شرکت در جلسه</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <hr>
+            <h5 class="">جلسات شما به عنوان شاگرد</h5>
+            <div class="row gap-2 justify-content-start position-relative mt-3 me-3 p-sm-4">
+                {% if teacher_times_as_student %}
+                    {% for t in teacher_times_as_student %}
+                        {% if t.is_reserved %}
+                            <div class="card col-lg-5" style="border-radius: 0; background-color: slategray; min-height: 50px">
+                                <div class="card-body">
+                                    <p class="text-light">{{ t.date }} - {{ t.week_day }} - {{ t.end|date:"H:i" }} - {{ t.start|date:"H:i" }}
+                                        <a class="btn btn-outline-light mx-2" target=”_blank” href="{{ t.google_meet_link }}">شرکت در جلسه</a></p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>
                 {% endif %}
-            {% endfor %}
-            {% else %}
-            <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>
-        {% endif %}
+            </div>
+        </div>
             <div class="container">
             <hr>
             <h5>برنامه هفتگی</h5>
@@ -50,7 +73,6 @@
             {% else %}
             <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
         {% endif %}
-    {% endif %}
         </div>
     </div>
 
