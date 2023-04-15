@@ -51,10 +51,9 @@
                                 {% else %}
                                 <a href="" class=" btn btn-outline-primary btn-sm disabled"> اعمال تخفیف</a>
                             {% endif %}
-
                             <hr>
                             {% if order_items %}
-                            <a href="" class="btn btn-primary my-3">پرداخت</a>
+                            <a href="{% url 'order_complete' order.id %}" class="btn btn-primary my-3">پرداخت</a>
                                 {% else %}
                                 <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>
                             {% endif %}

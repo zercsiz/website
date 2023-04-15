@@ -30,7 +30,7 @@ class Course(models.Model):
 
 class TeacherTime(models.Model):
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher")
-    student = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student")
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student")
     date = jmodels.jDateField(null=True)
     gdate = models.DateField(null=True)
     week_day = models.CharField(max_length=50, null=True)
