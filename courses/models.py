@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django_jalali.db import models as jmodels
+from datetime import date, datetime, time
+import time
 
 
 languages = [
