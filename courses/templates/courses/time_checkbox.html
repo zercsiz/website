@@ -5,10 +5,8 @@
 {% block profile_content %}
     {% if not plan %}
         <br>
-        <br>
-        <br>
-        <br>
         <h3 class="text-center">تایم های خالیتو تیک بزن</h3>
+        <p class="my-2">در این بخش باید از بین زمان های تعیین شده، زمان های خالی خود را انتخاب کنید. بعد از زدن دکمه تایید، برنامه هفتگی شما در سایت نمایش داده می شود.</p>
         <form action="" method="post"> {% csrf_token %}
             <div class="d-flex flex-column p-4">
                 <table class="table table-striped-columns table-bordered">
@@ -337,9 +335,6 @@
             </div>
         </form>
         <hr>
-        <p>
-        در این بخش باید از بین زمان های تعیین شده، تایم های خالی خود را انتخاب کنید. بعد از زدن دکمه تایید، تایم های شما در سایت آماده رزرو می شوند.
-        </p>
         {% else %}
         <br>
         <br>
