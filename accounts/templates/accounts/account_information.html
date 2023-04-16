@@ -33,7 +33,11 @@
                 </div>
             {% endif %}
             <hr>
+            {% if user.is_teacher %}
             <h5 class="">جلسات شما به عنوان شاگرد</h5>
+            {% else %}
+                <h5 class="">جلسات شما</h5>
+            {% endif %}
             <div class="row gap-2 justify-content-start position-relative mt-3 me-3 p-sm-4">
                 {% if teacher_times_as_student %}
                     {% for t in teacher_times_as_student %}
@@ -51,6 +55,7 @@
                 {% endif %}
             </div>
         </div>
+        {% if user.is_teacher %}
         <div class="container">
             <hr>
             <h5>برنامه هفتگی</h5>
@@ -74,6 +79,7 @@
             <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
         {% endif %}
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}

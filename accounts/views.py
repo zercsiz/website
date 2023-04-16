@@ -93,8 +93,7 @@ class AccountInfoView(LoginRequiredMixin, View):
             except TeacherTime.DoesNotExist:
                 teacher_time_as_student_list = None
             if teacher_time_as_student_list:
-                context['teacher_times_as_teacher'] = teacher_time_as_student_list
-
+                context['teacher_times_as_student'] = teacher_time_as_student_list
         return render(request, 'accounts/account_information.html', context)
 
 
