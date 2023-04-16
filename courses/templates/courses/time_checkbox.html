@@ -4,345 +4,343 @@
 
 {% block profile_content %}
     {% if not plan %}
-        <br>
-        <h3 class="text-center">تایم های خالیتو تیک بزن</h3>
-        <p class="my-2">در این بخش باید از بین زمان های تعیین شده، زمان های خالی خود را انتخاب کنید. بعد از زدن دکمه تایید، برنامه هفتگی شما در سایت نمایش داده می شود.</p>
-        <form action="" method="post"> {% csrf_token %}
-            <div class="d-flex flex-column p-4">
-                <table class="table table-striped-columns table-bordered">
-                    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col" class="text-center">09:00-10:30</th>
-            <th scope="col" class="text-center">10:30-12:00</th>
-            <th scope="col" class="text-center">12:00-13:30</th>
-            <th scope="col" class="text-center">13:30-15:00</th>
-            <th scope="col" class="text-center">15:00-16:30</th>
-            <th scope="col" class="text-center">16:30-18:00</th>
-            <th scope="col" class="text-center">18:00-19:30</th>
-            <th scope="col" class="text-center">19:30-21:00</th>
-        </tr>
-      </thead>
-                        <tbody>
-                            <tr>
-                            <th scope="row">شنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="5-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
+        <div class="d-flex flex-column m-3" style="margin-right: 500px">
+            <h5 class="text-center">تایم های خالیتو تیک بزن</h5>
+            <p class="my-2">در این بخش باید از بین زمان های تعیین شده، زمان های خالی خود را انتخاب کنید. بعد از زدن دکمه تایید، برنامه هفتگی شما در سایت نمایش داده می شود.</p>
+            <form action="" method="post"> {% csrf_token %}
+                <div class="d-flex flex-column p-4">
+                    <table class="table table-striped-columns table-bordered">
+                        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col" class="text-center">09:00-10:30</th>
+                <th scope="col" class="text-center">10:30-12:00</th>
+                <th scope="col" class="text-center">12:00-13:30</th>
+                <th scope="col" class="text-center">13:30-15:00</th>
+                <th scope="col" class="text-center">15:00-16:30</th>
+                <th scope="col" class="text-center">16:30-18:00</th>
+                <th scope="col" class="text-center">18:00-19:30</th>
+                <th scope="col" class="text-center">19:30-21:00</th>
+            </tr>
+          </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">شنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="5-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                </tr>
+                                <tr>
+                              <th scope="row">یکشنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="6-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
                             </tr>
-                            <tr>
-                          <th scope="row">یکشنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="6-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                        </tr>
-                            <tr>
-                          <th scope="row">دوشنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="0-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                        </tr>
-                            <tr>
-                            <th scope="row">سه شنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="1-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                        </tr>
-                            <tr>
-                            <th scope="row">چهارشنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="2-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                        </tr>
-                            <tr>
-                            <th scope="row">پنجشنبه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="3-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                         </tr>
-                            <tr>
-                            <th scope="row">جمعه</th>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-09:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-10:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-12:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-13:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-15:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-16:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-18:00" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                            <td>
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="4-19:30" id="flexCheckDefault" name="times">
-                              </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                </table>
-                <h5>لطفا لینک گوگل میت را وارد کنید.</h5><a href="{% url 'google_meet_link_tutorial' %}" target=”_blank”>آموزش ساختن لینک گوگل میت</a>
-                <input class="m-auto my-2" name="google_meet_link" placeholder="لینک گوگل میت" required="True">
-                <h5>لطفا هزینه هر جلسه را به ریال وارد کنید.</h5>
-                <input class="m-auto my-2" name="price" placeholder="هزینه هر جلسه" required="True">
-                <button class="btn btn-outline-primary m-auto" type="submit">تایید</button>
-            </div>
-        </form>
-        <hr>
-        {% else %}
-        <br>
-        <br>
-        <br>
-        <br>
-        <h5 class="text-center">برنامه شما اعلام شده است. برای اعلام برنامه جدید لطفا برنامه قبلی را حذف کنید.</h5>
-        <p class="text-center my-2">اگر جلسه ای از برنامه قبلی رزرو شده باشد، امکان حذف آن جلسه وجود ندارد و ملزم به برگزار کردن آن هستید.</p>
-        <a href="{% url 'delete_teacher_plan' plan.id %}" class="btn btn-danger mt-3">حذف برنامه قبلی</a>
-    {% endif %}
+                                <tr>
+                              <th scope="row">دوشنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="0-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                            </tr>
+                                <tr>
+                                <th scope="row">سه شنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="1-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                            </tr>
+                                <tr>
+                                <th scope="row">چهارشنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="2-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                            </tr>
+                                <tr>
+                                <th scope="row">پنجشنبه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="3-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                             </tr>
+                                <tr>
+                                <th scope="row">جمعه</th>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-09:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-10:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-12:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-13:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-15:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-16:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-18:00" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                                <td>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="4-19:30" id="flexCheckDefault" name="times">
+                                  </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                    </table>
+                    <div class="d-flex flex-column">
+                        <h5>لطفا لینک گوگل میت را وارد کنید.</h5><a href="{% url 'google_meet_link_tutorial' %}" target=”_blank”>آموزش ساختن لینک گوگل میت</a>
+                        <input type="url" class="form-control col-8 my-3 border border-dark" name="google_meet_link" placeholder="لینک گوگل میت" required="True">
+                        <h5>لطفا هزینه هر جلسه را به ریال وارد کنید.</h5>
+                        <input type="number" class="form-control col-8 my-3 border border-dark" name="price" placeholder="هزینه هر جلسه" required="True">
+                        <button class="btn btn-outline-primary m-auto" type="submit">تایید</button>
+                    </div>
 
+                </div>
+            </form>
+            {% else %}
+            <h5 class="text-center">برنامه شما اعلام شده است. برای اعلام برنامه جدید لطفا برنامه قبلی را حذف کنید.</h5>
+            <p class="text-center my-2">اگر جلسه ای از برنامه قبلی رزرو شده باشد، امکان حذف آن جلسه وجود ندارد و ملزم به برگزار کردن آن هستید.</p>
+            <a href="{% url 'delete_teacher_plan' plan.id %}" class="btn btn-danger mt-3">حذف برنامه قبلی</a>
+        </div>
+    {% endif %}
 {% endblock %}
