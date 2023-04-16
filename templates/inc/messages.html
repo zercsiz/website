@@ -1,5 +1,5 @@
 {% if messages %}
     {% for msg in messages %}
-        <p class="alert alert-{{ msg.tags }} m-auto">{{ msg }}</p>
+        <p class="alert alert-{{ msg.tags }} m-auto" style="border-radius: 0; height: max-content">{{ msg }}</p>
     {% endfor %}
 {% endif %}
