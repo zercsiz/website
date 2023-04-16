@@ -44,7 +44,7 @@ class TeacherTime(models.Model):
     report = models.TextField(null=True)
 
     def __str__(self):
-        return f"{self.date} | {self.start} | {self.end} | Reserve Status = {self.is_reserved}"
+        return f"{self.gdate} | {self.start} | Reserve Status = {self.is_reserved}"
 
 
 class TeacherPlan(models.Model):

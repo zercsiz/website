@@ -100,33 +100,45 @@ class TeacherDetails(View):
             return redirect('teacher_details', teacher_id)
         else:
             # create order for student
-            order, created = Order.objects.get_or_create(student=request.user)
+            order = Order.objects.create(student=request.user)
+            order.save()
 
             p_times_ids = request.POST.getlist('p_time_id')
-            # start_date = request.POST.get('start_date')
-            start_date = date.today()
-            print(start_date)
+
             p_times = []
             for i in p_times_ids:
                 p_times.append(PlanTime.objects.get(id=i))
 
             # this gets the teacher id from the first plan time
             teacher = Account.objects.get(id=teacher_id)
+
             plan = TeacherPlan.objects.get(teacher=teacher)
             session_number = request.POST.get('session_number')
             order_items = []
 
+            # start date and end date
+            start_date = date.today()
             end_date = date(2023, 12, 1)
 
             for single_date in daterange(start_date, end_date):
                 d = date2jalali(single_date).strftime("%Y-%m-%d")
                 for p in p_times:
                     if single_date.weekday() == p.week_day_number:
-                        t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
-                                 week_day=p.week_day, start=p.start, end=p.end, price=plan.price,
-                                 google_meet_link=plan.google_meet_link, teacher=teacher)
-                        item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
-                        order_items.append(item)
+
+                        # this checks whether the date and time is reserved and if it is, skips the day
+                        try:
+                            teacher_time = TeacherTime.objects.get(teacher=teacher, gdate=single_date.strftime("%Y-%m-%d"), start=p.start, is_reserved=True)
+                        except TeacherTime.DoesNotExist:
+                            teacher_time = None
+                            print('none found')
+                        if teacher_time:
+                            break
+                        else:
+                            t_time, created = TeacherTime.objects.get_or_create(date=d, gdate=single_date.strftime("%Y-%m-%d"),
+                                     week_day=p.week_day, start=p.start, end=p.end, price=plan.price,
+                                     google_meet_link=plan.google_meet_link, teacher=teacher)
+                            item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
+                            order_items.append(item)
                     if len(order_items) == int(session_number):
                         break
                 if len(order_items) == int(session_number):
