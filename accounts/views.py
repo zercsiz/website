@@ -70,11 +70,11 @@ class AccountInfoView(LoginRequiredMixin, View):
             except TeacherPlan.DoesNotExist:
                 t_plan = None
             try:
-                teacher_time_as_teacher_list = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=True)
+                teacher_time_as_teacher_list = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=True).order_by('gdate')
             except TeacherTime.DoesNotExist:
                 teacher_time_as_teacher_list = None
             try:
-                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True)
+                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True).order_by('gdate')
             except TeacherTime.DoesNotExist:
                 teacher_time_as_student_list = None
 
