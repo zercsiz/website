@@ -7,17 +7,17 @@
     <br>
     <form method="post" class="m-auto text-center"> {% csrf_token %}
         <h1 class="h3 mb-3 fw-normal text-center">ویرایش اطلاعات کاربری</h1>
-        <label for="phone_number" class="form-label">Phone Number</label>
+        <label for="phone_number" class="form-label">شماره تلفن همراه</label>
         <div class="form-floating">
-            <input type="phone_number" name="phone_number" class="form-control" id="floatingInput" value="{{ user.phone_number }}">
+            <input type="phone_number" name="phone_number" class="form-control" id="phone_number" value="{{ user.phone_number }}">
         </div>
-        <label for="username" class="form-label">Username</label>
+        <label for="username" class="form-label">نام کاربری</label>
         <div class="form-floating">
-            <input type="username" name="username" class="form-control" id="floatingInput" value="{{ user.username }}">
+            <input type="username" name="username" class="form-control" id="username" value="{{ user.username }}">
         </div>
-        <label for="phone_number" class="form-label">Email Address</label>
+        <label for="phone_number" class="form-label">آدرس ایمیل</label>
         <div class="form-floating">
-            <input type="email" name="email" class="form-control" id="floatingInput" value="{{ user.email }}">
+            <input type="email" name="email" class="form-control" id="phone_number" value="{{ user.email }}">
         </div>
 
 {#        {% csrf_token %}#}
