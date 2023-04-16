@@ -11,7 +11,7 @@ class Order(models.Model):
     total = models.BigIntegerField(null=True)
 
     def __str__(self):
-        return f"{self.student.email} - {self.transaction_id}"
+        return f"{self.student.email} - completed:{self.complete}"
 
 
 class OrderItem(models.Model):

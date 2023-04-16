@@ -95,13 +95,30 @@ class TeacherDetails(View):
             for n in range(int((end_date - start_date).days)):
                 yield start_date + timedelta(n)
 
+        # checks if user is trying to reserve their own times
         if request.user.id == teacher_id:
             messages.error(request, "رزرو کردن تایم های خود امکان پذیر نیست", 'danger')
             return redirect('teacher_details', teacher_id)
         else:
-            # create order for student
-            order = Order.objects.create(student=request.user)
-            order.save()
+
+            # this checks if user specified a start date and if they didnt, sets the start date today()
+            try:
+                user_start_date = datetime.strptime(request.POST.get('start_date'), "%Y-%m-%d").date()
+            except:
+                user_start_date = None
+            if user_start_date:
+                start_date = user_start_date
+            else:
+                start_date = date.today()
+
+            # create order for student, it checks if there is an uncompleted order
+            try:
+                order = Order.objects.get(student=request.user, complete=False)
+            except Order.DoesNotExist:
+                order = None
+            if not order:
+                order = Order.objects.create(student=request.user)
+                order.save()
 
             p_times_ids = request.POST.getlist('p_time_id')
 
@@ -116,8 +133,6 @@ class TeacherDetails(View):
             session_number = request.POST.get('session_number')
             order_items = []
 
-            # start date and end date
-            start_date = date.today()
             end_date = date(2023, 12, 1)
 
             for single_date in daterange(start_date, end_date):
@@ -130,7 +145,6 @@ class TeacherDetails(View):
                             teacher_time = TeacherTime.objects.get(teacher=teacher, gdate=single_date.strftime("%Y-%m-%d"), start=p.start, is_reserved=True)
                         except TeacherTime.DoesNotExist:
                             teacher_time = None
-                            print('none found')
                         if teacher_time:
                             break
                         else:
