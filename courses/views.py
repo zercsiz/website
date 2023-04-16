@@ -204,3 +204,8 @@ class TeacherTimeReportView(LoginRequiredMixin, View):
             return redirect('account_details')
         else:
             return redirect('home')
+
+
+class GoogleMeetLinkTutorialView(View):
+    def get(self, request):
+        return render(request, 'courses/google_meet_link_tutorial.html')
