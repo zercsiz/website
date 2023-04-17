@@ -68,8 +68,8 @@ class CreateTime(LoginRequiredMixin, View):
 
 
 class TeacherDetails(View):
-    def get(self, request, teacher_id):
-        teacher = Account.objects.get(id=teacher_id)
+    def get(self, request, teacher_slug):
+        teacher = Account.objects.get(slug=teacher_slug)
         w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
         hours = ("09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30")
         try:

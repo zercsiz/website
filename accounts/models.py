@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils.text import slugify
 
 
 class MyAccountManager(BaseUserManager):
@@ -36,6 +37,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(verbose_name="Last Name", max_length=200, null=True)
     description = models.TextField(verbose_name="Description", max_length=1000, null=True)
     skill = models.CharField(verbose_name="Skill", max_length=200, null=True)
+    slug = models.SlugField(null=True, max_length=300, unique=True)
 
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
@@ -50,6 +52,13 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     objects = MyAccountManager()
+
+    # overrides save function , this is commented because i dont know how to farsi slug
+    # def save(self, *args, **kwargs):
+    #     if self.is_teacher:
+    #         slug_str = self.skill + self.first_name + self.last_name
+    #         self.slug = slugify(slug_str)
+    #     super().save()
 
     def __str__(self):
         if self.is_superuser:

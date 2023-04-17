@@ -12,7 +12,7 @@
                             <h4>{{ t.first_name }} {{ t.last_name }}</h4>
                             <small>{{ t.skill }}</small>
                             <p class="card-text" style="overflow: hidden">{{ t.description}}</p>
-                            <a href="{% url 'teacher_details' t.id %}" class="btn btn-teacher-details">جزعیات</a>
+                            <a href="{% url 'teacher_details' t.slug %}" class="btn btn-teacher-details">جزعیات</a>
                         </div>
                     </div>
                 </div>
