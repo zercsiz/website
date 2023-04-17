@@ -5,7 +5,7 @@ from accounts.models import Account
 
 def home_view(request):
 
-    teacher_list = Account.objects.filter(is_teacher=True)
+    teacher_list = Account.objects.filter(is_teacher=True).filter(slug__isnull=False)
     course_list = Course.objects.all()[:6]
     context = {'courses': course_list, "teachers": teacher_list}
     return render(request, 'home/home.html', context)
