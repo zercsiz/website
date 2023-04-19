@@ -45,7 +45,7 @@ class UserLoginForm(forms.ModelForm):
 
 class AccountEditForm(forms.ModelForm):
     username = forms.CharField(label="نام کاربری", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
+    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True, max_length=11)
     email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}), required=True)
     first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
     last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
