@@ -338,9 +338,12 @@
                 </div>
             </form>
             {% else %}
-            <h5 class="text-center">برنامه شما اعلام شده است. برای اعلام برنامه جدید لطفا برنامه قبلی را حذف کنید.</h5>
-            <p class="text-center my-2">اگر جلسه ای از برنامه قبلی رزرو شده باشد، امکان حذف آن جلسه وجود ندارد و ملزم به برگزار کردن آن هستید.</p>
-            <a href="{% url 'delete_teacher_plan' plan.id %}" class="btn btn-danger mt-3">حذف برنامه قبلی</a>
+            <div class="d-flex flex-column mt-5">
+                <h5 class="text-center">برنامه شما اعلام شده است. برای اعلام برنامه جدید لطفا برنامه قبلی را حذف کنید.</h5>
+                <p class="text-center my-2">اگر جلسه ای از برنامه قبلی رزرو شده باشد، امکان حذف آن جلسه وجود ندارد و ملزم به برگزار کردن آن هستید.</p>
+                <a href="{% url 'delete_teacher_plan' plan.id %}" class="btn btn-danger m-auto mt-3">حذف برنامه قبلی</a>
+            </div>
+
         </div>
     {% endif %}
 {% endblock %}
