@@ -44,10 +44,17 @@ class UserLoginForm(forms.ModelForm):
 
 
 class AccountEditForm(forms.ModelForm):
+    username = forms.CharField(label="نام کاربری", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
+    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
+    email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}))
+    first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
+    last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
+    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3'}))
 
     class Meta:
         model = Account
-        fields = ('username', 'phone_number', 'email')
+        fields = ('username', 'phone_number', 'email', 'first_name', 'last_name', 'description')
+
 
     def clean_username(self):
         if self.is_valid():

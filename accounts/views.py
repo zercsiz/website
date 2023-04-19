@@ -3,6 +3,7 @@ from . import forms
 from django.contrib.auth import login, authenticate, logout
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from courses.models import *
 
 
@@ -104,15 +105,10 @@ class AccountEditView(LoginRequiredMixin, View):
         form = forms.AccountEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.error(request, "اطلاعات شما با موفقیت تغییر کرد.", 'success')
             return redirect('account_details')
         return render(request, 'accounts/account_edit.html', {'form': form})
 
     def get(self, request):
-        form = forms.AccountEditForm(
-            initial={
-                "username": request.user.username,
-                "phone_number": request.user.phone_number,
-                "email": request.user.email,
-            }
-        )
+        form = forms.AccountEditForm(instance=request.user)
         return render(request, 'accounts/account_edit.html', {'form': form})
