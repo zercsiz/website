@@ -16,7 +16,7 @@ class UserRegistrationView(View):
             # raw_password = form.cleaned_data.get('password')
             # account = authenticate(phone_number=phone_number, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('account_details')
         else:
             form = forms.RegistrationForm()
         return render(request, 'accounts/register.html', {'form': form})
@@ -62,6 +62,10 @@ class AccountInfoView(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_teacher:
             context = {}
+            if not request.user.first_name or not request.user.last_name or not request.user.skill or not request.user.description:
+                context['uncomplete_info'] = True
+            else:
+                context['uncomplete_info'] = False
             # week days in farsi for plan
             w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", )
             context['week_days'] = w_days
@@ -105,7 +109,7 @@ class AccountEditView(LoginRequiredMixin, View):
         form = forms.AccountEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.error(request, "اطلاعات شما با موفقیت تغییر کرد.", 'success')
+            messages.success(request, "اطلاعات شما با موفقیت تغییر کرد.", 'success')
             return redirect('account_details')
         return render(request, 'accounts/account_edit.html', {'form': form})
 

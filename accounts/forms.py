@@ -45,15 +45,17 @@ class UserLoginForm(forms.ModelForm):
 
 class AccountEditForm(forms.ModelForm):
     username = forms.CharField(label="نام کاربری", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}))
-    first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3'}))
+    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
+    email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}), required=True)
+    first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
+    last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
+    skill_choices = {('g', 'زبان آلمانی'), ('e', 'زبان انگلیسی')}
+    skill = forms.ChoiceField(label="مهارت", required=True, choices=skill_choices, widget=forms.Select(attrs={'class': 'form-control my-3'}))
+    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3'}), required=True)
 
     class Meta:
         model = Account
-        fields = ('username', 'phone_number', 'email', 'first_name', 'last_name', 'description')
+        fields = ('username', 'phone_number', 'email', 'first_name', 'last_name', 'skill', 'description')
 
 
     def clean_username(self):

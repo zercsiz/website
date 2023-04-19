@@ -4,6 +4,9 @@
     <div class="container">
         <div class="d-flex flex-column">
             <h5 class="text-center">پنل کاربری</h5>
+            {% if uncomplete_info %}
+                <h5 class="text-center text-danger my-2">لطفا برای نمایش داده شدن در وبسایت اطلاعات خود را <a href="{% url 'account_edit' %}">تکمیل</a> کنید.</h5>
+            {% endif %}
             <p> نام کاربری : {{ user.username }}</p>
             <p>شماره تلفن همراه : {{ user.phone_number }}</p>
             <p>ایمیل : {{ user.email }}</p>
@@ -12,38 +15,6 @@
     <hr>
     <div class="container-fluid p-0 m-0">
         <div class="d-flex flex-column">
-{#            {% if user.is_teacher %}#}
-{#                <h5>جلسات شما به عنوان استاد</h5>#}
-{#                {% if teacher_times_as_teacher %}#}
-{#                <table class="table col-lg-12 col-lg-12 col-sm-12 table-striped text-center mt-3">#}
-{#                    <thead>#}
-{#                        <tr>#}
-{#                            <th scope="col">تاریخ</th>#}
-{#                            <th scope="col">روز هفته</th>#}
-{#                            <th scope="col">ساعت آغاز</th>#}
-{#                            <th scope="col">ساعت پایان</th>#}
-{#                            <th scope="col">شاگرد</th>#}
-{#                            <th scope="col">گزارش</th>#}
-{#                            <th scope="col">شرکت در جلسه</th>#}
-{#                        </tr>#}
-{#                    </thead>#}
-{#                    <tbody>#}
-{#                        {% for t in teacher_times_as_teacher %}#}
-{#                            <tr>#}
-{#                                <td>{{ t.date }}</td>#}
-{#                                <td>{{ t.week_day }}</td>#}
-{#                                <td>{{ t.start|date:"H:i" }}</td>#}
-{#                                <td>{{ t.end|date:"H:i" }}</td>#}
-{#                                <td>{{ t.student.email }}</td>#}
-{#                                <td><a class="btn btn-outline-dark mx-2" style="height: max-content" href="{% url 'teacher_time_report' t.id %}">گزارش</a></td>#}
-{#                                <td><a class="btn btn-outline-dark mx-2" style="height: max-content" target=”_blank” href="{{ t.google_meet_link }}">شرکت در جلسه</a></td>#}
-{#                            </tr>#}
-{#                        {% endfor %}#}
-{#                    </tbody>#}
-{#                </table>#}
-{#                {% else %}#}
-{#                    <p class="text-center">هنوز جلسه رزرو شده ای موجود نیست</p>#}
-{#                {% endif %}#}
                 <h5>جلسات شما به عنوان استاد</h5>
                 <div class="row gap-2 justify-content-start position-relative mt-3 me-3">
                     {% if teacher_times_as_teacher %}
@@ -111,5 +82,11 @@
         </div>
         {% endif %}
     </div>
+    <style>
+        label.required::after {
+    content: ' *';
+    color: red;
+}
+    </style>
 
 {% endblock %}
