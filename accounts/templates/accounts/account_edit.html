@@ -6,8 +6,8 @@
     </head>
     <div class="d-flex mt-4">
         <form method="post" class="m-auto text-center"> {% csrf_token %}
-            <h1 class="h3 mb-3 fw-normal text-center">ویرایش اطلاعات کاربری</h1>
-            {{ form.as_table }}
+            <h5 class="mb-3 fw-normal">ویرایش اطلاعات کاربری</h5>
+            {{ form.as_p }}
 {#            <div class="row gap-1">#}
 {#                <div class="d-flex flex-column col-lg-4">#}
 {#                    <label for="phone_number" class="form-label">شماره تلفن همراه</label>#}
