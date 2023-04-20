@@ -1,6 +1,9 @@
 {% extends 'accounts/profile_base.html' %}
 
 {% block profile_content %}
+    {% block titel %}
+        <title>گزارش جلسه</title>
+    {% endblock %}
     <div class="container-fluid">
         <input class="btn btn-outline-dark mx-2 mt-2" type=button value="&#8594; بازگشت" onClick="javascript:history.go(-1);">
         <div class="d-flex flex-column" style="margin-top: 50px">

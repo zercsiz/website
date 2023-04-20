@@ -3,9 +3,12 @@
 <!-- in this table, monday is 0 and sunday is 6. -->
 
 {% block profile_content %}
+    {% block titel %}
+        <title>زمان های خالی من</title>
+    {% endblock %}
     {% if not plan %}
         <div class="d-flex flex-column m-3" style="margin-right: 500px">
-            <h5 class="text-center">تایم های خالیتو تیک بزن</h5>
+            <h5 class="text-center">زمان های خالی خود را در هفته تیک بزنید.</h5>
             <p class="my-2">در این بخش باید از بین زمان های تعیین شده، زمان های خالی خود را انتخاب کنید. بعد از زدن دکمه تایید، برنامه هفتگی شما در سایت نمایش داده می شود.</p>
             <form action="" method="post"> {% csrf_token %}
                 <div class="d-flex flex-column p-4">

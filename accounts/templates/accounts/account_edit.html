@@ -1,9 +1,9 @@
 {% extends 'accounts/profile_base.html' %}
 
 {% block profile_content %}
-    <head>
-        <title>ویرایش طلاعات کاربری</title>
-    </head>
+    {% block titel %}
+        <title>ویرایش اطلاعات کاربری</title>
+    {% endblock %}
     <div class="d-flex mt-4">
         <form method="post" class="m-auto text-center"> {% csrf_token %}
             <h5 class="mb-3 fw-normal">ویرایش اطلاعات کاربری</h5>
