@@ -61,7 +61,7 @@ class AccountEditForm(forms.ModelForm):
     last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
     skill_choices = {('g', 'زبان آلمانی'), ('e', 'زبان انگلیسی')}
     skill = forms.ChoiceField(label="مهارت", required=True, choices=skill_choices, widget=forms.Select(attrs={'class': 'form-control my-3'}))
-    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3'}), required=True)
+    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}), required=True)
 
     class Meta:
         model = Account
