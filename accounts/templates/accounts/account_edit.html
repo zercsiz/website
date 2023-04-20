@@ -8,38 +8,6 @@
         <form method="post" class="m-auto text-center"> {% csrf_token %}
             <h5 class="mb-3 fw-normal">ویرایش اطلاعات کاربری</h5>
             {{ form.as_p }}
-{#            <div class="row gap-1">#}
-{#                <div class="d-flex flex-column col-lg-4">#}
-{#                    <label for="phone_number" class="form-label">شماره تلفن همراه</label>#}
-{#                    <input type="tel" name="phone_number" class="form-control" id="phone_number" value="{{ user.phone_number }}">#}
-{#                </div>#}
-{#                <div class="d-flex flex-column col-lg-4">#}
-{#                    <label for="username" class="form-label">نام کاربری</label>#}
-{#                    <input type="text" name="username" class="form-control" id="username" value="{{ user.username }}">#}
-{#                </div>#}
-{#                <div class="d-flex flex-column col-lg-4">#}
-{#                    <label for="phone_number" class="form-label">آدرس ایمیل</label>#}
-{#                    <input type="email" name="email" class="form-control" id="phone_number" value="{{ user.email }}">#}
-{#                </div>#}
-{#                {% if user.is_teacher %}#}
-{#                <div class="d-flex flex-column col-lg-4">#}
-{#                    <label for="description" class="form-label">توضیحات</label>#}
-{#                    <textarea type="text" name="description" class="form-control" id="description"></textarea>#}
-{#                </div>#}
-{#                {% endif %}#}
-{#            </div>#}
-
-            {% for field in form %}
-                  {% for error in field.errors %}
-                      <p style="color: red">{{ error }}</p>
-                  {% endfor %}
-              {% endfor %}
-
-              {% if form.non_field_errors %}
-                  <div>
-                      <p style="color: red"> {{ form.non_field_errors }}</p>
-                  </div>
-              {% endif %}
             <button class="btn btn-primary my-3" type="submit">ثبت تغییرات</button>
         </form>
     </div>
