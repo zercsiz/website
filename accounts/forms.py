@@ -5,7 +5,10 @@ from accounts.models import Account
 
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(max_length=250, help_text="Required. Please enter a valid email address")
+    email = forms.EmailField(label="", max_length=250, required=True,
+                             widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'آدرس ایمیل'}))
+    password1 = forms.CharField(label="", max_length=250, required=True,
+                             widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز ورود'}))
 
     class Meta:
         model = Account
@@ -16,6 +19,13 @@ class RegistrationForm(UserCreationForm):
         del self.fields['password2']
         self.fields['password1'].help_text = None
         self.fields['email'].help_text = None
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = Account.objects.filter(email=email).exists()
+        if user:
+            raise forms.ValidationError('حساب کاربری با این ایمیل وجود دارد.', code="exists")
+        return email
 
 
 class UserLoginForm(forms.ModelForm):

@@ -5,20 +5,19 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from courses.models import *
+from accounts.models import *
 
 
 class UserRegistrationView(View):
     def post(self, request):
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # phone_number = form.cleaned_data.get('phone_number')
-            # raw_password = form.cleaned_data.get('password')
-            # account = authenticate(phone_number=phone_number, password=raw_password)
+            cd = form.cleaned_data
+            user = Account.objects.create_user(cd['email'], cd['password1'])
+            user.save()
+            messages.success(request, "حساب کاربری شما با موفقیت ایجاد شد.", 'success')
             login(request, user)
             return redirect('account_details')
-        else:
-            form = forms.RegistrationForm()
         return render(request, 'accounts/register.html', {'form': form})
 
     def get(self, request):

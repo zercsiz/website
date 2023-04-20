@@ -4,34 +4,26 @@
     <head>
         <title>ثبت نام</title>
     </head>
-    <div class="d-flex flex-column justify-content-center" style="margin-top: 100px"></div>
-    <h2 class="text-center">ثبت نام</h2>
-    <main class="form-signup w-100 m-auto text-center">
-        <form method="post">{% csrf_token %}
-            <div class="mb-3">
-                <input type="email" name="email" class="form-control" id="inputPhoneNumber" maxlength="250" placeholder="آدرس ایمیل" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password1" class="form-control" id="inputPass1" placeholder="رمز ورود" required>
-            </div>
-            {% if form.errors %}
-                {{ form.errors }}
-            {% endif %}
-            <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
-        </form>
-    </main>
-
+    <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
+        <h5 class="text-center">ثبت نام</h5>
+        <main class="form-signup w-100 m-auto text-center" style="width: 100%">
+            <form class="" method="post" novalidate style="width: 100%">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
+            </form>
+        </main>
+    </div>
 
     <style>
         .form-signup {
-          max-width: 330px;
+          max-width: 340px;
           padding: 15px;
         }
         .form-signup:focus-within {
           z-index: 2;
         }
         .button-signup {
-            max-width: 330px
+            max-width: 340px
         }
     </style>
 
