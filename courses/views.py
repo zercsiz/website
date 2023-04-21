@@ -97,7 +97,7 @@ class TeacherDetails(LoginRequiredMixin,View):
 
         # checks if user is trying to reserve their own times
         if request.user.id == teacher_id:
-            messages.error(request, "رزرو کردن تایم های خود امکان پذیر نیست", 'danger')
+            messages.error(request, "اساتید امکان رزرو کلاس های خود را ندارند.", 'danger')
             return redirect('teacher_details', teacher_id, teacher_slug)
         else:
 
