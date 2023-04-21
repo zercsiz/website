@@ -67,9 +67,9 @@ class CreateTime(LoginRequiredMixin, View):
             return redirect('user_login')
 
 
-class TeacherDetails(View):
-    def get(self, request, teacher_slug):
-        teacher = Account.objects.get(slug=teacher_slug)
+class TeacherDetails(LoginRequiredMixin,View):
+    def get(self, request, teacher_id, teacher_slug):
+        teacher = Account.objects.get(id=teacher_id)
         w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
         hours = ("09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30")
         try:
@@ -90,7 +90,7 @@ class TeacherDetails(View):
             }
         return render(request, 'courses/teacher_details.html', context)
 
-    def post(self, request, teacher_id):
+    def post(self, request, teacher_id, teacher_slug):
         def daterange(start_date, end_date):
             for n in range(int((end_date - start_date).days)):
                 yield start_date + timedelta(n)
@@ -98,7 +98,7 @@ class TeacherDetails(View):
         # checks if user is trying to reserve their own times
         if request.user.id == teacher_id:
             messages.error(request, "رزرو کردن تایم های خود امکان پذیر نیست", 'danger')
-            return redirect('teacher_details', teacher_id)
+            return redirect('teacher_details', teacher_id, teacher_slug)
         else:
 
             # this checks if user specified a start date and if they didnt, sets the start date today()
