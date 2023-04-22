@@ -70,9 +70,9 @@ class Account(AbstractBaseUser):
         if self.is_superuser:
             return f"Admin | {self.username} | {self.phone_number} | {self.email}"
         elif self.is_student:
-            return f"Student | {self.username} | {self.phone_number} | {self.email}"
+            return f"Student | {self.username} | {self.email}"
         else:
-            return f"Teacher | {self.username} | {self.phone_number} | {self.email}"
+            return f"Teacher | {self.first_name} {self.last_name} | {self.skill}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
