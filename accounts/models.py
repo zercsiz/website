@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class MyAccountManager(BaseUserManager):
@@ -80,3 +81,5 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_lable):
         return True
 
+    def get_absolute_url(self):
+        return reverse('teacher_details', args=(self.id, self.slug))
