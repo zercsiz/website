@@ -12,9 +12,7 @@ class UserRegistrationView(View):
     def post(self, request):
         form = forms.RegistrationForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            user = Account.objects.create_user(cd['email'], cd['password1'])
-            user.save()
+            user = form.save()
             messages.success(request, "حساب کاربری شما با موفقیت ایجاد شد.", 'success')
             login(request, user)
             return redirect('account_details')
