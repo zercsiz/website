@@ -183,19 +183,25 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
 class TeacherTimeReportView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
+    def setup(self, request, *args, **kwargs):
+        # gets a particular teacher time
+        self.teacher_time_instance = TeacherTime.objects.get(id=kwargs['teacher_time_id'])
+
+        super().setup(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher:
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, teacher_time_id):
-        t_time = TeacherTime.objects.get(id=teacher_time_id)
+        t_time = self.teacher_time_instance
         context = {'teacher_time': t_time}
         return render(request, 'courses/teacher_time_report.html', context)
 
     def post(self, request, teacher_time_id):
         teacher_time_report = request.POST.get('report')
-        teacher_time = TeacherTime.objects.get(id=teacher_time_id)
+        teacher_time = self.teacher_time_instance
         teacher_time.report = teacher_time_report
         teacher_time.save()
         return redirect('account_details')
