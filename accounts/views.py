@@ -9,8 +9,10 @@ from accounts.models import *
 
 
 class UserRegistrationView(View):
+    form_class = forms.RegistrationForm
+    
     def post(self, request):
-        form = forms.RegistrationForm(request.POST)
+        form = self.form_class(request.POST)
         if form.is_valid():
             user = form.save()
             messages.success(request, "حساب کاربری شما با موفقیت ایجاد شد.", 'success')
@@ -19,7 +21,7 @@ class UserRegistrationView(View):
         return render(request, 'accounts/register.html', {'form': form})
 
     def get(self, request):
-        form = forms.RegistrationForm()
+        form = self.form_class()
         return render(request, 'accounts/register.html', {'form': form})
 
 
@@ -45,17 +47,24 @@ class LoginView(View):
         return render(request, 'accounts/login.html', {'form': form})
 
 
+class LogoutView(View):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
-def logout_view(request):
-    if request.user.is_authenticated:
+    def get(self, request):
         logout(request)
         return redirect('home')
-    else:
-        return redirect('home')
-
+    
 
 class AccountInfoView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):
         if request.user.is_teacher:
@@ -102,9 +111,15 @@ class AccountInfoView(LoginRequiredMixin, View):
 
 class AccountEditView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+    form_class = forms.AccountEditForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
-        form = forms.AccountEditForm(request.POST, instance=request.user)
+        form = self.form_class(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "اطلاعات شما با موفقیت تغییر کرد.", 'success')
@@ -112,5 +127,5 @@ class AccountEditView(LoginRequiredMixin, View):
         return render(request, 'accounts/account_edit.html', {'form': form})
 
     def get(self, request):
-        form = forms.AccountEditForm(instance=request.user)
+        form = self.form_class(instance=request.user)
         return render(request, 'accounts/account_edit.html', {'form': form})
