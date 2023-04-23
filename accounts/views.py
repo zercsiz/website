@@ -24,24 +24,25 @@ class UserRegistrationView(View):
 
 
 class LoginView(View):
-    def post(self, request):
+    form_class = forms.UserLoginForm
+
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('home')
-        else:
-            form = forms.UserLoginForm(request.POST or None)
-            if form.is_valid():
-                user = form.login(request)
-                if user:
-                    login(request, user)
-                    return redirect('home')
-            return render(request, 'accounts/login.html', {'form': form})
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        form = self.form_class(request.POST or None)
+        if form.is_valid():
+            user = form.login(request)
+            if user:
+                login(request, user)
+                return redirect('home')
+        return render(request, 'accounts/login.html', {'form': form})
 
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-        else:
-            form = forms.UserLoginForm()
-            return render(request, 'accounts/login.html', {'form': form})
+        form = self.form_class()
+        return render(request, 'accounts/login.html', {'form': form})
 
 
 
