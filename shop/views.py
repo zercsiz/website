@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
 from django.contrib import messages
-import json
 from .models import *
 
 
@@ -19,7 +17,6 @@ class CartView(View):
             except Order.DoesNotExist:
                 order = None
                 items = None
-
         else:
             items = []
             order = {'total': 0}
@@ -27,7 +24,7 @@ class CartView(View):
         return render(request, 'shop/cart.html', context)
 
 
-class removeItem(View):
+class removeItem(LoginRequiredMixin, View):
     def get(self, request, item_id):
         order_item = OrderItem.objects.get(id=item_id)
         order_item.teacherTime.delete()
