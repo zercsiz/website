@@ -12,8 +12,12 @@ from jalali_date import date2jalali
 class CreateTime(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
-    def post(self, request):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_teacher:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
+    def post(self, request):
         # this function converts weekday number to farsi weekday names
         def week_day_convert(day_number):
             # here shanbe is 5
@@ -28,43 +32,33 @@ class CreateTime(LoginRequiredMixin, View):
             end = timedelta(hours=hour, minutes=minute) + timedelta(hours=1, minutes=30)
             return end
 
-        if request.user.is_teacher:
-            teacher_time_list = request.POST.getlist('times')
-            google_meet_link = request.POST.get('google_meet_link')
-            price = int(request.POST.get('price'))
-            teacher = request.user
+        teacher_time_list = request.POST.getlist('times')
+        google_meet_link = request.POST.get('google_meet_link')
+        price = int(request.POST.get('price'))
+        teacher = request.user
 
-            # TeacherPlan creation
-            t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher, google_meet_link=google_meet_link, price=price)
+        # TeacherPlan creation
+        t_plan, created = TeacherPlan.objects.get_or_create(teacher=teacher, google_meet_link=google_meet_link, price=price)
 
-            # plantime creation
-            for t in teacher_time_list:
-                end_time = str(calculate_endtime(t[2:]))
-                p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
-                                start=t[2:], end=end_time, week_day_number=int(t[0]))
+        # plantime creation
+        for t in teacher_time_list:
+            end_time = str(calculate_endtime(t[2:]))
+            p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
+                            start=t[2:], end=end_time, week_day_number=int(t[0]))
 
-            return redirect('account_details')
-        else:
-            return redirect('home')
+        return redirect('account_details')
 
     def get(self, request):
-        if request.user.is_authenticated:
-            if request.user.is_teacher:
-                try:
-                    plan = TeacherPlan.objects.get(teacher=request.user)
-                except TeacherPlan.DoesNotExist:
-                    plan = None
-                if plan:
-                    context = {'plan': plan}
-                else:
-                    context = {'plan': None}
-
-                return render(request, 'courses/time_checkbox.html', context)
-            else:
-                return redirect('home')
-
+        try:
+            plan = TeacherPlan.objects.get(teacher=request.user)
+        except TeacherPlan.DoesNotExist:
+            plan = None
+        if plan:
+            context = {'plan': plan}
         else:
-            return redirect('user_login')
+            context = {'plan': None}
+        return render(request, 'courses/time_checkbox.html', context)
+
 
 
 class TeacherDetails(LoginRequiredMixin,View):
@@ -168,44 +162,50 @@ class TeacherDetails(LoginRequiredMixin,View):
 class DeleteTeacherPlanView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
-    def get(self, request, plan_id):
-        if request.user.is_teacher:
-            teacher_plan = TeacherPlan.objects.get(id=plan_id)
-            plan_times = PlanTime.objects.filter(teacherplan=teacher_plan)
-            teacher_times = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=False)
-            for t_time in teacher_times:
-                for p_time in plan_times:
-                    if t_time.week_day == p_time.week_day and t_time.start == p_time.start:
-                        t_time.delete()
-            teacher_plan.delete()
-            messages.success(request, "برنامه شما با موفقیت حذف شد", 'success')
-            return redirect('time_checkbox')
-        else:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_teacher:
             return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, plan_id):
+        teacher_plan = TeacherPlan.objects.get(id=plan_id)
+        plan_times = PlanTime.objects.filter(teacherplan=teacher_plan)
+        teacher_times = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=False)
+        for t_time in teacher_times:
+            for p_time in plan_times:
+                if t_time.week_day == p_time.week_day and t_time.start == p_time.start:
+                    t_time.delete()
+        teacher_plan.delete()
+        messages.success(request, "برنامه شما با موفقیت حذف شد", 'success')
+        return redirect('time_checkbox')
 
 
 class TeacherTimeReportView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
-    def get(self, request, teacher_time_id):
-        if request.user.is_teacher:
-            t_time = TeacherTime.objects.get(id=teacher_time_id)
-            context = {'teacher_time': t_time}
-            return render(request, 'courses/teacher_time_report.html', context)
-        else:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_teacher:
             return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, teacher_time_id):
+        t_time = TeacherTime.objects.get(id=teacher_time_id)
+        context = {'teacher_time': t_time}
+        return render(request, 'courses/teacher_time_report.html', context)
 
     def post(self, request, teacher_time_id):
-        if request.user.is_teacher:
-            teacher_time_report = request.POST.get('report')
-            teacher_time = TeacherTime.objects.get(id=teacher_time_id)
-            teacher_time.report = teacher_time_report
-            teacher_time.save()
-            return redirect('account_details')
-        else:
-            return redirect('home')
+        teacher_time_report = request.POST.get('report')
+        teacher_time = TeacherTime.objects.get(id=teacher_time_id)
+        teacher_time.report = teacher_time_report
+        teacher_time.save()
+        return redirect('account_details')
 
 
 class GoogleMeetLinkTutorialView(View):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_teacher:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
     def get(self, request):
         return render(request, 'courses/google_meet_link_tutorial.html')
