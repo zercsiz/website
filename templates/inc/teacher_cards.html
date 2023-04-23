@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <h4>{{ t.first_name }} {{ t.last_name }}</h4>
                             <small>{{ t.skill }}</small>
-                            <p class="card-text" style="overflow: hidden">{{ t.description}}</p>
+                            <p class="card-text" style="overflow: hidden">{{ t.description|truncatewords:15 }}</p>
                             <a href="{{ t.get_absolute_url }}" class="btn btn-teacher-details">جزعیات</a>
                         </div>
                     </div>
