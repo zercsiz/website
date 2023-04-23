@@ -60,8 +60,7 @@ class CreateTime(LoginRequiredMixin, View):
         return render(request, 'courses/time_checkbox.html', context)
 
 
-
-class TeacherDetails(LoginRequiredMixin,View):
+class TeacherDetails(LoginRequiredMixin, View):
     def get(self, request, teacher_id, teacher_slug):
         teacher = Account.objects.get(id=teacher_id)
         w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه",)
