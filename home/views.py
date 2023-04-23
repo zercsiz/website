@@ -4,7 +4,6 @@ from accounts.models import Account
 
 
 def home_view(request):
-
     teacher_list = Account.objects.filter(is_teacher=True).exclude(slug__exact="")[:6]
     course_list = Course.objects.all()[:6]
     context = {'courses': course_list, "teachers": teacher_list}
