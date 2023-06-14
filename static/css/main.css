@@ -1,10 +1,13 @@
 .container {
     padding: 4% 8%;
     margin: 0;
+    width: 100vw;
 }
-
+p,h1,h2,h3,h4,h5,h6,small,em {
+    color: #121212;
+}
 body {
     font-family: 'Samim', sans-serif;
-    background-color: #F6F5F5;
+    background-color: #F5F5F5;
     overflow-x: hidden;
 }
