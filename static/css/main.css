@@ -3,5 +3,7 @@
 }
 
 body {
+    font-family: 'Samim', sans-serif;
+    background-color: #F6F5F5;
     overflow-x: hidden;
 }
