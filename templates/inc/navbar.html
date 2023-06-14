@@ -1,6 +1,6 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark position-absolute w-100">
-    <div class="container w-75">
+<nav class="navbar navbar-expand-lg navbar-dark w-100">
+    <div class="container">
         <a class="navbar-brand ms-auto" href="{% url 'home' %}" style="justify-self: start">وبسایت من</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
             <span class="navbar-toggler-icon"></span>
@@ -23,22 +23,19 @@
                         <a class="nav-link" href="{% url 'user_login' %}">ورود</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn" href="{% url 'user_registration' %}" style="background-color: #db6204; outline: None; color: white">ثبت نام</a>
+                        <a class="btn" href="{% url 'user_registration' %}" style="background-color: #EE6F57; outline: None; color: white">ثبت نام</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
 <style>
-    .nav-colored {
-        background-color: #14436b;
+    .navbar {
+        background-color: #145374;
+    }
+    .navbar .container {
+        padding: 1% 8%;
     }
 </style>
-<script>
-    const nav = document.querySelector('.navbar')
-    if(window.location.pathname !== '/') {
-        nav.classList.add('nav-colored')
-        nav.classList.remove('position-absolute')
-    }
-</script>
