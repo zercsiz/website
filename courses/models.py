@@ -48,7 +48,7 @@ class TeacherTime(models.Model):
 
 
 class TeacherPlan(models.Model):
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="Teacher")
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="Teacher")
     google_meet_link = models.CharField(null=True, max_length=250)
     price = models.BigIntegerField(null=True, blank=True)
 
