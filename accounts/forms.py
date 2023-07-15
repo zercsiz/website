@@ -8,7 +8,7 @@ class RegistrationForm(UserCreationForm):
     email = forms.EmailField(label="", max_length=250, required=True,
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'آدرس ایمیل'}))
     password1 = forms.CharField(label="", max_length=250, required=True,
-                             widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز ورود'}))
+                             widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز عبور'}))
 
     class Meta:
         model = Account
@@ -43,7 +43,7 @@ class UserLoginForm(forms.ModelForm):
             user = authenticate(email=email, password=password)
             if not user or not user.is_active:
                 # massage for invalid login
-                raise forms.ValidationError("نام کاربری یا رمز ورود اشتباه است.")
+                raise forms.ValidationError("نام کاربری یا رمز عبور اشتباه است.")
             return self.cleaned_data
 
     def login(self, request):
