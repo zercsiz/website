@@ -59,7 +59,7 @@ class AccountEditForm(forms.ModelForm):
     email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}), required=True)
     first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
     last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
-    skill_choices = {('g', 'زبان آلمانی'), ('e', 'زبان انگلیسی')}
+    skill_choices = {('زبان آلمانی', 'g'), ('زبان انگلیسی', 'e')}
     skill = forms.ChoiceField(label="مهارت", required=True, choices=skill_choices, widget=forms.Select(attrs={'class': 'form-control my-3'}))
     description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}), required=True)
 
