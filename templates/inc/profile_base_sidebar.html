@@ -3,27 +3,30 @@
       <div class="sidebar-sticky" id="sidebarNav">
         <ul class="nav flex-column" style="padding: 0.8rem;">
           <li class="nav-item" style="margin-left: auto">
-            <a class="nav-link sidebar-link" href="{% url 'account_details' %}">
+            <a class="nav-link sidebar-link" href="{% url 'account_details' %}" style="font-size: 1rem;">
               <span data-feather="home" class="align-text-bottom"></span>
               پنل کاربری
             </a>
           </li>
-            {% if user.is_teacher %}
-              <li class="nav-item">
-                <a class="nav-link sidebar-link" href="{% url 'time_checkbox' %}">
-                  <span data-feather="file" class="align-text-bottom"></span>
-                  تایم های خالی من
-                </a>
-              </li>
-            {% endif %}
+          <hr>
+          {% if user.is_teacher %}
+            <li class="nav-item">
+              <a class="nav-link sidebar-link" href="{% url 'time_checkbox' %}" style="font-size: 1rem;">
+                <span data-feather="file" class="align-text-bottom"></span>
+                تایم های خالی من
+              </a>
+            </li>
+            <hr>
+          {% endif %}
           <li class="nav-item">
-            <a class="nav-link sidebar-link" href="{% url 'account_edit' %}">
+            <a class="nav-link sidebar-link" href="{% url 'account_edit' %}" style="font-size: 1rem;">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               ویرایش اطلاعات کاربری
             </a>
           </li>
-        <li class="nav-item">
-            <a class="nav-link sidebar-link" href="{% url 'password_change' %}">
+          <hr>
+          <li class="nav-item">
+            <a class="nav-link sidebar-link" href="{% url 'password_change' %}" style="font-size: 1rem;">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               تعویض رمز عبور
             </a>

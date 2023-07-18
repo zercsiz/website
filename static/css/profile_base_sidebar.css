@@ -8,6 +8,6 @@
     color: black;
 }
 .sidebar-link[aria-current="page"]{
-    text-decoration: underline black 0.15rem;
-    text-underline-offset: 0.5rem;
+    color: cadetblue;
+
 }

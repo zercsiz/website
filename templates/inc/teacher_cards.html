@@ -4,12 +4,12 @@
             <div class="row">
                 {% for t in teachers %}
                     <div class="col-lg-3 p-2">
-                        <div class="card" style="min-height:350px; border-radius: 0">
+                        <div class="card" style="min-height:350px">
                             <div class="card-header" style="height: 150px">
                                 <img src="" alt="">
                             </div>
                             <div class="card-body text-end">
-                                <h4>{{ t.first_name }} {{ t.last_name }}</h4>
+                                <h5>{{ t.first_name }} {{ t.last_name }}</h5>
                                 <small>{{ t.skill }}</small>
                                 <p class="card-text" style="overflow: hidden">{{ t.description|truncatewords:15 }}</p>
                                 <a href="{{ t.get_absolute_url }}" class="btn btn-teacher-details">جزعیات</a>

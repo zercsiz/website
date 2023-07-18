@@ -30,7 +30,7 @@
                     {% if teacher_times_as_teacher %}
                         {% for t in teacher_times_as_teacher %}
                             {% if t.is_reserved %}
-                                <div class="card col-lg-5" style="border-radius: 0; background-color: steelblue">
+                                <div class="card col-lg-5" style="background-color: steelblue">
                                     <div class="card-body d-flex flex-row">
                                         <p class="text-light">{{ t.date }} - {{ t.week_day }} - {{ t.end|date:"H:i" }} - {{ t.start|date:"H:i" }} - {{ t.student.email }}</p>
                                         <a class="btn btn-outline-light mx-2" style="height: max-content" href="{% url 'teacher_time_report' t.id %}">گزارش</a>
@@ -54,7 +54,7 @@
                 {% if teacher_times_as_student %}
                     {% for t in teacher_times_as_student %}
                         {% if t.is_reserved %}
-                            <div class="card col-lg-5" style="border-radius: 0; background-color: slategray; min-height: 50px; box-shadow: 4px 10px 10px 0 rgba(0, 0, 0,0.12)">
+                            <div class="card col-lg-5" style="background-color: slategray; min-height: 50px; box-shadow: 4px 10px 10px 0 rgba(0, 0, 0,0.12)">
                                 <div class="card-body d-flex flex-row">
                                     <p class="text-light" style="width: 70%">{{ t.date }} - {{ t.week_day }} - {{ t.end|date:"H:i" }} - {{ t.start|date:"H:i" }} - {{ t.teacher.skill }} - استاد :  {{ t.teacher.first_name }} {{ t.teacher.last_name }}</p>
                                     <a class="btn btn-outline-light" style="width: 30%; height: max-content" target=”_blank” href="{{ t.google_meet_link }}">شرکت در جلسه</a>

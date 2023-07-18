@@ -37,7 +37,7 @@ class Account(AbstractBaseUser):
     first_name = models.CharField(verbose_name="First Name", max_length=200, null=True, blank=True)
     last_name = models.CharField(verbose_name="Last Name", max_length=200, null=True, blank=True)
     description = models.TextField(verbose_name="Description", max_length=1000, null=True, blank=True)
-    skill_choices = {('g', 'زبان آلمانی'), ('e', 'زبان انگلیسی')}
+    skill_choices = {('زبان آلمانی', 'g'), ('زبان انگلیسی', 'e')}
     skill = models.CharField(verbose_name="Skill", max_length=200, null=True, blank=True, choices=skill_choices)
     slug = models.SlugField(null=True, blank=True, max_length=300, unique=True, allow_unicode=True)
 
