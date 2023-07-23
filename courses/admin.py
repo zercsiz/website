@@ -3,8 +3,18 @@ from . import models
 
 
 admin.site.register(models.Course)
-admin.site.register(models.TeacherPlan)
-admin.site.register(models.PlanTime)
+
+@admin.register(models.PlanTime)
+class PlanTimeAdmin(admin.ModelAdmin):
+    list_display = ('teacherplan', 'week_day', 'week_day_number', 'start', 'end')
+    search_fields = ('week_day', 'start',)
+    raw_id_fields = ('teacherplan',)
+
+@admin.register(models.TeacherPlan)
+class TeacherPlanAdmin(admin.ModelAdmin):
+    list_display = ('teacher', 'google_meet_link', 'price')
+    search_fields = ('teacher',)
+    raw_id_fields = ('teacher',)
 
 
 @admin.register(models.TeacherTime)

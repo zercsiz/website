@@ -52,6 +52,9 @@ class TeacherPlan(models.Model):
     google_meet_link = models.CharField(null=True, max_length=250)
     price = models.BigIntegerField(null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.teacher.first_name} {self.teacher.last_name} -- {self.teacher.username} -- {self.google_meet_link}"
+
 
 
 class PlanTime(models.Model):
@@ -60,3 +63,6 @@ class PlanTime(models.Model):
     week_day_number = models.IntegerField(null=True)
     start = models.TimeField(null=True)
     end = models.TimeField(null=True)
+
+    def __str__(self):
+        return f"{self.teacherplan.teacher.first_name} {self.teacherplan.teacher.last_name} - {self.week_day} - {self.start}"
