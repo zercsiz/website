@@ -45,11 +45,20 @@ class OrderCompleteView(LoginRequiredMixin, View):
             order = None
         if order:
             order_items = OrderItem.objects.filter(order=order)
+
+            already_reserved_error = False
             for item in order_items:
-                item.teacherTime.student = request.user
-                item.teacherTime.is_reserved = True
-                item.teacherTime.save()
-            return redirect('accounts:account_details')
+                if not item.teacherTime.is_reserved:
+                    item.teacherTime.student = request.user
+                    item.teacherTime.is_reserved = True
+                    item.teacherTime.save()
+                else:
+                    already_reserved_error = True
+            if already_reserved_error == True:
+                messages.error(request, "امکان رزرو تعدادی از کلاس های انتخابی وجود ندارد.", 'danger')
+                return redirect('accounts:account_details')
+            else:
+                return redirect('accounts:account_details')
         else:
             messages.success(request, "سفارش یافت نشد", 'danger')
             return redirect('shop:cart')
