@@ -14,7 +14,7 @@ class CreateTime(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher:
-            return redirect('home')
+            return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
@@ -46,7 +46,7 @@ class CreateTime(LoginRequiredMixin, View):
             p_time, created = PlanTime.objects.get_or_create(teacherplan=t_plan, week_day=week_day_convert(int(t[0])),
                             start=t[2:], end=end_time, week_day_number=int(t[0]))
 
-        return redirect('account_details')
+        return redirect('accounts:account_details')
 
     def get(self, request):
         try:
@@ -91,7 +91,7 @@ class TeacherDetails(LoginRequiredMixin, View):
         # checks if user is trying to reserve their own times
         if request.user.id == teacher_id:
             messages.error(request, "اساتید امکان رزرو کلاس های خود را ندارند.", 'danger')
-            return redirect('teacher_details', teacher_id, teacher_slug)
+            return redirect('courses:teacher_details', teacher_id, teacher_slug)
         else:
 
             # this checks if user specified a start date and if they didnt, sets the start date today()
@@ -152,7 +152,7 @@ class TeacherDetails(LoginRequiredMixin, View):
                     break
 
             messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
-            return redirect('cart')
+            return redirect('shop:cart')
 
 
 # this view deletes teacher's plan for creating a new one
@@ -163,7 +163,7 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher:
-            return redirect('home')
+            return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, plan_id):
@@ -176,7 +176,7 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
                     t_time.delete()
         teacher_plan.delete()
         messages.success(request, "برنامه شما با موفقیت حذف شد", 'success')
-        return redirect('time_checkbox')
+        return redirect('courses:time_checkbox')
 
 
 class TeacherTimeReportView(LoginRequiredMixin, View):
@@ -190,7 +190,7 @@ class TeacherTimeReportView(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher:
-            return redirect('home')
+            return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, teacher_time_id):
@@ -203,13 +203,13 @@ class TeacherTimeReportView(LoginRequiredMixin, View):
         teacher_time = self.teacher_time_instance
         teacher_time.report = teacher_time_report
         teacher_time.save()
-        return redirect('account_details')
+        return redirect('accounts:account_details')
 
 
 class GoogleMeetLinkTutorialView(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher:
-            return redirect('home')
+            return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request):

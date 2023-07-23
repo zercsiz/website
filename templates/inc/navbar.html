@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark justify-content-center">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}" style="justify-self: start">وبسایت من</a>
+        <a class="navbar-brand" href="{% url 'home:home' %}" style="justify-self: start">وبسایت من</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
             <span class="navbar-toggler-icon"></span>
 {#            <img src="{% static 'img/navbar-toggler-icon.png' %}" alt="" style="aspect-ratio: auto;  width:20px">#}
@@ -9,21 +9,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end active">
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="{% url 'cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
+                    <a class="nav-link mx-2" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="{% url 'account_details' %}">پنل کاربری</a>
+                        <a class="nav-link" href="{% url 'accounts:account_details' %}">پنل کاربری</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="{% url 'user_logout' %}">خروج</a>
+                        <a class="nav-link" href="{% url 'accounts:user_logout' %}">خروج</a>
                     </li>
                 {% else %}
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="{% url 'user_login' %}">ورود</a>
+                        <a class="nav-link" href="{% url 'accounts:user_login' %}">ورود</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn" href="{% url 'user_registration' %}" style="background-color: #F05454; outline: None; color: white">ثبت نام</a>
+                        <a class="btn" href="{% url 'accounts:user_registration' %}" style="background-color: #F05454; outline: None; color: white">ثبت نام</a>
                     </li>
                 {% endif %}
             </ul>

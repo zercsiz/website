@@ -33,7 +33,7 @@
                                 <div class="card col-lg-5" style="background-color: steelblue">
                                     <div class="card-body d-flex flex-row">
                                         <p class="text-light">{{ t.date }} - {{ t.week_day }} - {{ t.end|date:"H:i" }} - {{ t.start|date:"H:i" }} - {{ t.student.email }}</p>
-                                        <a class="btn btn-outline-light mx-2" style="height: max-content" href="{% url 'teacher_time_report' t.id %}">گزارش</a>
+                                        <a class="btn btn-outline-light mx-2" style="height: max-content" href="{% url 'courses:teacher_time_report' t.id %}">گزارش</a>
                                         <a class="btn btn-outline-light mx-2" style="height: max-content" target=”_blank” href="{{ t.google_meet_link }}">شرکت در جلسه</a>
                                     </div>
                                 </div>

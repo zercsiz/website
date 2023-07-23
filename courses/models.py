@@ -52,8 +52,6 @@ class TeacherPlan(models.Model):
     google_meet_link = models.CharField(null=True, max_length=250)
     price = models.BigIntegerField(null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.teacher.email}"
 
 
 class PlanTime(models.Model):

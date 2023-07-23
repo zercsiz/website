@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+app_name = 'courses'
+
 urlpatterns = [
     path('time_checkbox', views.CreateTime.as_view(), name="time_checkbox"),
     path('teacher_details/<int:teacher_id>/<str:teacher_slug>/', views.TeacherDetails.as_view(), name="teacher_details"),

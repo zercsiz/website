@@ -331,7 +331,7 @@
                           </tbody>
                     </table>
                     <div class="d-flex flex-column">
-                        <h5>لطفا لینک گوگل میت را وارد کنید.</h5><a href="{% url 'google_meet_link_tutorial' %}" target=”_blank”>آموزش ساختن لینک گوگل میت</a>
+                        <h5>لطفا لینک گوگل میت را وارد کنید.</h5><a href="{% url 'courses:google_meet_link_tutorial' %}" target=”_blank”>آموزش ساختن لینک گوگل میت</a>
                         <input type="url" class="form-control col-8 my-3 border border-dark" name="google_meet_link" placeholder="لینک گوگل میت" required="True">
                         <h5>لطفا هزینه هر جلسه را به ریال وارد کنید.</h5>
                         <input type="number" class="form-control col-8 my-3 border border-dark" name="price" placeholder="هزینه هر جلسه" required="True">
@@ -344,7 +344,7 @@
             <div class="d-flex flex-column mt-5">
                 <h5 class="text-center">برنامه شما اعلام شده است. برای اعلام برنامه جدید لطفا برنامه قبلی را حذف کنید.</h5>
                 <p class="text-center my-2">اگر جلسه ای از برنامه قبلی رزرو شده باشد، امکان حذف آن جلسه وجود ندارد و ملزم به برگزار کردن آن هستید.</p>
-                <a href="{% url 'delete_teacher_plan' plan.id %}" class="btn btn-danger m-auto mt-3">حذف برنامه قبلی</a>
+                <a href="{% url 'courses:delete_teacher_plan' plan.id %}" class="btn btn-danger m-auto mt-3">حذف برنامه قبلی</a>
             </div>
 
         </div>

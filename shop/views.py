@@ -30,7 +30,7 @@ class removeItem(LoginRequiredMixin, View):
         order_item.teacherTime.delete()
         order_item.delete()
         messages.success(request, "کلاس با موفقیت حذف شد", 'success')
-        return redirect('cart')
+        return redirect('shop:cart')
 
 
 class OrderCompleteView(LoginRequiredMixin, View):
@@ -49,9 +49,9 @@ class OrderCompleteView(LoginRequiredMixin, View):
                 item.teacherTime.student = request.user
                 item.teacherTime.is_reserved = True
                 item.teacherTime.save()
-            return redirect('account_details')
+            return redirect('accounts:account_details')
         else:
             messages.success(request, "سفارش یافت نشد", 'danger')
-            return redirect('cart')
+            return redirect('shop:cart')
 
 

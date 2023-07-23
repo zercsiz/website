@@ -82,4 +82,4 @@ class Account(AbstractBaseUser):
         return True
 
     def get_absolute_url(self):
-        return reverse('teacher_details', args=(self.id, self.slug))
+        return reverse('courses:teacher_details', args=(self.id, self.slug))
