@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from accounts.models import Account
+from django.utils.translation import gettext_lazy as _
 
 
 class RegistrationForm(UserCreationForm):
@@ -54,18 +55,35 @@ class UserLoginForm(forms.ModelForm):
 
 
 class AccountEditForm(forms.ModelForm):
-    username = forms.CharField(label="نام کاربری", widget=forms.TextInput(attrs={'class': 'form-control my-3'}))
-    phone_number = forms.CharField(label="شماره تلفن همراه", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True, max_length=11)
-    email = forms.EmailField(label="آدرس ایمیل", widget=forms.EmailInput(attrs={'class': 'form-control my-3'}), required=True)
-    first_name = forms.CharField(label="نام", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
-    last_name = forms.CharField(label="نام خانوادگی", widget=forms.TextInput(attrs={'class': 'form-control my-3'}), required=True)
-    skill_choices = {('زبان آلمانی', 'g'), ('زبان انگلیسی', 'e')}
-    skill = forms.ChoiceField(label="مهارت", required=True, choices=skill_choices, widget=forms.Select(attrs={'class': 'form-control my-3'}))
-    description = forms.CharField(label="توضیحات", widget=forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}), required=True)
-
     class Meta:
         model = Account
-        fields = ('username', 'phone_number', 'email', 'first_name', 'last_name', 'skill', 'description')
+        fields = ('first_name', 'last_name', 'username', 'phone_number', 'email', 'skill', 'description')
+        if Account.is_student:
+            exclude = ('skill', 'description')
+        labels = {
+            'username': _('نام کاربری'),
+            'phone_number': _('شماره همراه'),
+            'email': _('ایمیل'),
+            'first_name': _('نام'),
+            'last_name': _('نام خانوادگی'),
+            'skill': _('مهارت'),
+            'description': _('توضیحات'),
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control my-3'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control my-3'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control my-3'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control my-3'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control my-3'}),
+            'skill': forms.Select(attrs={'class': 'form-control my-3'}),
+            'description': forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}),
+        }
+        def __init__(self, *args, **kwargs):
+            super(AccountEditForm, self).__init__(*args, **kwargs)
+            self.fields.all.required = True
+            
+            
+        
 
 
     def clean_username(self):

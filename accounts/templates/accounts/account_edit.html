@@ -4,9 +4,10 @@
     {% block titel %}
         <title>ویرایش اطلاعات کاربری</title>
     {% endblock %}
-    <div class="d-flex mt-4">
-        <form method="post" class="m-auto text-center"> {% csrf_token %}
+    <div class="d-flex m-4">
+        <form method="post" class="m-auto text-center col-lg-5 col-md-6 col-sm-7" novalidate> {% csrf_token %}
             <h5 class="mb-3 fw-normal">ویرایش اطلاعات کاربری</h5>
+            <hr>
             {{ form.as_p }}
             <button class="btn btn-primary my-3" type="submit">ثبت تغییرات</button>
         </form>

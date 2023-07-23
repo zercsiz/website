@@ -23,6 +23,10 @@
     </div>
     <hr>
     <div class="container-fluid p-0 m-0">
+        {% if user.is_student %}
+        <p class="col-9 text-center m-auto">دقت کنید نام کاربری اکانت گوگلی که با استفاده از آن در جلسات شرکت می کنید می بایست با نام کاربری شما در وبسایت مشابه یا در بهترین حالت یکسان باشد. در غیر این صورت از حضور شما در جلسه ممنانعت خواهد شد.</p>
+        <hr>
+        {% endif %}
         <div class="d-flex flex-column">
             {% if user.is_teacher %}
                 <h5>جلسات شما به عنوان استاد</h5>
