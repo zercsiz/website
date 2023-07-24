@@ -7,17 +7,14 @@
     <div class="d-flex flex-column justify-content-center align-items-center p-0"
          style="width: 100vw; object-fit: cover; margin-top: 100px">
         <main class="form-signin w-100 m-auto text-center">
-          <form method="post"> {% csrf_token %}
-
+          <form clss="dflex flex-column" method="post"> {% csrf_token %}
             <h1 class="h3 mb-3 fw-normal text-center">ورود به حساب کاربری</h1>
-
             <div class="mb-3">
               <input type="email" name="email" class="form-control" id="floatingInput" placeholder="آدرس ایمیل">
             </div>
             <div class="mb-3">
               <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="رمز عبور">
             </div>
-
             <div class="checkbox mb-3">
               <label class="justify-content-center">
                 <input type="checkbox" value="remember-me"> Remember me
@@ -31,7 +28,9 @@
                 </ul>
               {% endif %}
             <button class="w-100 btn btn-primary" type="submit">ورود</button>
-              <a href="{% url "accounts:password_reset" %}">نام کاربری یا رمز عبورم را فراموش کردم</a>
+            <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ایجاد حساب کاربری</a>
+            <hr>
+            <a href="{% url 'accounts:password_reset' %}">رمز عبورم را فراموش کردم</a>
           </form>
         </main>
     </div>

@@ -10,6 +10,8 @@
             <form class="" method="post" novalidate style="width: 100%">{% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
+
+                <a href="{% url 'accounts:user_login' %}" class="btn btn-outline-secondary w-100 mt-2">ورود به حساب کاربری</a>
             </form>
         </main>
     </div>

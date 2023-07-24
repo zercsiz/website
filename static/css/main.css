@@ -10,5 +10,9 @@ p,h1,h2,h3,h4,h5,h6,small,em {
 html, body {
     font-family: 'Samim', sans-serif;
     background-color: #F5F5F5;
-    overflow-x: auto;
+    overflow-x: hidden;
+}
+
+hr {
+    border: 1px groove #30475E;
 }
