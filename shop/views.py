@@ -37,7 +37,7 @@ class OrderCompleteView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
     def get(self, request, order_id):
-        if not request.user.username or request.user.first_name or request.user.last_name or request.user.phone_number:
+        if not request.user.username or not request.user.first_name or not request.user.last_name or not request.user.phone_number:
             messages.error(request, "لطفا اطلاعات کاربری خود را در قسمت ویرایش اطلاعات کاربری کامل کنید", 'danger')
             return redirect('accounts:account_details')
         else:
@@ -62,6 +62,7 @@ class OrderCompleteView(LoginRequiredMixin, View):
                     messages.error(request, "امکان رزرو تعدادی از کلاس های انتخابی وجود ندارد.", 'danger')
                     return redirect('accounts:account_details')
                 else:
+                    messages.success(request, "جلسات انتخابی با موفقیت رزرو شدند", 'success')
                     return redirect('accounts:account_details')
             else:
                 messages.success(request, "سفارش یافت نشد", 'danger')

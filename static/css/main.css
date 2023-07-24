@@ -7,8 +7,8 @@ p,h1,h2,h3,h4,h5,h6,small,em {
     color: #121212;
 }
 
-body {
+html, body {
     font-family: 'Samim', sans-serif;
     background-color: #F5F5F5;
-    overflow-x: hidden;
+    overflow-x: auto;
 }

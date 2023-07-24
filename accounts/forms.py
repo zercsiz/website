@@ -58,7 +58,7 @@ class AccountEditForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ('first_name', 'last_name', 'username', 'phone_number', 'email', 'skill', 'description')
-        if Account.is_student:
+        if not Account.is_teacher:
             exclude = ('skill', 'description')
         labels = {
             'username': _('نام کاربری'),
