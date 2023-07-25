@@ -76,7 +76,6 @@
         {% if user.is_teacher %}
             <hr>
             <h5 class="text-center">برنامه هفتگی</h5>
-            <br>
             {% if plan_times %}
                 <table class="table table-bordered my-4 table-striped-columns">
                     <tbody>
@@ -85,7 +84,7 @@
                                 <th scope="row" style="width: 100px">{{ w_day }}</th>
                                 {% for p_time in plan_times %}
                                     {% if p_time.week_day == w_day %}
-                                        <td class="text-center table-primary">{{ p_time.start|date:"H:i" }} - {{ p_time.end|date:"H:i" }}</td>
+                                        <td class="text-center table-primary">{{ p_time.end|date:"H:i" }} - {{ p_time.start|date:"H:i" }}</td>
                                     {% endif %}
                                 {% endfor %}
                             </tr>

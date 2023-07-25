@@ -18,15 +18,14 @@ class CreateTime(LoginRequiredMixin, View):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
-        # this function converts weekday number to farsi weekday names
+        # this function converts weekday number to farsi weekday names because we need to show the user persian week days
         def week_day_convert(day_number):
             # here shanbe is 5
             day_list = ['دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه','یکشنبه',]
             return day_list[day_number]
 
-        # this function adds 1:30 to start time
+        # this function adds 1:30 to start time because all courses have a length of 1:30
         def calculate_endtime(start):
-            start = start
             hour = int(start[0:2])
             minute = int(start[3:])
             end = timedelta(hours=hour, minutes=minute) + timedelta(hours=1, minutes=30)
