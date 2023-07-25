@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from accounts.models import Account
 from django.utils.translation import gettext_lazy as _
-
+from django.core.validators import validate_email, EmailValidator
+from django.core.exceptions import ValidationError
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(label="", max_length=250, required=True,
@@ -23,9 +24,15 @@ class RegistrationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
+        try: 
+            validate_email(email)
+        except ValidationError:
+            raise forms.ValidationError('لطفا ایمیل معتبر وارد کنید', code="invalid")
+
         user = Account.objects.filter(email=email).exists()
         if user:
-            raise forms.ValidationError('حساب کاربری با این ایمیل وجود دارد.', code="exists")
+            raise forms.ValidationError('لطفا ایمیل معتبر وارد کنید', code="exists")
+          
         return email
 
 

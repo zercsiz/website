@@ -16,3 +16,45 @@ html, body {
 hr {
     border: 1px groove #30475E;
 }
+
+.btn-primary {
+    background-color: #F05454;
+    border-color: #F05454;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #F05454;
+    border-color: #F05454;
+    color: white;
+}
+
+.btn-outline-primary {
+    border-color: #F05454;
+    color: #F05454;
+}
+.btn-outline-primary:hover {
+    background-color: #F05454;
+    border-color: #F05454;
+    color: white;
+}
+
+.btn-secondary {
+    border-color: #30475E;
+    background-color: #30475E;
+    color: white;
+}
+.btn-secondary:hover {
+    border-color: #30475E;
+    background-color: #30475E;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-color: #30475E;
+    color: #30475E;
+}
+.btn-outline-secondary:hover {
+    border-color: #30475E;
+    background-color: #30475E;
+    color: white;
+}
