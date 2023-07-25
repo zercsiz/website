@@ -31,8 +31,8 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher")
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student")
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher_teacherTimes")
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_teacherTimes")
     date = jmodels.jDateField(null=True)
     gdate = models.DateField(null=True)
     week_day = models.CharField(max_length=50, null=True)
@@ -48,7 +48,7 @@ class TeacherTime(models.Model):
 
 
 class TeacherPlan(models.Model):
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="Teacher")
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="plan")
     google_meet_link = models.CharField(null=True, max_length=250)
     price = models.BigIntegerField(null=True, blank=True)
 
@@ -58,7 +58,7 @@ class TeacherPlan(models.Model):
 
 
 class PlanTime(models.Model):
-    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.CASCADE, null=True, blank=True, related_name="TeacherPlan")
+    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.CASCADE, null=True, blank=True, related_name="planTimes")
     week_day = models.CharField(max_length=50, null=True)
     week_day_number = models.IntegerField(null=True)
     start = models.TimeField(null=True)

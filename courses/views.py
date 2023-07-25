@@ -49,13 +49,11 @@ class CreateTime(LoginRequiredMixin, View):
 
     def get(self, request):
         try:
-            plan = TeacherPlan.objects.get(teacher=request.user)
-        except TeacherPlan.DoesNotExist:
-            plan = None
-        if plan:
+            plan = request.user.plan.get()
             context = {'plan': plan}
-        else:
+        except TeacherPlan.DoesNotExist:
             context = {'plan': None}
+
         return render(request, 'courses/time_checkbox.html', context)
 
 
