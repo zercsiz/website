@@ -16,7 +16,7 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     teacherTime = models.ForeignKey(TeacherTime, on_delete=models.CASCADE, null=True, blank=True, related_name="teacherTime_orderItem")
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True, related_name="order_orderItem")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True, related_name="order_orderItems")
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

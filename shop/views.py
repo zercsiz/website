@@ -5,21 +5,18 @@ from django.contrib import messages
 from .models import *
 
 
-class CartView(View):
+class CartView(LoginRequiredMixin, View):
     def get(self, request):
-        if request.user.is_authenticated:
-            student = request.user
-            try:
-                order = Order.objects.get(student=student, complete=False)
-                items = OrderItem.objects.filter(order=order)
-                order.total = sum([item.teacherTime.price for item in items])
-                order.save()
-            except Order.DoesNotExist:
-                order = None
-                items = None
-        else:
-            items = []
-            order = {'total': 0}
+        try:
+            order = request.user.order.get(complete=False)
+            items = OrderItem.objects.filter(order=order)
+            orderItems = order.order_orderItems.all()
+            order.total = sum([item.teacherTime.price for item in orderItems])
+            order.save()
+        except Order.DoesNotExist:
+            order = None
+            items = None
+
         context = {'order_items': items, 'order': order}
         return render(request, 'shop/cart.html', context)
 
@@ -27,7 +24,6 @@ class CartView(View):
 class removeItem(LoginRequiredMixin, View):
     def get(self, request, item_id):
         order_item = OrderItem.objects.get(id=item_id)
-        order_item.teacherTime.delete()
         order_item.delete()
         messages.success(request, "کلاس با موفقیت حذف شد", 'success')
         return redirect('shop:cart')
@@ -37,6 +33,7 @@ class OrderCompleteView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
     def get(self, request, order_id):
+        ## this whole section is gonna change because we want to complete the orders by hand in admin panel
         if not request.user.username or not request.user.first_name or not request.user.last_name or not request.user.phone_number:
             messages.error(request, "لطفا اطلاعات کاربری خود را در قسمت ویرایش اطلاعات کاربری کامل کنید", 'danger')
             return redirect('accounts:account_details')
@@ -45,27 +42,28 @@ class OrderCompleteView(LoginRequiredMixin, View):
                 order = Order.objects.get(id=order_id)
                 order.complete = True
                 order.save()
-            except Order.DoesNotExist:
-                order = None
-            if order:
-                order_items = OrderItem.objects.filter(order=order)
-
-                already_reserved_error = False
+                order_items = order.order_orderItems.all()
+                ## already_reserved is because we want to show an error is some teacherTimes were already reserved before user reserve them
+                already_reserved = False
                 for item in order_items:
                     if not item.teacherTime.is_reserved:
                         item.teacherTime.student = request.user
                         item.teacherTime.is_reserved = True
                         item.teacherTime.save()
                     else:
-                        already_reserved_error = True
-                if already_reserved_error == True:
-                    messages.error(request, "امکان رزرو تعدادی از کلاس های انتخابی وجود ندارد.", 'danger')
+                        already_reserved = True
+                if already_reserved == True:
+                    messages.error(request, "تعدادی از جلسات انتخابی از قبل رزور شده اند", 'danger')
                     return redirect('accounts:account_details')
                 else:
                     messages.success(request, "جلسات انتخابی با موفقیت رزرو شدند", 'success')
                     return redirect('accounts:account_details')
-            else:
+            except Order.DoesNotExist:
                 messages.success(request, "سفارش یافت نشد", 'danger')
                 return redirect('shop:cart')
+
+                
+
+                
 
 
