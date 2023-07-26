@@ -83,7 +83,7 @@ class TeacherDetails(LoginRequiredMixin, View):
             for n in range(int((end_date - start_date).days)):
                 yield start_date + timedelta(n)
 
-        # checks if user is trying to reserve their own times
+        # checks if user is trying to reserve their own times because they shouldnt be able to do that
         if request.user.id == teacher_id:
             messages.error(request, "اساتید امکان رزرو کلاس های خود را ندارند.", 'danger')
             return redirect('courses:teacher_details', teacher_id, teacher_slug)
@@ -93,9 +93,10 @@ class TeacherDetails(LoginRequiredMixin, View):
             try:
                 start_date = datetime.strptime(request.POST.get('start_date'), "%Y-%m-%d").date()
             except:
-                start_date = date.today()
+                ## because we want to have time to evaluate users order and imform the teacher we want 7 days time
+                start_date = date.today() + timedelta(days=7)
             
-            # create order for student, it checks if there is an uncompleted order
+            # create order for student, it checks if there is an uncompleted order because we dont want to create an order everytime
             try:
                 order = request.user.order.get(complete=False)
             except Order.DoesNotExist:

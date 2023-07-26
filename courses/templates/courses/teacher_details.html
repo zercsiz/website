@@ -4,25 +4,25 @@
     {% block titel %}
         <title>جزعیات</title>
     {% endblock %}
-<div class="container-fluid mt-3 p-0">
-{#    teacher information#}
-    <div class="d-flex flex-column">
-        <div class="row">
-            <div class="col-2">
-                <div class="card" style="height: 200px; width: 200px">
+<div class="d-flex flex-column container">
+    {#    teacher information#}
+    <div class="d-flex flex-row gap-2">
+        <div class="col-lg-2 col-md-3 col-sm-4">
+            <div class="card" style="min-height: 100%;">
+                <p>picture</p>
+            </div>
+        </div>
+        <div class="border border-r-secondary">
 
-                </div>
-            </div>
-            <div class="col m-auto">
-                <h5>{{ teacher.first_name }} {{ teacher.last_name }}</h5>
-                <small>{{ teacher.skill }}</small>
-                <p>{{ teacher.description }}</p>
-            </div>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-8">
+            <h5>{{ teacher.first_name }} {{ teacher.last_name }}</h5>
+            <small>{{ teacher.skill }}</small>
+            <p>{{ teacher.description }}</p>
         </div>
     </div>
     <hr>
-</div>
-    <div class="d-flex justify-content-center p-5">
+    <div class="d-flex justify-content-center">
         {% if plan_times %}
             <form id="sectionForm"action="" method="post">
                 {% csrf_token %}
@@ -51,41 +51,42 @@
                     </div>
                 </div>
             </form>
-            {% else %}
+        {% else %}
             <p class="text-center m-2">هنوز برنامه ای اعلام نشده است.</p>
         {% endif %}
     </div>
-    <script>
-        (function() {
-            const form = document.querySelector('#sectionForm');
-            const checkboxes = form.querySelectorAll('input[type=checkbox]');
-            const checkboxLength = checkboxes.length;
-            const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
+</div>
+<script>
+    (function() {
+        const form = document.querySelector('#sectionForm');
+        const checkboxes = form.querySelectorAll('input[type=checkbox]');
+        const checkboxLength = checkboxes.length;
+        const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
 
-            function init() {
-                if (firstCheckbox) {
-                    for (let i = 0; i < checkboxLength; i++) {
-                        checkboxes[i].addEventListener('change', checkValidity);
-                    }
-
-                    checkValidity();
-                }
-            }
-
-            function isChecked() {
+        function init() {
+            if (firstCheckbox) {
                 for (let i = 0; i < checkboxLength; i++) {
-                    if (checkboxes[i].checked) return true;
+                    checkboxes[i].addEventListener('change', checkValidity);
                 }
 
-                return false;
+                checkValidity();
+            }
+        }
+
+        function isChecked() {
+            for (let i = 0; i < checkboxLength; i++) {
+                if (checkboxes[i].checked) return true;
             }
 
-            function checkValidity() {
-                const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
-                firstCheckbox.setCustomValidity(errorMessage);
-            }
+            return false;
+        }
 
-            init();
-        })();
-    </script>
+        function checkValidity() {
+            const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
+            firstCheckbox.setCustomValidity(errorMessage);
+        }
+
+        init();
+    })();
+</script>
 {% endblock %}
