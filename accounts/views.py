@@ -73,39 +73,35 @@ class AccountInfoView(LoginRequiredMixin, View):
                 context['uncomplete_info'] = True
             else:
                 context['uncomplete_info'] = False
-            # week days in farsi for plan
+            # week days in farsi for teacher plan
             w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", )
             context['week_days'] = w_days
 
             try:
-                t_plan = TeacherPlan.objects.get(teacher=request.user)
-            except TeacherPlan.DoesNotExist:
-                t_plan = None
+                teacher_plan = request.user.plan.get()
+                p_times = teacher_plan.planTimes.all()
+                context['plan_times'] = p_times
+            except:
+                context['plan_times'] = None
             try:
-                teacher_time_as_teacher_list = TeacherTime.objects.filter(teacher=request.user).filter(is_reserved=True).order_by('gdate')
-            except TeacherTime.DoesNotExist:
-                teacher_time_as_teacher_list = None
-            try:
-                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True).order_by('gdate')
-            except TeacherTime.DoesNotExist:
-                teacher_time_as_student_list = None
-
-            if t_plan:
-                p_time = PlanTime.objects.filter(teacherplan=t_plan)
-                context['plan_times'] = p_time
-            if teacher_time_as_teacher_list:
+                ## teacher_teacherTimes means times when user is teacher, and student_teacherTime means times when user is student
+                teacher_time_as_teacher_list = request.user.teacher_teacherTimes.filter(is_reserved=True).order_by('gdate')
                 context['teacher_times_as_teacher'] = teacher_time_as_teacher_list
-            if teacher_time_as_student_list:
+            except:
+                context['teacher_times_as_teacher'] = None
+            try:
+                teacher_time_as_student_list = request.user.student_teacherTimes.filter(is_reserved=True).order_by('gdate')
                 context['teacher_times_as_student'] = teacher_time_as_student_list
-
+            except:
+                context['teacher_times_as_student'] = None
         else:
             context = {}
             try:
-                teacher_time_as_student_list = TeacherTime.objects.filter(student=request.user).filter(is_reserved=True)
-            except TeacherTime.DoesNotExist:
-                teacher_time_as_student_list = None
-            if teacher_time_as_student_list:
+                teacher_time_as_student_list = request.user.student_teacherTimes.filter(is_reserved=True).order_by('gdate')
                 context['teacher_times_as_student'] = teacher_time_as_student_list
+            except:
+                context['teacher_times_as_student'] = None
+                
         return render(request, 'accounts/account_information.html', context)
 
 

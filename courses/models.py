@@ -31,6 +31,7 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
+    ## teacher_teacherTimes means times when user is teacher, and student_teacherTime means times when user is student
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher_teacherTimes")
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_teacherTimes")
     date = jmodels.jDateField(null=True)
