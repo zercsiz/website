@@ -28,7 +28,7 @@
             <hr>
         {% endif %}
         {% if user.is_teacher %}
-            <h5 class="text-center">جلسات شما به عنوان استاد</h5>
+            <h5 class="text-center mb-3">جلسات شما به عنوان استاد</h5>
             <div class="d-flex flex-column gap-1">
                 {% if teacher_times_as_teacher %}
                     {% for t in teacher_times_as_teacher %}
@@ -51,9 +51,9 @@
             <hr>
         {% endif %}
         {% if user.is_teacher %}
-            <h5 class="text-center">جلسات شما به عنوان شاگرد</h5>
+            <h5 class="text-center mb-3">جلسات شما به عنوان شاگرد</h5>
         {% else %}
-            <h5 class="text-center">جلسات شما</h5>
+            <h5 class="text-center mb-3">جلسات شما</h5>
         {% endif %}
         <div class="d-flex flex-column gap-1">
             {% if teacher_times_as_student %}
