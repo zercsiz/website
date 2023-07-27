@@ -9,6 +9,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end active">
                 <li class="nav-item">
+                    <a class="nav-link mx-2" href="{% url 'home:palette' %}" >palette</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link mx-2" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
                 </li>
                 {% if user.is_authenticated %}
@@ -33,7 +36,7 @@
 
 <style>
     .navbar {
-        background-color: #30475E;
+        background-color: #222831;
         padding: 0;
     }
     .navbar .container {
@@ -41,5 +44,8 @@
     }
     .navbar-brand{
         margin-right: 0;
+    }
+    .nav-link{
+        color: white;
     }
 </style>

@@ -1,3 +1,7 @@
+/* https://colorhunt.co/palette/dddddd22283130475ef05454 
+ link of color palette
+*/
+
 .container {
     padding: 4% 8%;
     margin: 0;
@@ -56,5 +60,26 @@ hr {
 .btn-outline-secondary:hover {
     border-color: #30475E;
     background-color: #30475E;
+    color: white;
+}
+
+.btn-dark {
+    border-color: #222831;
+    background-color: #222831;
+    color: white;
+}
+.btn-dark:hover {
+    border-color: #222831;
+    background-color: #222831;
+    color: white;
+}
+
+.btn-outline-dark {
+    border-color: #222831;
+    color: #222831;
+}
+.btn-outline-dark:hover {
+    border-color: #222831;
+    background-color: #222831;
     color: white;
 }
