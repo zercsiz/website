@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark justify-content-center">
+<nav class="navbar navbar-expand-lg navbar-light justify-content-center">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home:home' %}" style="justify-self: start">وبسایت من</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
@@ -12,7 +12,7 @@
                     <a class="nav-link mx-2" href="{% url 'home:palette' %}" >palette</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
+                    <a class="nav-link mx-2 border border-dark" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item mx-2">
@@ -36,7 +36,7 @@
 
 <style>
     .navbar {
-        background-color: #222831;
+        background-color: white;
         padding: 0;
     }
     .navbar .container {
@@ -46,6 +46,6 @@
         margin-right: 0;
     }
     .nav-link{
-        color: white;
+        color: black;
     }
 </style>
