@@ -11,8 +11,8 @@
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="{% url 'home:palette' %}" >palette</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2 border border-dark" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon.png' %}" alt="" style="aspect-ratio: auto; height: 23px;"></a>
+                <li class="nav-item p-0">
+                    <a class="nav-link mx-2 p-0" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon-dark.jpg' %}" alt="" style="aspect-ratio: auto; height: 40px;"></a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item mx-2">
@@ -22,17 +22,15 @@
                         <a class="nav-link" href="{% url 'accounts:user_logout' %}">خروج</a>
                     </li>
                 {% else %}
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{% url 'accounts:user_login' %}">ورود</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="btn" href="{% url 'accounts:user_registration' %}" style="background-color: #F05454; outline: None; color: white">ثبت نام</a>
+                        <a class="btn btn-primary" href="{% url 'accounts:user_login' %}" style="margin-right: 8px;">ورود | ثبت نام</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+<div style="height: 1px; background: linear-gradient(90deg, white 0%, #e4e4e4 50%, white 100%);"></div>
 
 <style>
     .navbar {

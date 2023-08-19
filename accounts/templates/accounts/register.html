@@ -5,9 +5,9 @@
         <title>ثبت نام</title>
     {% endblock %}
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
-        <h5 class="text-center">ثبت نام</h5>
         <main class="form-signup w-100 m-auto text-center" style="width: 100%">
             <form class="" method="post" novalidate style="width: 100%">{% csrf_token %}
+                <h1 class="h3 mb-3 fw-normal text-center">ثبت نام</h1>
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
 

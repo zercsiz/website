@@ -61,24 +61,3 @@ hr {
     background-color: #30475E;
     color: white;
 }
-
-.btn-dark {
-    border-color: #222831;
-    background-color: #222831;
-    color: white;
-}
-.btn-dark:hover {
-    border-color: #222831;
-    background-color: #222831;
-    color: white;
-}
-
-.btn-outline-dark {
-    border-color: #222831;
-    color: #222831;
-}
-.btn-outline-dark:hover {
-    border-color: #222831;
-    background-color: #222831;
-    color: white;
-}

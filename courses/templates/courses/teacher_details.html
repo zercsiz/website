@@ -6,16 +6,14 @@
     {% endblock %}
 <div class="d-flex flex-column container">
     {#    teacher information#}
-    <div class="d-flex flex-row gap-2">
-        <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="d-flex flex-row">
+        <div class="d-flex flex-column col-lg-2 col-md-3 col-sm-4 p-2">
             <div class="card" style="min-height: 100%;">
                 <p>picture</p>
             </div>
         </div>
-        <div class="border border-r-secondary">
-
-        </div>
-        <div class="col-lg-10 col-md-9 col-sm-8">
+        <hr class="p-0 m-0">
+        <div class="d-flex flex-column col-lg-10 col-md-9 col-sm-8 p-4">
             <h5>{{ teacher.first_name }} {{ teacher.last_name }}</h5>
             <small>{{ teacher.skill }}</small>
             <p>{{ teacher.description }}</p>
@@ -41,14 +39,16 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    <div class="row justify-content-center gap-3">
-                        <lable class="col-lg-3 text-center align-self-center" for="start_date">تاریخ شروع جلسات</lable>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                        <lable class="col-lg-3 text-center" for="start_date">تاریخ شروع جلسات</lable>
                         <input class="col-lg-2 form-control" id="start_date" name="start_date" type="date" placeholder="تاریخ شروع جلسات" style="width: 300px">
-                        <input class="col-2 form-control" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 300px; height: 50px" required="True">
-                        <p class="text-center">اگر تاریخ شروع جلسات را خالی بگذارید، جلسات شما از زودترین تاریخ ممکن آغاز خواهند شد.</p>
-                        <button class="btn btn-primary my-3" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
                     </div>
+                    
+                    <input class="form-control m-2" name="session_number" type="number" placeholder="تعداد جلسات" style="width: 200px; height: 46px" required="True">
+                    <p class="text-center">اگر تاریخ شروع جلسات را خالی بگذارید، جلسات شما از زودترین تاریخ ممکن آغاز خواهند شد.</p>
+                    <p class="text-center">هزینه هر جلسه: {{teacher.plan.all.first.price|floatformat:"-3g"}} ریال</p>
+                    <button class="btn btn-primary my-3" type="submit" style=" width: 200px; height: 50px">افزودن به سبد رزرو</button>
                 </div>
             </form>
         {% else %}

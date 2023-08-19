@@ -15,11 +15,6 @@
             <div class="mb-3">
               <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="رمز عبور">
             </div>
-            <div class="checkbox mb-3">
-              <label class="justify-content-center">
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
-            </div>
               {% if form.non_field_errors %}
                 <ul class='form-errors'>
                     {% for error in form.non_field_errors %}
@@ -28,9 +23,9 @@
                 </ul>
               {% endif %}
             <button class="w-100 btn btn-primary" type="submit">ورود</button>
-            <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ایجاد حساب کاربری</a>
+            <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ثبت نام</a>
             <hr>
-            <a href="{% url 'accounts:password_reset' %}">رمز عبورم را فراموش کردم</a>
+            <a href="{% url 'accounts:password_reset' %}" style="text-decoration: none; color: cornflowerblue;">رمز عبورم را فراموش کردم</a>
           </form>
         </main>
     </div>

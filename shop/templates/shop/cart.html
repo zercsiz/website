@@ -1,66 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% load humanize %}
     {% load static %}
 <head>
 <title>
     سبد خرید
 </title>
 </head>
-    <body>
-        <div class="dflex flex-column">
-            <div class="d-flex justify-content-center">
-                <div class="col-1" style="margin-left: auto">
-                    <input class="btn btn-outline-dark mx-2 mt-2" type=button value="&#8594; بازگشت" onClick="javascript:history.go(-1);">
-                </div>
-                <div class="col-2 position-absolute" style="justify-self: center">
-                    <h5 class="text-center my-2 m-auto">سبد خرید</h5>
-                </div>
+<body>
+    <div class="dflex flex-column">
+        <div class="d-flex justify-content-center">
+            <div class="col-1" style="margin-left: auto">
+                <input class="btn btn-outline-dark mx-2 mt-2" type=button value="&#8594; بازگشت" onClick="javascript:history.go(-1);">
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-lg-6 mx-3" style="max-height: 690px">
-                {% if order_items %}
-                    {% for item in order_items %}
-                        <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
-                            <div class="card-body text-center">
-                                <div class="d-flex flex-row">
-                                    <a class="mx-2" href="{% url 'shop:remove_item' item.id %}"><img src="{% static 'img/remove_icon.png' %}" alt="" style="aspect-ratio: auto; height:17px"></a>
-                                    <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start|date:"H:i" }} تا ساعت {{ item.teacherTime.end|date:"H:i" }}</p>
-                                    <p style="margin-right: auto">هزینه جلسه : {{ item.teacherTime.price|intcomma }} ریال</p>
-                                </div>
+            <div class="col-2 position-absolute" style="justify-self: center">
+                <h5 class="text-center my-2 m-auto">سبد خرید</h5>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-lg-6 mx-3" style="max-height: 690px">
+            {% if order_items %}
+                {% for item in order_items %}
+                    <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
+                        <div class="card-body text-center">
+                            <div class="d-flex flex-row">
+                                <a class="mx-2" href="{% url 'shop:remove_item' item.id %}"><img src="{% static 'img/remove_icon.png' %}" alt="" style="aspect-ratio: auto; height:17px"></a>
+                                <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start|date:"H:i" }} تا ساعت {{ item.teacherTime.end|date:"H:i" }}</p>
+                                <p style="margin-right: auto">هزینه جلسه : {{ item.teacherTime.price|floatformat:"-3g" }} ریال</p>
                             </div>
                         </div>
-                    {% endfor %}
-                    {% else %}
-                    <h6 class="text-center">سبد خرید شما خالی است.</h6>
-                {% endif %}
-                </div>
-                <div class="col-5 mx-3 my-2">
-                    <div class="card">
-                        <div class="card-body">
-                            {% if order.total %}
-                            <h6>هزینه کل: {{ order.total|intcomma }} ریال</h6>
-                                {% else %}
-                                <h6>هزینه کل : 0 ریال</h6>
-                            {% endif %}
-                            <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
-                            {% if order_items %}
-                            <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
-                                {% else %}
-                                <a href="" class=" btn btn-outline-primary btn-sm disabled"> اعمال تخفیف</a>
-                            {% endif %}
-                            <hr>
-                            {% if order_items %}
-                            <a href="{% url 'shop:order_complete' order.id %}" class="btn btn-primary my-3">پرداخت</a>
-                                {% else %}
-                                <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>
-                            {% endif %}
-                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <h6 class="text-center">سبد خرید شما خالی است.</h6>
+            {% endif %}
+            </div>
+            <div class="col-5 mx-3 my-2">
+                <div class="card">
+                    <div class="card-body">
+                        {% if order.total %}
+                        <h6>هزینه کل: {{ order.total|floatformat:"-3g" }} ریال</h6>
+                            {% else %}
+                            <h6>هزینه کل : 0 ریال</h6>
+                        {% endif %}
+                        <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
+                        {% if order_items %}
+                        <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
+                            {% else %}
+                            <a href="" class=" btn btn-outline-primary btn-sm disabled"> اعمال تخفیف</a>
+                        {% endif %}
+                        <hr>
+                        {% if order_items %}
+                        <a href="{% url 'shop:order_complete' order.id %}" class="btn btn-primary my-3">پرداخت</a>
+                            {% else %}
+                            <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 {% endblock %}
