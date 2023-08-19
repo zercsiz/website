@@ -40,6 +40,7 @@ class Account(AbstractBaseUser):
     skill_choices = {('زبان آلمانی', 'g'), ('زبان انگلیسی', 'e')}
     skill = models.CharField(verbose_name="Skill", max_length=200, null=True, blank=True, choices=skill_choices)
     slug = models.SlugField(null=True, blank=True, max_length=300, unique=True, allow_unicode=True)
+    image = models.ImageField(null=True, blank=True, upload_to='images/teachers/')
 
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)

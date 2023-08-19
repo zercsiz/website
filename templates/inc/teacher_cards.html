@@ -1,18 +1,23 @@
 <section id="teacher-cards" class="d-flex justify-content-center" style="background-color: #30475E">
     <div class="container text-center">
         <h4 class="text-center text-light">اساتید ما</h4>
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-row" style="flex-wrap: wrap;">
                 {% for t in teachers %}
-                    <div class="col-lg-3 p-2">
+                    <div class="col-lg-3 col-md-6 col-sm-12 p-2">
                         <div class="card" style="min-height:350px">
-                            <div class="card-header" style="height: 150px">
-                                <img src="" alt="">
+                            <div class="card-header d-flex flex-column justify-content-center align-items-center" style="background: None; border: None;">
+                                
+                                {% if t.image %}
+                                    <img class="img-fluid" src="{{ t.image.url }}" alt="" style="aspect-ratio: auto; overflow: hidden; min-height: 80px; border-radius: 6px;">
+                                {% endif %}
+                                    
+                                
                             </div>
                             <div class="card-body text-end">
                                 <h5>{{ t.first_name }} {{ t.last_name }}</h5>
                                 <small>{{ t.skill }}</small>
                                 <p class="card-text" style="overflow: hidden">{{ t.description|truncatewords:15 }}</p>
-                                <a href="{{ t.get_absolute_url }}" class="btn btn-teacher-details">جزعیات</a>
+                                <a href="{{ t.get_absolute_url }}" class="btn btn-outline-primary mt-4">جزعیات</a>
                             </div>
                         </div>
                     </div>
@@ -23,17 +28,7 @@
 </section>
 
 <style>
-    .btn-teacher-details {
-        position: absolute;
-        bottom:20px;
-        left:20px;
-        color:#14436b;
-        border-color: #14436b
-    }
-    .btn-teacher-details:hover {
-        color:white;
-        background-color: #14436b;
-    }
+
     #teacher-cards .card:hover{
         box-shadow: 0 0 20px 0 rgba(0,0,0,0.2);
     }
