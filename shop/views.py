@@ -63,7 +63,20 @@ class OrderCompleteView(LoginRequiredMixin, View):
                 return redirect('shop:cart')
 
                 
+class UserOrdersView(View):
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('home:home')
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request):
+        try:
+            orders = Order.objects.filter(student=request.user)
+        except:
+            orders = None
+        context = {'orders': orders}
+        return render(request, 'shop/user_orders.html', context)
                 
 
 

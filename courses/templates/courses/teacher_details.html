@@ -7,10 +7,12 @@
 <div class="d-flex flex-column container">
     {#    teacher information#}
     <div class="d-flex flex-row">
-        <div class="d-flex flex-column col-lg-3 col-md-4 col-sm-5 p-2">
-            <div class="card" style="min-height: 100%;">
-                <img class="img-fluid" src="{{teacher.image.url}}" alt="">
-            </div>
+        <div class="d-flex flex-column col-lg-3 col-md-4 col-sm-5 p-2"> 
+            {% if teacher.image %}
+                <div class="card" style="min-height: 100%;">
+                    <img class="img-fluid" src="{{teacher.image.url}}" alt="">
+                </div>
+            {% endif %}
         </div>
         <hr class="p-0 m-0">
         <div class="d-flex flex-column col-lg-10 col-md-9 col-sm-8 p-4">
