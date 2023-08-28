@@ -1,17 +1,14 @@
-<section id="teacher-cards" class="d-flex justify-content-center" style="background-color: #30475E">
+<section id="teacher-cards" class="d-flex justify-content-center">
     <div class="container text-center">
-        <h4 class="text-center text-light">اساتید ما</h4>
+        <h4 class="text-center">اساتید ما</h4>
             <div class="d-flex flex-row" style="flex-wrap: wrap;">
                 {% for t in teachers %}
                     <div class="col-lg-3 col-md-6 col-sm-12 p-2">
                         <div class="card" style="min-height:350px">
                             <div class="card-header d-flex flex-column justify-content-center align-items-center" style="background: None; border: None;">
-                                
                                 {% if t.image %}
                                     <img class="img-fluid" src="{{ t.image.url }}" alt="" style="aspect-ratio: auto; overflow: hidden; min-height: 80px; border-radius: 6px;">
-                                {% endif %}
-                                    
-                                
+                                {% endif %}   
                             </div>
                             <div class="card-body text-end">
                                 <h5>{{ t.first_name }} {{ t.last_name }}</h5>
@@ -23,7 +20,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <a href="" class="btn btn-outline-light" style="font-size: larger; margin-top: 20px">لیست کامل اساتید</a>
+            <a href="" class="btn btn-outline-dark" style="font-size: larger; margin-top: 20px">لیست کامل اساتید</a>
     </div>
 </section>
 

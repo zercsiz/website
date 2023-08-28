@@ -7,9 +7,6 @@
     margin: 0;
     max-width: 100%;
 }
-p,h1,h2,h3,h4,h5,h6,small,em {
-    color: #121212;
-}
 
 html, body {
     font-family: 'Samim', sans-serif;
@@ -17,47 +14,26 @@ html, body {
 }
 
 hr {
-    border: 1px groove #30475E;
+    border: 1px groove black;
 }
 
 .btn-primary {
-    background-color: #F05454;
-    border-color: #F05454;
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
     color: white;
 }
 .btn-primary:hover {
-    background-color: #F05454;
-    border-color: #F05454;
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
     color: white;
 }
 
 .btn-outline-primary {
-    border-color: #F05454;
-    color: #F05454;
+    border-color: #ff4d4f;
+    color: #ff4d4f;
 }
 .btn-outline-primary:hover {
-    background-color: #F05454;
-    border-color: #F05454;
-    color: white;
-}
-
-.btn-secondary {
-    border-color: #30475E;
-    background-color: #30475E;
-    color: white;
-}
-.btn-secondary:hover {
-    border-color: #30475E;
-    background-color: #30475E;
-    color: white;
-}
-
-.btn-outline-secondary {
-    border-color: #30475E;
-    color: #30475E;
-}
-.btn-outline-secondary:hover {
-    border-color: #30475E;
-    background-color: #30475E;
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
     color: white;
 }

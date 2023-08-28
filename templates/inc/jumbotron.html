@@ -2,15 +2,22 @@
 <!--old jumbotron-->
 
 <section class="d-flex jumbotron">
-    <div class="d-flex container justify-content-between align-items-center">
-        <div class="d-flex flex-column jumbotron-text-btn col-lg-4 align-items-center justify-content-end">
-            <h5 class="text-dark text-end mb-3" style="font-size: 1.2rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h5>
-            <p class="text-end">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
-            <a class="btn btn-outline-dark btn-lg" href="" style="margin-left: auto;">یادگیری رو شروع کن</a>
+    <div class="d-flex container justify-content-between align-items-center" style="padding: 4% 8%;">
+        <div class="card d-flex flex-row justify-content-center col-lg-4 p-4" style="border-color: white;">
+            <form class="d-flex flex-column justify-content-center align-items-center w-100" action="" method="post" style="max-width: max-content;">
+                <p>یادگیری رو شروع کن</p>
+                {% csrf_token %}
+                {{register_form.as_p}}
+                <button class="btn btn-outline-primary w-100" type="submit" style="min-width: inherit;">ثبت نام</button>
+            </form> 
+            <!-- <img class="img-fluid" alt="Responsive image" src="{% static 'img/book2_homepage.png' %}" style="aspect-ratio: auto; height: 300px; object-fit: scale-down"> -->
         </div>
-        <div class="col-auto">
-            <img class="img-fluid" alt="Responsive image" src="{% static 'img/book2_homepage.png' %}" style="aspect-ratio: auto; height: 300px; object-fit: scale-down">
+        <div class="d-flex flex-column jumbotron-text-btn col-lg-6 align-items-start justify-content-center">
+            <h4 class="text-light text-end mb-3" style="font-size: 1.6rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h4>
+            <p class="text-end text-light" style="font-size: 1.2rem">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
+            <!-- <a class="btn btn-outline-primary btn-lg" href="" style="margin-left: auto;">یادگیری رو شروع کن</a> -->
         </div>
+        
     </div>
 </section>
 
@@ -18,8 +25,8 @@
     .jumbotron {
         overflow-x: hidden;
         overflow-y: hidden;
-        /* background-color: #DDDDDD; */
-        min-height: 500px;
+        /* min-height: 500px; */
+        background-color: #222831;
     }
 
     @media (max-width: 991px){
@@ -31,27 +38,3 @@
         }
     }
 </style>
-
-<!-- New Jumbotron-->
-<!-- <section class="d-flex flex-row container">
-    <div class="d-flex flex-column col-lg-6 col-md-12 col-sm-12 p-1 align-items-center">
-        <div class="d-flex flex-column justify-content-center" style="background-color: #30475E; padding: 4%; min-height: 100%;">
-            <h5 class="text-light text-end m-0 mb-3" style="font-size: 1.2rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h5>
-            <p class="text-light text-end">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
-            <a class="btn btn-light btn-lg" href="" style="margin-left: auto;">یادگیری رو شروع کن</a>
-        </div>
-    </div>
-    <div class="d-flex flex-column col-lg-6 col-md-12 col-sm-12 p-1">
-        <div class="d-flex flex-column align-content-center" style="background-color: #30475E; padding: 4%;">
-            <h5 class="text-light text-center m-auto mb-3" style="font-size: 1.2rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h5>
-            <p class="text-light text-center m-auto">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
-            <a class="btn btn-outline-light btn-lg m-auto mt-3" href="">یادگیری رو شروع کن</a>
-        </div>
-        <div style="background-color: #30475E; padding: 4%; margin-top: 1.5%;">
-            <h5 class="text-light text-end mb-3" style="font-size: 1.2rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h5>
-            <p class="text-light text-end">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
-            <a class="btn btn-outline-light btn-lg" href="" style="margin-left: auto;">یادگیری رو شروع کن</a>
-        </div>
-    </div>
-
-</section> -->
