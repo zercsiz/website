@@ -1,14 +1,14 @@
 {% load static %}
 <!--old jumbotron-->
 
-<section class="d-flex jumbotron">
+<section class="d-flex flex-column jumbotron align-items-center">
     <div class="d-flex container justify-content-between align-items-center" style="padding: 4% 8%;">
-        <div class="card d-flex flex-row justify-content-center col-lg-4 p-4" style="border-color: white;">
+        <div class="jumbotron-register card d-flex flex-row justify-content-center col-lg-4 p-4" style="border-color: white;">
             <form class="d-flex flex-column justify-content-center align-items-center w-100" action="" method="post" style="max-width: max-content;">
                 <p>یادگیری رو شروع کن</p>
                 {% csrf_token %}
                 {{register_form.as_p}}
-                <button class="btn btn-outline-primary w-100" type="submit" style="min-width: inherit;">ثبت نام</button>
+                <button class="btn btn-primary w-100" type="submit" style="min-width: inherit;">ثبت نام</button>
             </form> 
             <!-- <img class="img-fluid" alt="Responsive image" src="{% static 'img/book2_homepage.png' %}" style="aspect-ratio: auto; height: 300px; object-fit: scale-down"> -->
         </div>
@@ -17,8 +17,8 @@
             <p class="text-end text-light" style="font-size: 1.2rem">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
             <!-- <a class="btn btn-outline-primary btn-lg" href="" style="margin-left: auto;">یادگیری رو شروع کن</a> -->
         </div>
-        
     </div>
+    <hr class="jumbo-hr">
 </section>
 
 <style>
@@ -28,6 +28,12 @@
         /* min-height: 500px; */
         background-color: #222831;
     }
+    .jumbo-hr {
+        border-color: gray;
+        margin-left: 8%;
+        margin-right: 8%;
+        width: 100%;
+    }
 
     @media (max-width: 991px){
         .jumbotron .d-flex {
@@ -35,6 +41,9 @@
         }
         .jumbotron-text-btn {
             margin-bottom: 20px;
+        }
+        .jumbotron-register {
+            margin-bottom: 10%;
         }
     }
 </style>
