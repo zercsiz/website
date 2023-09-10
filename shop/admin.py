@@ -1,16 +1,37 @@
 from django.contrib import admin
 from . import models
 
+
+class TransactionInline(admin.StackedInline):
+    model = models.Transaction
+    can_delete = False
+    readonly_fields = ('order', 'date', 'hour', 'minute', 'dateIssued', 'card4Digits', 'transactionId', 'amount')
+    extra = 0
+
+class OrderItemInline(admin.StackedInline):
+    model = models.OrderItem
+    can_delete = False
+    readonly_fields = ('teacherTime', 'order', 'date_added',)
+    extra = 0
+
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('student', 'date_ordered', 'complete', 'transaction_id', 'total')
-    list_filter = ('complete',)
-    search_fields = ('student', 'transaction_id')
+    list_display = ('student', 'date_ordered', 'status', 'total')
+    list_filter = ('status',)
+    search_fields = ('student',)
     raw_id_fields = ('student',)
+    inlines = [OrderItemInline, TransactionInline, ]
 
 
 @admin.register(models.OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('teacherTime', 'order', 'date_added')
     search_fields = ('order', 'teacherTime')
+
+
+@admin.register(models.Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('order', 'date', 'hour', 'minute', 'dateIssued', 'card4Digits', 'transactionId', 'amount')
+    search_fields = ('transactionId', 'date_issued','order')
+
 

@@ -52,7 +52,7 @@
                         {% endif %}
                         <hr>
                         {% if order_items %}
-                        <a href="{% url 'shop:order_complete' order.id %}" class="btn btn-primary my-3">پرداخت</a>
+                        <a href="{% url 'shop:transactionInfo' order.id %}" class="btn btn-primary my-3">پرداخت</a>
                             {% else %}
                             <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>
                         {% endif %}

@@ -1,14 +1,17 @@
+from typing import Any
+from django import http
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .models import *
+from . import forms
 
 
 class CartView(LoginRequiredMixin, View):
     def get(self, request):
         try:
-            order = request.user.order.get(complete=False)
+            order = request.user.order.get(status='incomplete')
             items = OrderItem.objects.filter(order=order)
             orderItems = order.order_orderItems.all()
             order.total = sum([item.teacherTime.price for item in orderItems])
@@ -80,3 +83,39 @@ class UserOrdersView(View):
                 
 
 
+class TransactionInfoView(View, LoginRequiredMixin):
+
+    form_class = forms.TransactionInfoForm
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('home:home')
+        return super().dispatch(request, *args, **kwargs)
+    
+    def setup(self, request, *args, **kwargs):
+        self.order_instance = Order.objects.get(id=kwargs['order_id'])
+        return super().setup(request, *args, **kwargs)
+    
+    def get(self, request, order_id):
+        order = self.order_instance
+        form = self.form_class()
+        context = {}
+        context['form'] = form
+        context['order'] = order
+        return render(request, 'shop/transaction_info.html', context)
+    
+    def post(self, request, order_id):
+        order = self.order_instance
+        form = self.form_class(request.POST)
+        context = {}
+        context['form'] = form
+        context['order'] = order
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.order = order
+            transaction.save()
+            order.status = 'pending'
+            order.save()
+            messages.success(request, "اطلاعات شما با موفقیت وارد شدند", 'success')
+            return redirect('accounts:account_details')
+        
+        return render(request, 'shop/transaction_info.html' , context)
