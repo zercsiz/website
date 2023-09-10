@@ -7,14 +7,16 @@
                         <div class="card" style="min-height:350px">
                             <div class="card-header d-flex flex-column justify-content-center align-items-center" style="background: None; border: None;">
                                 {% if t.image %}
-                                    <img class="img-fluid" src="{{ t.image.url }}" alt="" style="aspect-ratio: auto; overflow: hidden; min-height: 80px; border-radius: 6px;">
+                                    <a href="{{ t.get_absolute_url }}">
+                                        <img class="img-fluid" src="{{ t.image.url }}" alt="" style="aspect-ratio: auto; overflow: hidden; min-height: 80px; border-radius: 6px;">
+                                    </a>
                                 {% endif %}   
                             </div>
                             <div class="card-body text-end">
-                                <h5>{{ t.first_name }} {{ t.last_name }}</h5>
+                                <a href="{{ t.get_absolute_url }}" style="text-decoration: none; color:black"><h5>{{ t.first_name }} {{ t.last_name }}</h5></a>
                                 <small>{{ t.skill }}</small>
                                 <p class="card-text" style="overflow: hidden">{{ t.description|truncatewords:15 }}</p>
-                                <a href="{{ t.get_absolute_url }}" class="btn btn-outline-primary mt-4">جزعیات</a>
+                                <a href="{{ t.get_absolute_url }}" class="btn btn-primary mt-4">جزعیات</a>
                             </div>
                         </div>
                     </div>
