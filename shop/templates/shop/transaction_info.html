@@ -2,10 +2,25 @@
 
 
 {% block content %}
-<p>{{order.total}}</p>
-    <form action="" method="post">{% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Submit</button>
-    </form>
+<div class="d-flex flex-row container" style="background-color: #222831; height: 100%;">
+    <div class="d-flex flex-column col-lg-4 p-2">
+        <div class="d-flex flex-column p-2" style="border-radius: 8px; background-color: white;">
+            <h4 class="text-center my-2"> مبلغ {{order.total|floatformat:"-3g"}} ریال</h4>
+            <h5 class="text-center my-2"> به شماره کارت بانک ملی به نام خشایار خسروسورمی</h5>
+            <h4 class="text-center my-2" style="direction: ltr; color: green;">6037 9917 7972 5039</h4>
+            <h5 class="my-5">حتما پس از پرداخت برای اتمام مراحل ثبت سفارش، مشخصات پرداخت خود را به همراه شماره پیگیری یا کد رسید در فرم ثبت پرداخت وارد نمایید.</h5>
+        </div>
+    </div>
+    <div class="d-flex flex-column col-lg-8 p-2">
+        <div class="d-flex flex-column p-2" style="border-radius: 8px; background-color: white;">
+            <form class="p-2" action="" method="post">{% csrf_token %}
+                <h5 class="text-center">فرم ثبت پرداخت</h5>
+                {{form.as_p}}
+                <button class="btn btn-primary" type="submit">ثبت پرداخت</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
     
