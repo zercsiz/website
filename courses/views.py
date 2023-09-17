@@ -79,15 +79,20 @@ class TeacherDetails(LoginRequiredMixin, View):
         return render(request, 'courses/teacher_details.html', context)
 
     def post(self, request, teacher_id, teacher_slug):
-        def daterange(start_date, end_date):
-            for n in range(int((end_date - start_date).days)):
-                yield start_date + timedelta(n)
+        
 
         # checks if user is trying to reserve their own times because they shouldnt be able to do that
         if request.user.id == teacher_id:
             messages.error(request, "اساتید امکان رزرو کلاس های خود را ندارند.", 'danger')
             return redirect('courses:teacher_details', teacher_id, teacher_slug)
-        else:
+        try:
+            order = request.user.order.get(status='pending')
+            messages.error(request, "کاربر عزیز شما یک سفارش در حال بررسی دارید", 'danger')
+            return redirect('courses:teacher_details', teacher_id, teacher_slug)
+        except:
+            def daterange(start_date, end_date):
+                for n in range(int((end_date - start_date).days)):
+                    yield start_date + timedelta(n)
 
             # this checks if user specified a start date and if they didnt, sets the start date today()
             try:
