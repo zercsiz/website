@@ -6,16 +6,18 @@
         
         {% for order in orders %}
             <div class="card">
-                <div class="card-body">
-                    <p>تاریخ سفارش : {{order.date_ordered}}</p>
+                <div class="card-body d-flex flex-row" style="flex-wrap: wrap;">
+                    <p class="px-5">تاریخ سفارش : {{order.date_ordered}}</p>
+                    <p class="px-5">مبلغ کل : {{order.total}}</p>
                     
-                    {% if order.complete %}
-                        <p>وضعیت سفارش : تکمیل شد</p>
-                    {% else %}
-                        <p>وضعیت سفارش : ناتمام</p>
+                    {% if order.status == 'complete' %}
+                        <p class="px-5" style="background-color: green; color: white;">وضعیت سفارش : تکمیل شد</p>
+                    {% elif order.status == 'pending' %}
+                        <p class="px-5" style="background-color: yellow;">وضعیت سفارش : در حال بررسی</p>
+                        {% else %}
+                        <p class="px-5" style="background-color: red;">وضعیت سفارش : ناتمام</p>
                     {% endif %}
 
-                    <p>مبلغ کل : {{order.total}}</p>
                 </div>
             </div>
         {% endfor %}

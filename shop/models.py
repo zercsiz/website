@@ -9,7 +9,7 @@ class Order(models.Model):
 
     status_choices = {('complete', 'complete'), ('pending', 'pending'), ('incomplete', 'incomplete')}
 
-    status = models.CharField(choices=status_choices, max_length=100, null=True, blank=True)
+    status = models.CharField(choices=status_choices, max_length=100, null=True, blank=True, default="incomplete")
     total = models.BigIntegerField(null=True)
 
     def __str__(self):

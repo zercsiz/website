@@ -98,7 +98,7 @@ class TeacherDetails(LoginRequiredMixin, View):
             
             # create order for student, it checks if there is an uncompleted order because we dont want to create an order everytime
             try:
-                order = request.user.order.get(complete=False)
+                order = request.user.order.get(status='incomplete')
             except Order.DoesNotExist:
                 order = Order.objects.create(student=request.user)
                 order.save()
