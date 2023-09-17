@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from courses import models as coursesModels
 
 
 class TransactionInline(admin.StackedInline):
@@ -8,11 +9,11 @@ class TransactionInline(admin.StackedInline):
     readonly_fields = ('order', 'date', 'hour', 'minute', 'dateIssued', 'card4Digits', 'transactionId', 'amount')
     extra = 0
 
-class OrderItemInline(admin.StackedInline):
-    model = models.OrderItem
-    can_delete = False
-    readonly_fields = ('teacherTime', 'order', 'date_added',)
-    extra = 0
+# class PlanTimeInline(admin.StackedInline):
+#     model = coursesModels.PlanTime
+#     can_delete = False
+#     readonly_fields = ('teacherplan', 'week_day', 'week_day_number', 'start', 'end')
+#     extra = 0
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -20,13 +21,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ('student',)
     raw_id_fields = ('student',)
-    inlines = [OrderItemInline, TransactionInline, ]
-
-
-@admin.register(models.OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('teacherTime', 'order', 'date_added')
-    search_fields = ('order', 'teacherTime')
+    inlines = [TransactionInline]
 
 
 @admin.register(models.Transaction)

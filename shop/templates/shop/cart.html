@@ -20,18 +20,14 @@
         <hr>
         <div class="row">
             <div class="col-lg-6 mx-3" style="max-height: 690px">
-            {% if order_items %}
-                {% for item in order_items %}
-                    <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
-                        <div class="card-body text-center">
-                            <div class="d-flex flex-row">
-                                <a class="mx-2" href="{% url 'shop:remove_item' item.id %}"><img src="{% static 'img/remove_icon.png' %}" alt="" style="aspect-ratio: auto; height:17px"></a>
-                                <p class="">{{ item.teacherTime.date }} - {{ item.teacherTime.week_day }} - از ساعت {{ item.teacherTime.start|date:"H:i" }} تا ساعت {{ item.teacherTime.end|date:"H:i" }}</p>
-                                <p style="margin-right: auto">هزینه جلسه : {{ item.teacherTime.price|floatformat:"-3g" }} ریال</p>
-                            </div>
+            {% if order %}
+                <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
+                    <div class="card-body text-center">
+                        <div class="d-flex flex-row">
+                            <p class="">{{ order.start_date }}</p>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
                 {% else %}
                 <h6 class="text-center">سبد خرید شما خالی است.</h6>
             {% endif %}
@@ -45,13 +41,13 @@
                             <h6>هزینه کل : 0 ریال</h6>
                         {% endif %}
                         <input class="col-3 m-auto my-3" name="discount" placeholder="کد تخفیف">
-                        {% if order_items %}
+                        {% if order %}
                         <a href="" class=" btn btn-outline-primary btn-sm"> اعمال تخفیف</a>
                             {% else %}
                             <a href="" class=" btn btn-outline-primary btn-sm disabled"> اعمال تخفیف</a>
                         {% endif %}
                         <hr>
-                        {% if order_items %}
+                        {% if order %}
                         <a href="{% url 'shop:transactionInfo' order.id %}" class="btn btn-primary my-3">پرداخت</a>
                             {% else %}
                             <a href="" class="btn btn-primary my-3 disabled">پرداخت</a>

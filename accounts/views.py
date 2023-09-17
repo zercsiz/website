@@ -79,7 +79,7 @@ class AccountInfoView(LoginRequiredMixin, View):
 
             try:
                 teacher_plan = request.user.plan.get()
-                p_times = teacher_plan.planTimes.all()
+                p_times = teacher_plan.teacherPlan_planTimes.all()
                 context['plan_times'] = p_times
             except:
                 context['plan_times'] = None

@@ -1,10 +1,15 @@
 from django.db import models
 from django.conf import settings
-from courses.models import TeacherTime
 
 
 class Order(models.Model):
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="order")
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_orders")
+
+    planTimes = models.ManyToManyField("courses.PlanTime")
+
+    start_date = models.DateField(null=True, blank=True)
+    sessions_number = models.IntegerField(null=True, blank=True)
+
     date_ordered = models.DateTimeField(auto_now_add=True)
 
     status_choices = {('complete', 'complete'), ('pending', 'pending'), ('incomplete', 'incomplete')}
@@ -13,17 +18,8 @@ class Order(models.Model):
     total = models.BigIntegerField(null=True)
 
     def __str__(self):
-        return f"completed:{self.status}"
+        return f"{self.student} - status:{self.status}"
 
-
-class OrderItem(models.Model):
-    teacherTime = models.ForeignKey(TeacherTime, on_delete=models.CASCADE, null=True, blank=True, related_name="teacherTime_orderItem")
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, blank=True, related_name="order_orderItems")
-    date_added = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.teacherTime} - id = {self.id}"
-    
 
 class Transaction(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name="Transaction")

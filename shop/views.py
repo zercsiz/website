@@ -11,16 +11,12 @@ from . import forms
 class CartView(LoginRequiredMixin, View):
     def get(self, request):
         try:
-            order = request.user.order.get(status='incomplete')
-            items = OrderItem.objects.filter(order=order)
-            orderItems = order.order_orderItems.all()
-            order.total = sum([item.teacherTime.price for item in orderItems])
-            order.save()
+            order = request.user.student_orders.get(status='incomplete')
+
         except Order.DoesNotExist:
             order = None
-            items = None
 
-        context = {'order_items': items, 'order': order}
+        context = {'order': order}
         return render(request, 'shop/cart.html', context)
 
 

@@ -6,7 +6,7 @@ from accounts.models import Account
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from jalali_date import date2jalali
+
 
 
 class CreateTime(LoginRequiredMixin, View):
@@ -64,7 +64,7 @@ class TeacherDetails(LoginRequiredMixin, View):
         hours = ("09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00", "19:30")
         try:
             teacher_plan = teacher.plan.get()
-            plan_times = teacher_plan.planTimes.all()
+            plan_times = teacher_plan.teacherPlan_planTimes.all()
             context = {
                 'teacher': teacher,
                 'plan_times': plan_times,
@@ -79,20 +79,16 @@ class TeacherDetails(LoginRequiredMixin, View):
         return render(request, 'courses/teacher_details.html', context)
 
     def post(self, request, teacher_id, teacher_slug):
-        
 
         # checks if user is trying to reserve their own times because they shouldnt be able to do that
         if request.user.id == teacher_id:
             messages.error(request, "اساتید امکان رزرو کلاس های خود را ندارند.", 'danger')
             return redirect('courses:teacher_details', teacher_id, teacher_slug)
         try:
-            order = request.user.order.get(status='pending')
+            order = request.user.student_orders.get(status='pending')
             messages.error(request, "کاربر عزیز شما یک سفارش در حال بررسی دارید", 'danger')
             return redirect('courses:teacher_details', teacher_id, teacher_slug)
         except:
-            def daterange(start_date, end_date):
-                for n in range(int((end_date - start_date).days)):
-                    yield start_date + timedelta(n)
 
             # this checks if user specified a start date and if they didnt, sets the start date today()
             try:
@@ -103,44 +99,54 @@ class TeacherDetails(LoginRequiredMixin, View):
             
             # create order for student, it checks if there is an uncompleted order because we dont want to create an order everytime
             try:
-                order = request.user.order.get(status='incomplete')
+                order = request.user.student_orders.get(status='incomplete')
             except Order.DoesNotExist:
-                order = Order.objects.create(student=request.user)
+                session_number = request.POST.get('session_number')
+                order = Order.objects.create(student=request.user, sessions_number=int(session_number), start_date=start_date)
                 order.save()
 
             plan_times_ids = request.POST.getlist('p_time_id')
 
-            plan_times = []
+            plan_times_list = []
             for i in plan_times_ids:
-                plan_times.append(PlanTime.objects.get(id=i))
+                planTime = PlanTime.objects.get(id=i)
+                order.planTimes.add(planTime)
+                order.save()
+                plan_times_list.append(planTime)
 
-            teacher = Account.objects.get(id=teacher_id)
-            plan = teacher.plan.get()
+            ## to calculate the total amount for order
+            order.total = plan_times_list[0].teacherplan.price * order.sessions_number
+            order.save()
+            print(order.planTimes.all())
 
-            session_number = request.POST.get('session_number')
-            order_items = []
 
-            end_date = date(2023, 12, 1)
+            # teacher = Account.objects.get(id=teacher_id)
+            # plan = teacher.plan.get()
 
-            for single_date in daterange(start_date, end_date):
-                jdate = date2jalali(single_date).strftime("%Y-%m-%d")
-                for planTime in plan_times:
-                    if single_date.weekday() == planTime.week_day_number:
-                        # this checks whether the date and time is reserved and if it is, skips the day
-                        ## here "gdate" is gregorian date and "date" is jalali
-                        t_time, created = TeacherTime.objects.get_or_create(date=jdate, gdate=single_date.strftime("%Y-%m-%d"),
-                                    week_day=planTime.week_day, start=planTime.start, end=planTime.end, price=plan.price,
-                                    google_meet_link=plan.google_meet_link, teacher=teacher)
-                        if t_time.is_reserved:
-                            break
-                        else:
-                            item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
-                            order_items.append(item)
+            
+            # order_items = []
+
+            # end_date = date(2024, 12, 1)
+
+            # for single_date in daterange(start_date, end_date):
+            #     jdate = date2jalali(single_date).strftime("%Y-%m-%d")
+            #     for planTime in plan_times:
+            #         if single_date.weekday() == planTime.week_day_number:
+            #             # this checks whether the date and time is reserved and if it is, skips the day
+            #             ## here "gdate" is gregorian date and "date" is jalali
+            #             t_time, created = TeacherTime.objects.get_or_create(date=jdate, gdate=single_date.strftime("%Y-%m-%d"),
+            #                         week_day=planTime.week_day, start=planTime.start, end=planTime.end, price=plan.price,
+            #                         google_meet_link=plan.google_meet_link, teacher=teacher)
+            #             if t_time.is_reserved:
+            #                 break
+            #             else:
+            #                 item = OrderItem.objects.get_or_create(teacherTime=t_time, order=order)
+            #                 order_items.append(item)
                             
-                    if len(order_items) == int(session_number):
-                        break
-                if len(order_items) == int(session_number):
-                    break
+            #         if len(order_items) == int(session_number):
+            #             break
+            #     if len(order_items) == int(session_number):
+            #         break
 
             messages.success(request, "جلسات با موفقیت اضافه شد", 'success')
             return redirect('shop:cart')
@@ -158,7 +164,7 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
 
     def get(self, request, plan_id):
         teacher_plan = TeacherPlan.objects.get(id=plan_id)
-        plan_times = teacher_plan.planTimes.all()
+        plan_times = teacher_plan.teacherPlan_planTimes.all()
         teacher_times = request.user.teacher_teacherTimes.filter(is_reserved=False)
         for t_time in teacher_times:
             for p_time in plan_times:

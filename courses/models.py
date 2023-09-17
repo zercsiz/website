@@ -4,7 +4,6 @@ from django_jalali.db import models as jmodels
 
 
 
-
 languages = [
     ('e', 'English'),
     ('g', 'German')
@@ -31,9 +30,12 @@ class Course(models.Model):
 
 
 class TeacherTime(models.Model):
+    from shop.models import Order
     ## teacher_teacherTimes means times when user is teacher, and student_teacherTime means times when user is student
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher_teacherTimes")
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_teacherTimes")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name="order_teacherTimes")
+
     date = jmodels.jDateField(null=True)
     gdate = models.DateField(null=True)
     week_day = models.CharField(max_length=50, null=True)
@@ -59,7 +61,8 @@ class TeacherPlan(models.Model):
 
 
 class PlanTime(models.Model):
-    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.CASCADE, null=True, blank=True, related_name="planTimes")
+    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name="teacherPlan_planTimes")
+
     week_day = models.CharField(max_length=50, null=True)
     week_day_number = models.IntegerField(null=True)
     start = models.TimeField(null=True)

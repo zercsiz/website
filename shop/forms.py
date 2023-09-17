@@ -21,8 +21,8 @@ class TransactionInfoForm(forms.ModelForm):
         widgets = {
             'date': forms.TextInput(attrs={'class': 'form-control my-3'}),
             'hour': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'minute': forms.EmailInput(attrs={'class': 'form-control my-3'}),
+            'minute': forms.TextInput(attrs={'class': 'form-control my-3'}),
             'card4Digits': forms.TextInput(attrs={'class': 'form-control my-3'}),
             'transactionId': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'amount': forms.Select(attrs={'class': 'form-control my-3'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control my-3'}),
         }
