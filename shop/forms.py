@@ -19,10 +19,10 @@ class TransactionInfoForm(forms.ModelForm):
             'amount': _('مبلغ پرداخت شده'),
         }
         widgets = {
-            'date': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'hour': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'minute': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'card4Digits': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'transactionId': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'amount': forms.NumberInput(attrs={'class': 'form-control my-3'}),
+            'date': forms.TextInput(attrs={'class': 'form-control my-3', 'required':'true'}),
+            'hour': forms.TextInput(attrs={'class': 'form-control my-3', 'required':'true'}),
+            'minute': forms.TextInput(attrs={'class': 'form-control my-3', 'required':'true'}),
+            'card4Digits': forms.TextInput(attrs={'class': 'form-control my-3', 'required':'true'}),
+            'transactionId': forms.TextInput(attrs={'class': 'form-control my-3', 'required':'true'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control my-3', 'required':'true'}),
         }

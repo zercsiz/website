@@ -23,8 +23,9 @@
             {% if order %}
                 <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
                     <div class="card-body text-center">
-                        <div class="d-flex flex-row">
-                            <p class="">{{ order.start_date }}</p>
+                        <div class="d-flex flex-column">
+                            <p class="">تاریخ سفارش : {{ order.start_date }}</p>
+                            <p class="">تعداد جلسات : {{ order.sessions_number }}</p>
                         </div>
                     </div>
                 </div>

@@ -9,12 +9,6 @@ class TransactionInline(admin.StackedInline):
     readonly_fields = ('order', 'date', 'hour', 'minute', 'dateIssued', 'card4Digits', 'transactionId', 'amount')
     extra = 0
 
-# class PlanTimeInline(admin.StackedInline):
-#     model = coursesModels.PlanTime
-#     can_delete = False
-#     readonly_fields = ('teacherplan', 'week_day', 'week_day_number', 'start', 'end')
-#     extra = 0
-
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('student', 'date_ordered', 'status', 'total')
