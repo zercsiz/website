@@ -20,7 +20,7 @@ def orderComplete(sender, instance, **kwargs):
         order = sender.objects.get(id=instance.id)
         plan_times = order.planTimes.all()
 
-        teacher = plan_times[0].teacherplan.teacher
+        teacher = order.teacher
         plan = teacher.plan.get()
 
         start_date = order.start_date

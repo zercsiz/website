@@ -101,8 +101,9 @@ class TeacherDetails(LoginRequiredMixin, View):
             try:
                 order = request.user.student_orders.get(status='incomplete')
             except Order.DoesNotExist:
+                teacher = Account.objects.get(id=teacher_id)
                 session_number = request.POST.get('session_number')
-                order = Order.objects.create(student=request.user, sessions_number=int(session_number), start_date=start_date)
+                order = Order.objects.create(student=request.user, sessions_number=int(session_number), start_date=start_date, teacher=teacher)
                 order.save()
 
             plan_times_ids = request.POST.getlist('p_time_id')
@@ -160,6 +161,14 @@ class DeleteTeacherPlanView(LoginRequiredMixin, View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_teacher or not kwargs['plan_id']:
             return redirect('home:home')
+        
+        # because we dont want to let the teacher delete his plan when he has pending or incomplete orders related to him
+        teacher_orders = request.user.teacher_orders.all()
+        for item in teacher_orders:
+            if item.status == "incomplete" or item.status == "pending":
+                messages.error(request, "در حال حاضر امکان حدف برنامه وجود ندارد", 'danger')
+                return redirect('courses:time_checkbox')
+            
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, plan_id):

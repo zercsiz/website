@@ -3,7 +3,8 @@ from django.conf import settings
 
 
 class Order(models.Model):
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_orders")
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="student_orders")
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="teacher_orders")
 
     planTimes = models.ManyToManyField("courses.PlanTime")
 
@@ -22,7 +23,7 @@ class Order(models.Model):
 
 
 class Transaction(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name="Transaction")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name="Transaction")
 
     date = models.CharField(max_length=100, null=True, blank=True)
     hour = models.CharField(max_length=100, null=True, blank=True)

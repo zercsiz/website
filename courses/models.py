@@ -61,7 +61,7 @@ class TeacherPlan(models.Model):
 
 
 class PlanTime(models.Model):
-    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name="teacherPlan_planTimes")
+    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.CASCADE, null=True, blank=True, related_name="teacherPlan_planTimes")
 
     week_day = models.CharField(max_length=50, null=True)
     week_day_number = models.IntegerField(null=True)
@@ -69,4 +69,7 @@ class PlanTime(models.Model):
     end = models.TimeField(null=True)
 
     def __str__(self):
-        return f"{self.teacherplan.teacher.first_name} {self.teacherplan.teacher.last_name} - {self.week_day} - {self.start}"
+        if self.teacherplan:
+            return f"{self.teacherplan.teacher.first_name} {self.teacherplan.teacher.last_name} - {self.week_day} - {self.start}"
+        else:
+            return f"{self.week_day} - {self.start}"
