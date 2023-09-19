@@ -1,3 +1,5 @@
+from typing import Any
+from django import http
 from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
@@ -28,6 +30,10 @@ class UserRegistrationView(View):
 class LoginView(View):
     form_class = forms.UserLoginForm
 
+    def setup(self, request, *args, **kwargs):
+        self.next = request.GET.get('next')
+        return super().setup(request, *args, **kwargs)
+    
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('home:home')
@@ -39,6 +45,9 @@ class LoginView(View):
             user = form.login(request)
             if user:
                 login(request, user)
+                if self.next:
+                    return redirect(self.next)
+                
                 return redirect('home:home')
         return render(request, 'accounts/login.html', {'form': form})
 
@@ -65,7 +74,7 @@ class AccountInfoView(LoginRequiredMixin, View):
         if not request.user.is_authenticated:
             return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
-
+    
     def get(self, request):
         if request.user.is_teacher:
             context = {}
