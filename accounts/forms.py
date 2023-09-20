@@ -19,8 +19,8 @@ class RegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         del self.fields['password2']
-        self.fields['password1'].help_text = None
-        self.fields['email'].help_text = None
+        self.fields['password1'].help_text = "رمز عبور شما باید حداقل 8 کرکتر و دارای اعداد باشد"
+        self.fields['email'].help_text = "مثال : user@email.com"
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -34,6 +34,26 @@ class RegistrationForm(UserCreationForm):
             raise forms.ValidationError('لطفا ایمیل معتبر وارد کنید', code="exists")
           
         return email
+    
+    def clean_password1(self):
+        password = self.cleaned_data['password1']
+        if len(password) < 8:
+            raise forms.ValidationError('رمز عبور شما باید حداقل 8 کرکتر باشد')
+        
+        # password must contain numbers and be without spaces
+        number = False
+        space = False
+
+        for i in password:
+            if i.isdigit():
+                number = True
+            if i == " ":
+                space = True
+
+        if number == False:
+            raise forms.ValidationError('رمز عبور شما باید شامل اعداد باشد')
+        if space == True:
+            raise forms.ValidationError('رمز عبور شما نباید شامل فاصله باشد')
 
 
 class UserLoginForm(forms.ModelForm):

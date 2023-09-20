@@ -47,3 +47,7 @@ class AccountModelTest(TestCase):
         self.account.save()
         expected_object_name = f"Student | {self.account.first_name} {self.account.last_name}"
         self.assertEqual(str(self.account), expected_object_name)
+
+    def test_get_absolute_url(self):
+        self.account.slug = "teacher-german-ali"
+        self.assertEqual(self.account.get_absolute_url(), '/courses/teacher_details/1/teacher-german-ali/')
