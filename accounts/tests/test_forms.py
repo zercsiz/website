@@ -44,3 +44,15 @@ class RegistrationFormTest(TestCase):
         self.form = accountsForms.RegistrationForm(data={'email':"ksourmi@gmail.com", 'password1':"hjoiuy7uih"})
         self.assertTrue(self.form.is_valid())
 
+
+    def test_registration_form_password_saved_after_registration(self):
+        self.form = accountsForms.RegistrationForm(data={'email':"ksourmi@gmail.com", 'password1':"hjoiuy7uih"})
+        self.form.save()
+        account = accountsModels.Account.objects.get(id=1)
+        self.assertTrue(account.password)
+
+
+class UserLoginFormTest(TestCase):
+    def test_login_form_user_deos_not_exist(self):
+        form = accountsForms.UserLoginForm(data={'email':"ksourmi@gmail.com", 'password':"hjoiuy7uih"})
+        self.assertFormError(form=form, errors=['نام کاربری یا رمز عبور اشتباه است.'], field=None)

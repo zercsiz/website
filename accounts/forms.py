@@ -54,7 +54,8 @@ class RegistrationForm(UserCreationForm):
             raise forms.ValidationError('رمز عبور شما باید شامل اعداد باشد')
         if space == True:
             raise forms.ValidationError('رمز عبور شما نباید شامل فاصله باشد')
-
+        
+        return password
 
 class UserLoginForm(forms.ModelForm):
 
