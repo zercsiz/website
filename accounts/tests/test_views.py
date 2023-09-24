@@ -31,7 +31,11 @@ class UserRegistrationViewTest(TestCase):
 
         logged_in = self.client.login(email='ksourmi@gmail.com', password="yourtherichboy1")
         self.assertTrue(logged_in)
-        
+
         response = self.client.get('/accounts/register/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('home:home'))
+
+    def test_view_form_in_context(self):
+        response = self.client.get('/accounts/register/')
+        self.assertTrue('form' in response.context )
