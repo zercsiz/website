@@ -1,6 +1,7 @@
 from django.test import TestCase
 from accounts import forms as accountsForms
 from accounts import models as accountsModels
+from django.http import HttpRequest
 
 class RegistrationFormTest(TestCase):
 
@@ -53,3 +54,42 @@ class UserLoginFormTest(TestCase):
     def test_login_form_user_deos_not_exist(self):
         form = accountsForms.UserLoginForm(data={'email':"ksourmi@gmail.com", 'password':"hjoiuy7uih"})
         self.assertFormError(form=form, errors=['نام کاربری یا رمز عبور اشتباه است.'], field=None)
+
+
+
+class AccountEditFormTest(TestCase):
+
+    def test_AccountEditForm_user_not_teacher_skill_and_description_fields_pop(self):
+        account = accountsModels.Account.objects.create(phone_number='09197858171', username="ksourmi", email="ksourmi@gmail.com", is_teacher=False)
+        account.save()
+        form = accountsForms.AccountEditForm(instance=account)
+
+        self.assertNotIn('skill', form.fields)
+        self.assertNotIn('description', form.fields)
+
+    def test_AccountEditForm_user_is_teacher_form_with_skill_and_description_fields(self):
+        account = accountsModels.Account.objects.create(phone_number='09197858171', username="ksourmi", email="ksourmi@gmail.com", is_teacher=True)
+        account.save()
+        form = accountsForms.AccountEditForm(instance=account)
+
+        self.assertIn('skill', form.fields)
+        self.assertIn('description', form.fields)
+
+    def test_AccountEditForm_username_already_exists(self):
+        accountsModels.Account.objects.create(phone_number='09197858171', username="ksourmi", email="ksourmi@gmail.com", is_teacher=True)
+        form = accountsForms.AccountEditForm(data={'username': 'ksourmi', 'email': 'test@gmail.com'})
+        self.assertFalse(form.is_valid())
+        self.assertFormError(form=form, errors=['Username "ksourmi" already exists!'], field='username')
+
+    def test_AccountEditForm_phone_number_already_exists(self):
+        accountsModels.Account.objects.create(phone_number='09197858171', username="ksourmi", email="ksourmi@gmail.com", is_teacher=True)
+        form = accountsForms.AccountEditForm(data={'phone_number': '09197858171', 'email': 'test@gmail.com'})
+        self.assertFalse(form.is_valid())
+        self.assertFormError(form=form, errors=['Phone number "09197858171" already exists!'], field='phone_number')
+
+    def test_AccountEditForm_email_already_exists(self):
+        accountsModels.Account.objects.create(phone_number='09197858171', username="ksourmi", email="ksourmi@gmail.com", is_teacher=True)
+        form = accountsForms.AccountEditForm(data={'username': 'usernametest', 'email': 'ksourmi@gmail.com'})
+        self.assertFalse(form.is_valid())
+        self.assertFormError(form=form, errors=['Email "ksourmi@gmail.com" already exists!'], field='email')
+

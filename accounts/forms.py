@@ -86,8 +86,6 @@ class AccountEditForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ('first_name', 'last_name', 'username', 'phone_number', 'email', 'skill', 'description')
-        if not Account.is_teacher:
-            exclude = ('skill', 'description')
         labels = {
             'username': _('نام کاربری'),
             'phone_number': _('شماره همراه'),
@@ -106,40 +104,43 @@ class AccountEditForm(forms.ModelForm):
             'skill': forms.Select(attrs={'class': 'form-control my-3'}),
             'description': forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}),
         }
-        def __init__(self, *args, **kwargs):
-            super(AccountEditForm, self).__init__(*args, **kwargs)
-            self.fields.all.required = True
+
+    def __init__(self, *args, **kwargs):
+        super(AccountEditForm, self).__init__(*args, **kwargs)
+        if not self.instance.is_teacher:
+            self.fields.pop('skill')
+            self.fields.pop('description')
             
             
         
 
 
     def clean_username(self):
-        if self.is_valid():
-            username = self.cleaned_data['username']
+        username = self.cleaned_data['username']
+        if username and self.is_valid():
             try:
                 account = Account.objects.exclude(pk=self.instance.pk).get(username=username)
-
             except Account.DoesNotExist:
                 return username
             raise forms.ValidationError('Username "%s" already exists!' % account.username)
+        return username
 
     def clean_phone_number(self):
-        if self.is_valid():
-            phone_number = self.cleaned_data['phone_number']
+        phone_number = self.cleaned_data['phone_number']
+        if phone_number and self.is_valid():
             try:
                 account = Account.objects.exclude(pk=self.instance.pk).get(phone_number=phone_number)
-
             except Account.DoesNotExist:
                 return phone_number
             raise forms.ValidationError('Phone number "%s" already exists!' % account.phone_number)
-
+        return phone_number
+    
     def clean_email(self):
-        if self.is_valid():
-            email = self.cleaned_data['email']
+        email = self.cleaned_data['email']
+        if email and self.is_valid():
             try:
                 account = Account.objects.exclude(pk=self.instance.pk).get(email=email)
-
             except Account.DoesNotExist:
                 return email
-            raise forms.ValidationError('Email number "%s" already exists!' % account.email)
+            raise forms.ValidationError('Email "%s" already exists!' % account.email)
+        return email
