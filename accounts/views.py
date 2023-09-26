@@ -64,6 +64,7 @@ class LoginView(View):
 class LogoutView(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
+            print('user is not authenticated')
             return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
 
