@@ -1,4 +1,4 @@
-FROM hub.hamdocker.ir/library/python:3.11.4
+FROM hub.hamdocker.ir/library/python:3.11
 WORKDIR /website/
 ADD ./requirements.txt ./
 RUN pip install -r ./requirements.txt
