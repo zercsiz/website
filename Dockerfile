@@ -11,7 +11,7 @@ COPY . .
 
 ENV ALLOWED_HOSTS=localhost
 
-RUN python manage.py migrate
+# RUN python manage.py migrate
 RUN python3 manage.py collectstatic
 
 COPY etc/apps-supervisor.conf /etc/supervisor/conf.d/apps-supervisor.conf
