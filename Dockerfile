@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 ENV ALLOWED_HOSTS=localhost
+ENV CSRF_TRUSTED_ORIGINS=localhost
 
 # RUN python manage.py migrate
 RUN python3 manage.py collectstatic
