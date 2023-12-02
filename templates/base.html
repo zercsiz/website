@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <meta property="og:title" content="کلاس ایران">
+    <meta property="og:description" content="پلتفرم کارامد یادگیری مهارت">
+    <meta property="og:image" content="{% static '/img/icon_image' %}">
+    <meta property="og:url" content="https://classiran.org/">
+
 {#    font#}
     <!-- <link href="https://cdn.rawgit.com/rastikerdar/samim-font/v4.0.5/dist/font-face.css" rel="stylesheet" type="text/css"> -->
 
@@ -31,6 +36,9 @@
     </script>
     {% block titel %}
     {% endblock %}
+    <link rel="icon" type="image/x-icon" sizes="32x32" href="{% static 'img/favicon32.ico' %}">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="{% static 'img/favicon16.ico' %}">
+
 </head>
 <body>
     <div style="background-color: #222831; min-height: 25px;"></div>
