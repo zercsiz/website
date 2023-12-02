@@ -28,7 +28,7 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 
-# CSRF_TRUSTED_ORIGINS  = os.getenv("CSRF_TRUSTED_ORIGINS").split(',')
+CSRF_TRUSTED_ORIGINS  = os.getenv("CSRF_TRUSTED_ORIGINS").split(',')
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # only during development
@@ -63,6 +63,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    
+    ## my admin ip middleware
+    'home.middleware.admin_ip',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
