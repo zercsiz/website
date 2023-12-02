@@ -1,8 +1,9 @@
 <section id="teacher-cards" class="d-flex justify-content-center">
     <div class="container text-center">
         <h4 class="text-center">اساتید ما</h4>
-            <div class="d-flex flex-row" style="flex-wrap: wrap;">
-                {% for t in teachers %}
+        <div class="d-flex flex-row" style="flex-wrap: wrap;">
+            {% for t in teachers %}
+                {% if t.skill and t.image and t.first_name and t.last_name and t.description %}
                     <div class="col-lg-3 col-md-6 col-sm-12 p-2">
                         <div class="card" style="min-height:350px">
                             <div class="card-header d-flex flex-column justify-content-center align-items-center" style="background: None; border: None;">
@@ -20,9 +21,10 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-            <a href="" class="btn btn-outline-dark" style="font-size: larger; margin-top: 20px">لیست کامل اساتید</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <a href="" class="btn btn-outline-dark" style="font-size: larger; margin-top: 20px">لیست کامل اساتید</a>
     </div>
 </section>
 
