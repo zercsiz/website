@@ -3,3 +3,9 @@
 *.pyc
 __pycache__/
 local_settings.py
+settings.py
+
+
+## how to assume changed and reverse it in git
+## git update-index --assume-unchanged example.txt 
+## git update-index --no-assume-unchanged example.txt
