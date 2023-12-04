@@ -10,9 +10,9 @@
             {% if uncomplete_info %}
                 <h5 class="text-center text-danger my-2">لطفا برای نمایش داده شدن در وبسایت اطلاعات خود را <a href="{% url 'accounts:account_edit' %}">تکمیل</a> کنید.</h5>
             {% endif %}
-            <p> نام کاربری : {{ user.username|default:""  }}</p>
-            <p>شماره تلفن همراه : {{ user.phone_number|default:""  }}</p>
-            <p>آدرس ایمیل : {{ user.email }}</p>
+            <p><i class="bi bi-person"></i> نام کاربری : {{ user.username|default:""  }}</p>
+            <p><i class="bi bi-telephone"></i>شماره تلفن همراه : {{ user.phone_number|default:""  }}</p>
+            <p><i class="bi bi-envelope"></i>آدرس ایمیل : {{ user.email }}</p>
             <p>نام : {{ user.first_name|default:"" }}</p>
             <p>نام خانوادگی : {{ user.last_name|default:""  }}</p>
             {% if user.is_teacher %}

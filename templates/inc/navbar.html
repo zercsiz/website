@@ -8,11 +8,25 @@
                 <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2rem;"></i></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">
-                        <a class="nav-link" href="{% url 'accounts:account_details' %}" style="text-align: right;"><i class="bi bi-person-lines-fill mx-2" style="font-size: 1.5rem;"></i>پنل کاربری</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_details' %}"><i class="bi bi-person-lines-fill mx-2" style="font-size: 1.3rem;"></i>پنل کاربری</a>
+                    </li>
+                    {% if user.is_teacher %}
+                        <li class="dropdown-item">
+                            <a class="nav-link dropdown-link" href="{% url 'courses:time_checkbox' %}"><i class="bi bi-calendar-check mx-2" style="font-size: 1.3rem;"></i> تایم های خالی من</a>
+                        </li>
+                    {% endif %}
+                    <li class="dropdown-item">
+                        <a class="nav-link dropdown-link" href="{% url 'shop:user_orders' %}"><i class="bi bi-card-heading mx-2" style="font-size: 1.3rem;"></i> سفارش های من</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_edit' %}"><i class="bi bi-pencil-square mx-2" style="font-size: 1.3rem;"></i>ویرایش اطلاعات کاربری</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:password_change' %}"><i class="bi bi-key mx-2" style="font-size: 1.3rem;"></i>تعویض رمز عبور</a>
                     </li>
                     <li><hr class="dropdown-divider-dark" ></li>
                     <li class="dropdown-item">
-                        <a class="nav-link" href="{% url 'accounts:user_logout' %}" style="text-align: right;"><i class="bi bi-box-arrow-right mx-2" style="font-size: 1.5rem;"></i>خروج</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:user_logout' %}"><i class="bi bi-box-arrow-right mx-2" style="font-size: 1.3rem;"></i>خروج</a>
                     </li>
                 </ul>
             </div>
@@ -22,40 +36,17 @@
                 <a class="btn btn-primary" href="{% url 'accounts:user_login' %}" style="margin-right: 8px;">ورود | ثبت نام</a>
             </li>
         {% endif %}
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
-            <span class="navbar-toggler-icon"></span>
-{#            <img src="{% static 'img/navbar-toggler-icon.png' %}" alt="" style="aspect-ratio: auto;  width:20px">#}
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav col-md-4 offset-md-4 w-100 justify-content-end active">
-                <li class="nav-item p-0">
-                    <a class="nav-link mx-2 p-0" href="{% url 'shop:cart' %}" ><img src="{% static 'img/cart-icon-dark.jpg' %}" alt="" style="aspect-ratio: auto; height: 40px;"></a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{% url 'accounts:account_details' %}">پنل کاربری</a>
-                    </li>
-                    <li class="nav-item mr-2">
-                        <a class="nav-link" href="{% url 'accounts:user_logout' %}">خروج</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="{% url 'accounts:user_login' %}" style="margin-right: 8px;">ورود | ثبت نام</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div> -->
     </div>
 </nav>
 <div style="height: 1px; background: linear-gradient(90deg, white 0%, #e4e4e4 50%, white 100%);"></div>
 <div class="d-flex flex-row justify-content-start align-items-center" style="background-color: white ;padding: 0 8%;">
     <div class="dropdown d-flex flex-row">
-        <h4 type="button" class="p-2 dropdown-toggle dropdown-toggle-split" style="font-size: 1rem; font-weight: 400;" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span>مهارت ها<span class="mx-2"></span></h4>
+        <h4 type="button" class="p-2 dropdown-toggle dropdown-toggle-split" style="font-size: 1rem; font-weight: 400;" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها<span class="mx-2"></span></h4>
         <!-- <h4 type="button" class="py-2 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="visually-hidden" style="font-weight: 100;">Toggle Dropdown</span>
         </h4> -->
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" style="text-align: right;">آلمانی</a></li>
+            <li><a class="dropdown-item px-2" href="#" style="text-align: right;">آلمانی</a></li>
             <!-- <li><a class="dropdown-item" href="#" style="text-align: right;">انگلیسی</a></li>
             <li><a class="dropdown-item" href="#" style="text-align: right;">ترکی</a></li> -->
         </ul>
@@ -77,4 +68,37 @@
     .nav-link{
         color: black;
     }
+    .dropdown-link[aria-current="page"]{
+        background-color: #ff4d4f;
+        color: white;
+
+    }
+    .dropdown-item {
+        padding-right: 0;
+        padding-left: 0;
+        justify-content: center;
+    }
+    .dropdown-link {
+        text-align: right;
+        padding: 3%;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+
+    }
+    .dropdown-divider-dark {
+        padding: 0;
+        margin: 0;
+    }
+    .dropdown-menu {
+        box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.4);
+        min-width: 210px;
+    }
 </style>
+ <script>
+    document.querySelectorAll('.dropdown-link').forEach(link => {
+        if(link.href === window.location.href){
+            link.setAttribute('aria-current', 'page')
+        }
+    })
+ </script>
