@@ -1,5 +1,18 @@
 /* https://colorhunt.co/palette/dddddd22283130475ef05454 
  link of color palette
+
+
+
+ new palette
+
+#333333  dark
+#FFFFFF
+
+#00A5DB blue
+#277E9C     blue classy
+#DB6F00 orange
+
+
 */
 @charset "UTF-8";
 .container {
@@ -18,22 +31,46 @@ hr {
 }
 
 .btn-primary {
-    background-color: #ff4d4f;
-    border-color: #ff4d4f;
+    background-color: #00A5DB;
+    border-color: #00A5DB;
     color: white;
 }
 .btn-primary:hover {
-    background-color: #ff4d4f;
-    border-color: #ff4d4f;
+    background-color: #00A5DB;
+    border-color: #00A5DB;
     color: white;
 }
 
 .btn-outline-primary {
-    border-color: #ff4d4f;
-    color: #ff4d4f;
+    border-color: #00A5DB;
+    color: #00A5DB;
 }
 .btn-outline-primary:hover {
-    background-color: #ff4d4f;
-    border-color: #ff4d4f;
+    background-color: #00A5DB;
+    border-color: #00A5DB;
+    color: white;
+}
+
+
+
+
+.btn-secondary {
+    background-color: #DB6F00;
+    border-color: #DB6F00;
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #DB6F00;
+    border-color: #DB6F00;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border-color: #DB6F00;
+    color: #DB6F00;
+}
+.btn-outline-secondary:hover {
+    background-color: #DB6F00;
+    border-color: #DB6F00;
     color: white;
 }

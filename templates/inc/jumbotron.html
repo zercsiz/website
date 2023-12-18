@@ -3,23 +3,42 @@
 
 <section class="d-flex flex-column jumbotron align-items-center">
     <div class="d-flex container justify-content-between align-items-center" style="padding: 4% 8%;">
-        <div class="jumbotron-register card d-flex flex-row justify-content-center col-lg-4 p-4" style="border-color: white;">
-            <form class="d-flex flex-column justify-content-center align-items-center w-100" action="" method="post" style="max-width: max-content;">
-                <p>یادگیری رو شروع کن</p>
-                {% csrf_token %}
-                {{register_form.as_p}}
-                <button class="btn btn-primary w-100" type="submit" style="min-width: inherit;">ثبت نام</button>
-            </form> 
-            <!-- <img class="img-fluid" alt="Responsive image" src="{% static 'img/book2_homepage.png' %}" style="aspect-ratio: auto; height: 300px; object-fit: scale-down"> -->
-        </div>
+        
+        {% if not user.is_authenticated %}
+            <div class="jumbotron-register card d-flex flex-row justify-content-center col-lg-4 p-4" style="border-color: white;">
+                <form class="d-flex flex-column justify-content-center align-items-center w-100" action="" method="post" style="max-width: fit-content;">
+                    <p style="font-size: 1.2rem; font-weight: 500;">یادگیری رو شروع کن!</p>
+                    {% csrf_token %}
+                    {% for field in register_form %}
+                        <div class="my-2 w-100">
+                            {{ field }}
+                            <small style="max-width: 20px;">{{ field.help_text|safe }}</small>
+
+                            <!--doesnt fucking work!-->
+                            <!-- {% if field.errors %}
+                                <hr>
+                                <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% endif %} -->
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-primary w-100 my-2" type="submit" style="min-width: inherit;">ثبت نام</button>
+                </form> 
+            </div>
+        {% endif %}
         <div class="d-flex flex-column jumbotron-text-btn col-lg-6 align-items-start justify-content-center">
-            <h4 class="text-light text-end mb-3" style="font-size: 1.6rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h4>
-            <p class="text-end text-light" style="font-size: 1.2rem">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
-        </div>
+            <h4 class="text-light text-end mb-3" style="font-size: 1.2rem">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h4>
+            <p class="text-end text-light" style="font-size: 1.0rem">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</p>
+        </div>    
+        
+        
     </div>
-    <div style="padding: 0% 8%; width: 100%;">
+    <!-- <div style="padding: 0% 8%; width: 100%;">
         <hr class="jumbo-hr">
-    </div>
+    </div> -->
 </section>
 
 <style>
@@ -27,12 +46,16 @@
         overflow-x: hidden;
         overflow-y: hidden;
         /* min-height: 500px; */
-        background-color: #222831;
+        background-color: #333333;
     }
     .jumbo-hr {
         border-color: gray;
         width: 100%;
     }
+    .jumbotron-text-btn {
+        padding-right: 1%;
+    }
+    
 
     @media (max-width: 991px){
         .jumbotron .d-flex {

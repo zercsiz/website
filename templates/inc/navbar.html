@@ -1,11 +1,11 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home:home' %}" style="justify-self: start">کلاس ایران</a>
+        <a class="navbar-brand" href="{% url 'home:home' %}" style="justify-self: start; font-weight: 500;">کلاس ایران</a>
 
         {% if user.is_authenticated %}
             <div class="dropdown-center">
-                <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2rem;"></i></button>
+                <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle text-light" style="font-size: 2rem;"></i></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">
                         <a class="nav-link dropdown-link" href="{% url 'accounts:account_details' %}"><i class="bi bi-person-lines-fill mx-2" style="font-size: 1.3rem;"></i>پنل کاربری</a>
@@ -38,24 +38,25 @@
         {% endif %}
     </div>
 </nav>
-<div style="height: 1px; background: linear-gradient(90deg, white 0%, #e4e4e4 50%, white 100%);"></div>
-<div class="d-flex flex-row justify-content-start align-items-center" style="background-color: white ;padding: 0 8%;">
+<div style="height: 1px; background: linear-gradient(90deg, #333333 0%, #676767 50%, #333333 100%);"></div>
+<div class="d-flex flex-row justify-content-start align-items-center" style="background-color: #333333 ;padding: 0 8%;">
     <div class="dropdown d-flex flex-row">
-        <h4 type="button" class="p-2 dropdown-toggle dropdown-toggle-split" style="font-size: 1rem; font-weight: 400;" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها<span class="mx-2"></span></h4>
+        <a class="bottom-bar-button py-2 px-3 text-light" href="{% url 'skills:skills_home' %}" style="text-decoration: none; color: black;"><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها</a>
+        <!-- <h4 type="button" class="p-2 dropdown-toggle dropdown-toggle-split" style="font-size: 1rem; font-weight: 400;" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها<span class="mx-2"></span></h4> -->
         <!-- <h4 type="button" class="py-2 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="visually-hidden" style="font-weight: 100;">Toggle Dropdown</span>
         </h4> -->
-        <ul class="dropdown-menu">
+        <!-- <ul class="dropdown-menu">
             <li><a class="dropdown-item px-2" href="#" style="text-align: right;">آلمانی</a></li>
-            <!-- <li><a class="dropdown-item" href="#" style="text-align: right;">انگلیسی</a></li>
-            <li><a class="dropdown-item" href="#" style="text-align: right;">ترکی</a></li> -->
-        </ul>
+            <li><hr class="dropdown-divider-dark" ></li>
+            <li><a class="dropdown-item px-2" href="{% url 'skills:skills_home' %}" style="text-align: right;">تمام مهارت ها</a></li>
+        </ul> -->
     </div>
 </div>
 
 <style>
     .navbar {
-        background-color: white;
+        background-color: #333333;
         padding: 0;
     }
     .navbar .container {
@@ -63,13 +64,18 @@
     }
     .navbar-brand{
         margin-right: 0;
-        color: #ff4d4f;
+        color: #00A5DB;
     }
+    .navbar-brand:hover{
+
+        color: #00A5DB;
+    }
+
     .nav-link{
         color: black;
     }
     .dropdown-link[aria-current="page"]{
-        background-color: #ff4d4f;
+        background-color: #00A5DB;
         color: white;
 
     }
@@ -93,6 +99,10 @@
     .dropdown-menu {
         box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.4);
         min-width: 210px;
+    }
+    .bottom-bar-button:hover{
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+        transition: background 300ms ease;
     }
 </style>
  <script>

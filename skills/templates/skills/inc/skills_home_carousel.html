@@ -1,0 +1,114 @@
+<section class="carousel-section d-flex container">
+    <div class="d-flex flex-column skill-feature-box col-lg-6 col-md-12 ">
+        <!-- <i class="bi bi-hand-index-thumb-fill" style="font-size: 4.5rem; color: white;"></i> -->
+        <h5 class="feature_title text-light">مهارت مورد نظر خود را انتخاب کنید</h5>
+        <p class="text-light">در این پلتفرم سعی بر این است که مهارت های متنوع برای یادگیری فراهم شوند</p>
+        <a class="btn btn-secondary" href="{% url 'skills:skills_home' %}">تمام مهارت ها</a>
+    </div>
+    {% if skills %}
+        <div class="carousel-div col-lg-6 col-md-12">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="width: 100%; height: 100%;">
+                <div class="carousel-inner">
+                    {% for skill in skills %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{skill.image.url}}" class="d-block img-fluid skill-carousel-image w-100" alt="...">
+                            <div class="skill-image-mask"></div>
+                            <div class="carousel-caption">
+                                <a class="skill-name btn btn-dark" href="{{ skill.get_absolute_url }}"><h5>{{ skill.name }}</h5></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    {% endif %} 
+</section>
+
+
+<style>
+    .skill-feature-box{
+        justify-content:center; 
+        align-items: start;
+        padding-left: 4%;
+    }
+    .carousel-section {
+        background-color: #277E9C;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .skill-carousel-image{
+        height: 300px;
+        width: auto;
+        object-fit: cover;
+    
+    }
+    .carousel-inner{
+        justify-content: center;
+        height: 100%;
+    
+    }
+    .skill-image-mask{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 300px;
+    
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
+    }
+    .carousel-caption{
+        /* position: absolute; */
+        /* width: 100%; */
+        /* background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 20%, rgba(0, 0, 0, 0.6) 80%, rgba(0, 0, 0, 0) 100%); */
+        
+    }
+    .skill-name {
+        text-decoration: none;
+    
+    }
+    .carousel-item{
+        object-fit: contain;
+        height: 100%;
+        
+    }
+    
+    .carousel {
+        object-fit: contain;
+
+    }
+    .carousel-control-prev{
+        background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
+        
+
+    }
+    .carousel-control-next{
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 1) 100%);
+        
+
+    }
+
+    @media (max-width: 991px){
+        .skill-feature-box{
+            justify-content:center; 
+            align-items: start;
+        }
+        .carousel-section{
+            flex-direction: column-reverse;
+        }
+        .skill-carousel-image{
+
+            height: 300px;
+            width: auto;
+            object-fit: cover;
+            
+        }
+    }
+</style>

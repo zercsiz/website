@@ -12,12 +12,12 @@
        style="background-color: #F05454; color: white;
               width: 190px; outline-color: #F05454; border-color: #F05454; transition: opacity 0.25s;
                 box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6)">یادگیری رو شروع کن</a> -->
-
+    {% include 'skills/inc/skills_home_carousel.html' %}
     {% include 'inc/features.html' %}
     {% include 'inc/teacher_cards.html' %}
 {#    {% include 'inc/course_cards.html' %}#}
     <!-- added java script for btn-floating transition -->
-    <script>
+    <!-- <script>
         const btnFl = document.querySelector('.btn-floating')
         window.addEventListener('scroll',
         () => {
@@ -27,5 +27,6 @@
             btnFl.classList.add('opacity-0','disabled');
         }
         });
-    </script>
+    </script> -->
+    {% include 'inc/social_media_links.html' %}
 {% endblock %}

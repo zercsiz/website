@@ -118,7 +118,6 @@ class TeacherDetails(LoginRequiredMixin, View):
             ## to calculate the total amount for order
             order.total = plan_times_list[0].teacherplan.price * order.sessions_number
             order.save()
-            print(order.planTimes.all())
 
 
             # teacher = Account.objects.get(id=teacher_id)

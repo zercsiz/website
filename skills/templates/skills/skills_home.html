@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <h4>لیست مهارت ها</h4>
+    <hr>
+    <div class="skills-container d-flex flex-row justify-content-center">
+        {% if skills %}
+            {% for skill in skills %}
+                <div class="p-2 col-lg-4">
+                    <div class="card d-flex" style="min-height: fit-content; background: transparent;">
+                        <div class="card-header">
+                            <img class="img-fluid skill-image" src="{{ skill.image.url }}" alt="">
+                            <a href="{{ skill.get_absolute_url }}"><h5 class="skill-name">{{ skill.name }}</h5></a>
+                        </div>
+                        
+                        <p>{{ skill.description|truncatewords:30}}</p>
+                        <a class="btn" href="#"></a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+<style>
+    .skills-container{
+        flex-wrap: wrap;
+    }
+    .skill-image{
+        overflow: hidden; 
+        width: inherit; 
+        z-index: -1;
+        border-radius: inherit;
+        aspect-ratio: auto;
+    }
+    .card-header {
+        min-height: fit-content;
+    }
+    .skill-name{
+        padding: 4% 0;
+    }
+</style>
+
+{% endblock content %}
+    

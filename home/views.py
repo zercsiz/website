@@ -7,6 +7,7 @@ from django.views import View
 from accounts import forms as accountForms
 from django.contrib.auth import login
 from django.contrib import messages
+from skills.models import Skill
 
 
 class HomeView(View):
@@ -15,10 +16,12 @@ class HomeView(View):
     def setup(self, request, *args, **kwargs):
         self.teacherListInstance = Account.objects.filter(is_teacher=True).exclude(slug__exact="")[:6]
         self.courseListInstance = Course.objects.all()[:6]
+        self.skillsListInstance = Skill.objects.all()[:3]
         return super().setup(request, *args, **kwargs)
     
     def get(self, request):
-        context = {'courses': self.courseListInstance, "teachers": self.teacherListInstance, 'register_form':self.form_class}
+        context = {'courses': self.courseListInstance, "teachers": self.teacherListInstance, 'register_form':self.form_class,
+                   'skills': self.skillsListInstance}
 
         return render(request, 'home/home.html', context)
     
