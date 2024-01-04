@@ -4,7 +4,7 @@
 __pycache__/
 local_settings.py
 settings.py
-
+db.sqlite3
 
 ## how to assume changed and reverse it in git
 ## git update-index --assume-unchanged example.txt 
