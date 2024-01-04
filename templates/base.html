@@ -37,18 +37,26 @@
     </script>
     {% block titel %}
     {% endblock %}
-    <link rel="icon" type="image/x-icon" sizes="32x32" href="{% static 'img/favicon32.ico' %}">
-    <link rel="icon" type="image/x-icon" sizes="16x16" href="{% static 'img/favicon16.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/site.webmanifest' %}">
 
 </head>
 <body>
     <!-- <div style="background-color: #222831; min-height: 25px;"></div> -->
     {% include 'inc/navbar.html' %}
     {% include 'inc/messages.html' %}
-    {% block content %}
-    {% endblock %}
-    {% include 'inc/footer.html' %}
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    
 
     <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
+<footer>
+    {% include 'inc/footer.html' %}
+</footer>
 </html>

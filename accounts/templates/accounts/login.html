@@ -4,11 +4,11 @@
     {% block titel %}
         <title>ورود به حساب کاربری</title>
     {% endblock %}
-    <div class="d-flex flex-column justify-content-center align-items-center p-0"
-         style="width: 100vw; object-fit: cover; margin-top: 100px">
-        <main class="form-signin w-100 m-auto text-center">
+    <div class="d-flex flex-column justify-content-center align-items-center p-0 background-dark"
+         style="width: 100vw; object-fit: cover; min-height: 600px;">
+        <main class="form-signin w-100 m-auto text-center background-light">
           <form clss="dflex flex-column" method="post"> {% csrf_token %}
-            <h1 class="h3 mb-3 fw-normal text-center">ورود به حساب کاربری</h1>
+            <h5 class="mb-3 fw-normal text-center">ورود به حساب کاربری</h5>
             <div class="mb-3">
               <input type="email" name="email" class="form-control" id="floatingInput" placeholder="آدرس ایمیل">
             </div>
@@ -33,7 +33,8 @@
     <style>
         .form-signin {
           max-width: 330px;
-          padding: 15px;
+          padding: 1.5rem;
+          border-radius: 2%;
         }
         .form-signin:focus-within {
           z-index: 2;

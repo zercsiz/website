@@ -26,8 +26,27 @@ html, body {
     overflow-x: hidden;
 }
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 hr {
     border: 1px groove black;
+}
+.content {
+    flex: 1;
+}
+
+.background-dark {
+    background-color: #333333;
+}
+.background-classy {
+    background-color: #277E9C;
+}
+.background-light {
+    background-color: #FFFFFF;
 }
 
 .btn-primary {
