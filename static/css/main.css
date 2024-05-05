@@ -1,5 +1,6 @@
 /* https://colorhunt.co/palette/dddddd22283130475ef05454 
  link of color palette
+ https://colorhunt.co/palette/33333300a5db277e9cb3c51e#justCreated
 
 
 
@@ -11,6 +12,9 @@
 #00A5DB blue
 #277E9C     blue classy
 #DB6F00 orange
+#F57800 2nd orange
+#EBFF15
+#B3C51E
 
 
 */
@@ -74,22 +78,22 @@ hr {
 
 
 .btn-secondary {
-    background-color: #DB6F00;
-    border-color: #DB6F00;
-    color: white;
+    background-color: #B3C51E;
+    border-color: #B3C51E;
+    color: black;
 }
 .btn-secondary:hover {
-    background-color: #DB6F00;
-    border-color: #DB6F00;
-    color: white;
+    background-color: #B3C51E;
+    border-color: #B3C51E;
+    color: black;
 }
 
 .btn-outline-secondary {
-    border-color: #DB6F00;
-    color: #DB6F00;
+    border-color: #B3C51E;
+    color: #B3C51E;
 }
 .btn-outline-secondary:hover {
-    background-color: #DB6F00;
-    border-color: #DB6F00;
-    color: white;
+    background-color: #B3C51E;
+    border-color: #B3C51E;
+    color: black;
 }

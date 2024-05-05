@@ -6,9 +6,9 @@
     {% endblock %}
     <div class="d-flex flex-column justify-content-center align-items-center p-0 background-dark"
          style="width: 100vw; object-fit: cover; min-height: 600px;">
-        <main class="form-signin w-100 m-auto text-center background-light">
+        <main class="form-signin w-100 m-auto text-center background-dark border border-secondary">
           <form clss="dflex flex-column" method="post"> {% csrf_token %}
-            <h5 class="mb-3 fw-normal text-center">ورود به حساب کاربری</h5>
+            <h5 class="mb-3 fw-normal text-center text-light">ورود به حساب کاربری</h5>
             <div class="mb-3">
               <input type="email" name="email" class="form-control" id="floatingInput" placeholder="آدرس ایمیل">
             </div>
