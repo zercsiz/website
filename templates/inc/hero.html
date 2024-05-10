@@ -1,0 +1,35 @@
+{% load static %}
+<!--old jumbotron-->
+
+<section class="hero d-flex flex-column align-items-center">
+    <img class="home-background img-fluid" src="{% static 'img/home-background.png' %}" alt="">
+    <div class="hero-text-container d-flex container justify-content-center align-items-center">
+        <div class="d-flex flex-column jumbotron-text-btn col-lg-6 align-items-start justify-content-center">
+            <h3 class="text-center mb-3">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h3>
+            <h5 class="text-center">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</h5>
+        </div>    
+    </div>
+</section>
+
+<style>
+    .hero {
+        height: 100vh;
+    }
+    .hero-text-container {
+        margin-top: 120px;
+    }
+    .home-background{
+        z-index: -1;
+        position: absolute; 
+        width: 100%; 
+        height: 100%; 
+        object-fit: fill;
+    }
+    
+
+    @media (max-width: 991px){
+        .hero .d-flex {
+            flex-direction: column;
+        }
+    }
+</style>

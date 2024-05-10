@@ -1,74 +1,81 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+<nav class="navbar navbar-expand-lg justify-content-center">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'home:home' %}" style="justify-self: start; font-weight: 500;">کلاس ایران</a>
-
+        <a class="navbar-brand" href="{% url 'home:home' %}">کلاس ایران</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'skills:skills_home' %}">مهارت ها</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">راهنما</a>
+                </li>
+            </ul>
+        </div>      
         {% if user.is_authenticated %}
             <div class="dropdown-center">
                 <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle text-light" style="font-size: 2rem;"></i></button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-left">
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_details' %}"><i class="bi bi-person-lines-fill mx-2" style="font-size: 1.3rem;"></i>پنل کاربری</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_details' %}"><i class="bi bi-person-lines-fill mx-2"></i>پنل کاربری</a>
                     </li>
                     {% if user.is_teacher %}
                         <li class="dropdown-item">
-                            <a class="nav-link dropdown-link" href="{% url 'courses:time_checkbox' %}"><i class="bi bi-calendar-check mx-2" style="font-size: 1.3rem;"></i> تایم های خالی من</a>
+                            <a class="nav-link dropdown-link" href="{% url 'courses:time_checkbox' %}"><i class="bi bi-calendar-check mx-2"></i> تایم های خالی من</a>
                         </li>
                     {% endif %}
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'shop:user_orders' %}"><i class="bi bi-card-heading mx-2" style="font-size: 1.3rem;"></i> سفارش های من</a>
+                        <a class="nav-link dropdown-link" href="{% url 'shop:user_orders' %}"><i class="bi bi-card-heading mx-2"></i> سفارش های من</a>
                     </li>
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_edit' %}"><i class="bi bi-pencil-square mx-2" style="font-size: 1.3rem;"></i>ویرایش اطلاعات کاربری</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_edit' %}"><i class="bi bi-pencil-square mx-2"></i>ویرایش اطلاعات کاربری</a>
                     </li>
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'accounts:password_change' %}"><i class="bi bi-key mx-2" style="font-size: 1.3rem;"></i>تعویض رمز عبور</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:password_change' %}"><i class="bi bi-key mx-2"></i>تعویض رمز عبور</a>
                     </li>
                     <li><hr class="dropdown-divider-dark" ></li>
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'accounts:user_logout' %}"><i class="bi bi-box-arrow-right mx-2" style="font-size: 1.3rem;"></i>خروج</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:user_logout' %}"><i class="bi bi-box-arrow-right mx-2"></i>خروج</a>
                     </li>
                 </ul>
-            </div>
-            
+            </div>   
         {% else %}
             <li class="nav-item list-unstyled">
-                <a class="btn btn-primary" href="{% url 'accounts:user_login' %}" style="margin-right: 8px;">ورود | ثبت نام</a>
+                <a class="login-btn btn btn-outline-dark" href="{% url 'accounts:user_login' %}" style="margin-right: 8px;">ورود | ثبت نام</a>
             </li>
         {% endif %}
     </div>
 </nav>
-<div style="height: 1px; background: linear-gradient(90deg, #333333 0%, #676767 50%, #333333 100%);"></div>
-<div class="d-flex flex-row justify-content-start align-items-center" style="background-color: #333333 ;padding: 0 8%;">
-    <div class="dropdown d-flex flex-row">
-        <a class="bottom-bar-button py-2 px-3 text-light" href="{% url 'skills:skills_home' %}" style="text-decoration: none; color: black;"><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها</a>
-        <!-- <h4 type="button" class="p-2 dropdown-toggle dropdown-toggle-split" style="font-size: 1rem; font-weight: 400;" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span><i class="bi bi-list-stars mx-2" style="font-size: 1.3rem;"></i>مهارت ها<span class="mx-2"></span></h4> -->
-        <!-- <h4 type="button" class="py-2 dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden" style="font-weight: 100;">Toggle Dropdown</span>
-        </h4> -->
-        <!-- <ul class="dropdown-menu">
-            <li><a class="dropdown-item px-2" href="#" style="text-align: right;">آلمانی</a></li>
-            <li><hr class="dropdown-divider-dark" ></li>
-            <li><a class="dropdown-item px-2" href="{% url 'skills:skills_home' %}" style="text-align: right;">تمام مهارت ها</a></li>
-        </ul> -->
-    </div>
-</div>
 
 <style>
     .navbar {
-        background-color: #333333;
         padding: 0;
+        position: fixed;
+        width: 100vw;
+        transition: background-color 0.3s ease-in-out;
+        z-index: 1000;
+        background-color: transparent;
+    }
+    .navbar-scrolled {
+        background-color: rgba(241, 241, 241, 0.96) !important;
     }
     .navbar .container {
         padding: 1% 8%;
     }
+    .navbar .dropdown-menu .bi {
+        font-size: 1.3rem;
+    }
     .navbar-brand{
-        margin-right: 0;
-        color: #00A5DB;
+        margin: auto 0;
+        color: var(--color-brand-3);
+        font-weight: 500;
     }
     .navbar-brand:hover{
 
-        color: #00A5DB;
+        color: var(--color-brand-3);
     }
 
     .nav-link{
@@ -104,6 +111,24 @@
         background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 50%);
         transition: background 300ms ease;
     }
+
+    .login-btn{
+        background-color: rgba(255, 255, 255, 0.75);
+    }
+
+    .navbar-collapse .navbar-nav .nav-item {
+        margin: 0 1rem;
+    }
+    .navbar .container .navbar-collapse .navbar-nav {
+        margin-right: auto;
+    }
+    .navbar-toggler {
+        margin-right: auto;
+    }
+
+    .bi-person-circle{
+        transition: color 0.3s ease-in-out;
+    }
 </style>
  <script>
     document.querySelectorAll('.dropdown-link').forEach(link => {
@@ -111,4 +136,23 @@
             link.setAttribute('aria-current', 'page')
         }
     })
+
+    // navbar background change with scroll script  
+    // Listen for the scroll event
+    window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        const login_icon = document.querySelector(".bi-person-circle")
+
+        // Check if the page has scrolled a certain amount of pixels (e.g., 100px)
+        if (window.scrollY >= 100) {
+            // If scrolled, add the "scrolled" class to the navbar
+            navbar.classList.add("navbar-scrolled");
+            login_icon.classList.remove("text-light")
+
+        } else {
+            // If not scrolled enough, remove the "scrolled" class from the navbar
+            navbar.classList.remove("navbar-scrolled");
+            login_icon.classList.add("text-light");
+        }
+    });
  </script>

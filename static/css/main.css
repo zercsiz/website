@@ -1,28 +1,49 @@
-/* https://colorhunt.co/palette/dddddd22283130475ef05454 
- link of color palette
- https://colorhunt.co/palette/33333300a5db277e9cb3c51e#justCreated
 
-
-
- new palette
-
-#333333  dark
-#FFFFFF
-
-#00A5DB blue
-#277E9C     blue classy
-#DB6F00 orange
-#F57800 2nd orange
-#EBFF15
-#B3C51E
-
-
-*/
 @charset "UTF-8";
-.container {
-    padding: 4% 8%;
-    margin: 0;
-    max-width: 100%;
+
+:root {
+    --fs-h1: clamp(2rem, 6vw + 1rem, 3.5rem);
+    --fs-h2: clamp(1.5rem, 4vw + 1rem, 2.5rem);
+    --fs-h3: clamp(1.25rem, 3vw + 1rem, 2rem);
+    --fs-h4: clamp(1rem, 2vw + 1rem, 1.5rem);
+    --fs-h5: clamp(0.875rem, 1.5vw + 1rem, 1.25rem);
+    --fs-p: clamp(1rem, 2vw + 1rem, 1.25rem);
+
+    --color-brand-3: hsl(254, 74%, 49%);
+}
+@media (max-width:600px) {
+    :root {
+        --fs-h1: clamp(1.5rem, 6vw + 1rem, 2.5rem);
+        --fs-h2: clamp(1.2rem, 5vw + 0.8rem, 2rem);
+        --fs-h3: clamp(1rem, 4vw + 0.6rem, 1.5rem);
+        --fs-h4: clamp(0.8rem, 3vw + 0.4rem, 1.2rem);
+        --fs-h5: clamp(0.6rem, 2vw + 0.2rem, 1rem);
+        --fs-p: clamp(0.8rem, 3vw + 0.4rem, 1.2rem);
+    }
+}
+
+h1 {
+    font-size: var(--fs-h1);
+}
+
+h2 {
+    font-size: var(--fs-h2);
+}
+
+h3 {
+    font-size: var(--fs-h3);
+}
+
+h4 {
+    font-size: var(--fs-h4);
+}
+
+h5 {
+    font-size: var(--fs-h5);
+}
+
+p {
+    font-size: var(--fs-p);
 }
 
 html, body {
@@ -39,61 +60,17 @@ body{
 hr {
     border: 1px groove black;
 }
+
+.container {
+    padding: 4% 8%;
+    margin: 0;
+    max-width: 100%;
+}
+
 .content {
     flex: 1;
 }
 
 .background-dark {
     background-color: #333333;
-}
-.background-classy {
-    background-color: #277E9C;
-}
-.background-light {
-    background-color: #FFFFFF;
-}
-
-.btn-primary {
-    background-color: #00A5DB;
-    border-color: #00A5DB;
-    color: white;
-}
-.btn-primary:hover {
-    background-color: #00A5DB;
-    border-color: #00A5DB;
-    color: white;
-}
-
-.btn-outline-primary {
-    border-color: #00A5DB;
-    color: #00A5DB;
-}
-.btn-outline-primary:hover {
-    background-color: #00A5DB;
-    border-color: #00A5DB;
-    color: white;
-}
-
-
-
-
-.btn-secondary {
-    background-color: #B3C51E;
-    border-color: #B3C51E;
-    color: black;
-}
-.btn-secondary:hover {
-    background-color: #B3C51E;
-    border-color: #B3C51E;
-    color: black;
-}
-
-.btn-outline-secondary {
-    border-color: #B3C51E;
-    color: #B3C51E;
-}
-.btn-outline-secondary:hover {
-    background-color: #B3C51E;
-    border-color: #B3C51E;
-    color: black;
 }

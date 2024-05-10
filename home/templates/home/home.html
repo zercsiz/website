@@ -2,31 +2,13 @@
 
 {% block content %}
 
-{% block titel %}
-    <title>کلاس ایران | صفحه اصلی</title>
-{% endblock %}
-    {% include 'inc/jumbotron.html' %}
-
-{#    the floating button#}
-    <!-- <a href="{% url 'accounts:user_registration' %}" class="btn btn-floating m-4 fixed-top opacity-0 disabled"
-       style="background-color: #F05454; color: white;
-              width: 190px; outline-color: #F05454; border-color: #F05454; transition: opacity 0.25s;
-                box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6)">یادگیری رو شروع کن</a> -->
+    {% block titel %}
+        <title>کلاس ایران | صفحه اصلی</title>
+    {% endblock %}
+    {% include 'inc/hero.html' %}
     {% include 'skills/inc/skills_home_carousel.html' %}
     {% include 'inc/features.html' %}
     {% include 'inc/teacher_cards.html' %}
 {#    {% include 'inc/course_cards.html' %}#}
-    <!-- added java script for btn-floating transition -->
-    <!-- <script>
-        const btnFl = document.querySelector('.btn-floating')
-        window.addEventListener('scroll',
-        () => {
-        if (window.scrollY > 500) {
-            btnFl.classList.remove('opacity-0','disabled');
-        } else if (window.scrollY <= 500) {
-            btnFl.classList.add('opacity-0','disabled');
-        }
-        });
-    </script> -->
     {% include 'inc/social_media_links.html' %}
 {% endblock %}
