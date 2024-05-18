@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'skills:skills_home' %}">مهارت ها</a>
+                    <a class="nav-link" href="{% url 'courses:courses_home' %}">دوره ها</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">راهنما</a>
@@ -129,13 +129,27 @@
     .bi-person-circle{
         transition: color 0.3s ease-in-out;
     }
+    .bi-person-circle-dark {
+        color: black;
+    }
 </style>
  <script>
+    //the current page color change for the drop down menu
     document.querySelectorAll('.dropdown-link').forEach(link => {
         if(link.href === window.location.href){
             link.setAttribute('aria-current', 'page')
         }
     })
+
+    //to make user icon white in homepage and black in other pages
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     // Check if the current page is the homepage
+    //     if (window.location.pathname !== '/' || window.location.pathname !== '/base.html') {
+    //         // Add the specific class to the icon
+    //         document.getElementById('bi-person-circle').classList.add('bi-person-circle-dark');
+    //     }
+    // });
+
 
     // navbar background change with scroll script  
     // Listen for the scroll event

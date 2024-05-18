@@ -4,11 +4,6 @@ from django_jalali.db import models as jmodels
 
 
 
-languages = [
-    ('e', 'English'),
-    ('g', 'German')
-]
-
 
 class Course(models.Model):
 
@@ -19,10 +14,10 @@ class Course(models.Model):
     start_date = models.DateTimeField(verbose_name="Start Date")
     days = models.CharField(max_length=200)
     hour = models.CharField(max_length=200)
-    language = models.CharField(max_length=1, choices=languages)
+    image = models.ImageField(null=True, blank=True, upload_to='images/courses/')
 
     def __str__(self):
-        return f"{self.title} | Language:{self.language} | Start Date:{self.start_date} | {self.description[:60]}... | Days:{self.created} | Hour:{self.edited}"
+        return f"{self.title} | Start Date:{self.start_date} | {self.description[:60]}... | Days:{self.created} | Hour:{self.edited}"
 
     class Meta:
         verbose_name = "Course"

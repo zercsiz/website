@@ -8,6 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
 
+class CoursesView(View):
+    def get(self, request):
+        coursesList = Course.objects.all()
+        context = {'courses': coursesList}
+        return render(request, 'courses/courses.html', context)
+
 
 class CreateTime(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
