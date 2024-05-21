@@ -44,10 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # jalali date app
+    
     "jalali_date",
-    # humanize app
     "django.contrib.humanize",
+    "widget_tweaks",
+
     # my apps
     "home.apps.HomeConfig",
     "accounts.apps.AccountsConfig",

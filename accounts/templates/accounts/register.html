@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
     {% block titel %}
         <title>ثبت نام</title>
     {% endblock %}
+
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
         <main class="form-signup w-100 m-auto text-center" style="width: 100%">
-            <form class="" method="post" novalidate style="width: 100%">{% csrf_token %}
-                <h1 class="h3 mb-3 fw-normal text-center">ثبت نام</h1>
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary button-signup w-100">ارسال</button>
+            <h5 class="mb-3 fw-normal text-center">ثبت نام</h5>
+            <hr>
+            <form class="" method="post" style="width: 100%">
+                {% csrf_token %}
+                
+                {% render_field form.email class="form-control my-2" placeholder="ایمیل" %}
+                <small class="my-2" style="color: red;">{{ form.email.errors }}</small>
+                
+                {% render_field form.password1 class="form-control my-2" placeholder="رمز عبور" %}
+                <small class="my-2" style="color: red; list-style: none;">{{ form.password1.errors }}</small>
+
+                {% render_field form.password2 class="form-control my-2" placeholder="تکرار رمز عبور" %}
+                <small class="my-2" style="color: red;">{{ form.password1.errors }}</small>
+
+                <small class="my-2" style="color: gray;">{{ form.password1.help_text }}</small>
+
+                <button type="submit" class="btn btn-primary button-signup w-100 mt-2">ثبت نام</button>
 
                 <a href="{% url 'accounts:user_login' %}" class="btn btn-outline-secondary w-100 mt-2">ورود به حساب کاربری</a>
             </form>

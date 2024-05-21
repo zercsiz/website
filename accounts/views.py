@@ -25,6 +25,7 @@ class UserRegistrationView(View):
             messages.success(request, "حساب کاربری شما با موفقیت ایجاد شد. برای رزرو کلاس به صفحه اصلی مراجعه کنید.", 'success')
             login(request, user)
             return redirect('accounts:account_details')
+        
         return render(request, 'accounts/register.html', {'form': form})
 
     def get(self, request):

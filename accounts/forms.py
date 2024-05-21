@@ -7,20 +7,29 @@ from django.core.validators import validate_email, EmailValidator
 from django.core.exceptions import ValidationError
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(label="", max_length=250, required=True,
-                             widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'آدرس ایمیل'}))
-    password1 = forms.CharField(label="", max_length=250, required=True,
-                             widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'رمز عبور'}))
+    email = forms.EmailField(label="", max_length=250, required=True, widget=forms.EmailInput())
+    password1 = forms.CharField(label="", max_length=250, required=True, widget=forms.PasswordInput())
 
     class Meta:
         model = Account
         fields = ('email', 'password1')
 
+        # to override djangos error messages
+        error_messages = {
+            'email': {
+                'invalid': 'لطفا ایمیل معتبر وارد کنید',
+                'unique': 'این ایمیل قبلا استفاده شده است',
+                'required': 'ایمیل الزامی است',
+            },
+        }
+
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
-        del self.fields['password2']
-        self.fields['password1'].help_text = "رمز عبور شما باید حداقل 8 کرکتر و دارای اعداد باشد"
-        self.fields['email'].help_text = "مثال : user@email.com"
+
+        # password repeat field remove
+        # del self.fields['password2']
+
+        self.fields['password1'].help_text = "رمز عبور شما باید حداقل 8 کرکتر باشد"
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -31,29 +40,12 @@ class RegistrationForm(UserCreationForm):
 
         user = Account.objects.filter(email=email).exists()
         if user:
-            raise forms.ValidationError('لطفا ایمیل معتبر وارد کنید', code="exists")
+            raise forms.ValidationError('این ایمیل قبلا استفاده شده است', code="unique")
           
         return email
     
     def clean_password1(self):
         password = self.cleaned_data['password1']
-        if len(password) < 8:
-            raise forms.ValidationError('رمز عبور شما باید حداقل 8 کرکتر باشد')
-        
-        # password must contain numbers and be without spaces
-        number = False
-        space = False
-
-        for i in password:
-            if i.isdigit():
-                number = True
-            if i == " ":
-                space = True
-
-        if number == False:
-            raise forms.ValidationError('رمز عبور شما باید شامل اعداد باشد')
-        if space == True:
-            raise forms.ValidationError('رمز عبور شما نباید شامل فاصله باشد')
         
         return password
 
