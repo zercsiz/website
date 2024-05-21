@@ -1,15 +1,4 @@
 {% load static %}
-<!--old jumbotron-->
-
-<section class="hero d-flex flex-column align-items-center">
-    <img class="home-background img-fluid" src="{% static 'img/home-background.png' %}" alt="">
-    <div class="hero-text-container d-flex container justify-content-center align-items-center">
-        <div class="d-flex flex-column jumbotron-text-btn col-lg-6 align-items-start justify-content-center">
-            <h3 class="text-center mb-3">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h3>
-            <h5 class="text-center">اساتید مجرب و کلاس‌های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</h5>
-        </div>    
-    </div>
-</section>
 
 <style>
     .hero {
@@ -33,3 +22,16 @@
         }
     }
 </style>
+
+<section class="hero d-flex flex-column align-items-center">
+    <img class="home-background img-fluid" src="{% static 'img/home-background.png' %}" alt="">
+    <div class="hero-text-container d-flex container justify-content-center align-items-center">
+        <div class="d-flex flex-column jumbotron-text-btn col-lg-6 align-items-start justify-content-center">
+            <h3 class="text-center mb-3">با پلتفرم یادگیری قدرتمند ما، پتانسیل های خود را کشف کنید.</h3>
+            <h5 class="text-center">اساتید مجرب و دوره های متنوع این وبسایت، تجربه‌ی جدیدی از یادگیری آسان و اقتصادی را برای شما فراهم خواهند کرد.</h5>
+        </div>    
+    </div>
+    {% include 'inc/courses_search_bar.html' %}
+    {% include 'inc/social_media_links.html' %}
+</section>
+

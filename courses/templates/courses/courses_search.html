@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .courses-search {
+        margin-top: 71px;
+    }
+</style>
+<section class="courses-search container">
+    <h5>نتایج جستجوی شما برای "{{ search }}"</h5>
+    <hr>
+    <div class="d-flex flex-row">
+        {% if courses %}
+            {% for course in courses %}
+                <div class="col-lg-4 col-md-6 col-sm-12 p-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <img class="img-fluid" src="{{ course.image.url }}" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h4>{{ course.title }}</h4>
+                            <p class="course-description">{{ course.description }}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <h5>نتیجه ای یافت نشد</h5>
+        {% endif %}
+    </div>
+</section>
+    
+{% endblock content %}

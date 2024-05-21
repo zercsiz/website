@@ -14,6 +14,12 @@ class CoursesView(View):
         context = {'courses': coursesList}
         return render(request, 'courses/courses.html', context)
 
+class CoursesSearchView(View):
+    def post(self, request):
+        searchWord = request.POST.get('courses-search')
+        courses = Course.objects.filter(title__contains=searchWord)
+        context = {'search': searchWord, 'courses':courses}
+        return render(request, 'courses/courses_search.html', context)
 
 class CreateTime(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin

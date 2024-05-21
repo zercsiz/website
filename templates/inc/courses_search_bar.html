@@ -1,0 +1,40 @@
+<style>
+    .search-bar .btn-primary{
+        width: 150px;
+        margin-left: 5px;
+    }
+
+    .search-bar-input-danger{
+        border-color: red;
+    }
+    .search-bar .form-control {
+        transition: 300ms border-color;
+    }
+</style>
+<form action="{% url 'courses:courses_search' %}" method="POST">
+    {% csrf_token %}
+    <section class="search-bar">
+        <div class="d-flex flex-row">
+            <button id="submitButton" class="btn btn-primary"><i class="bi bi-search"></i> جستجو</button>
+            <input id="inputField" class="form-control form-control-lg" name="courses-search" type="text" placeholder="جستجو دوره ها" aria-label=".form-control-lg example">
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const inputField = document.getElementById('inputField');
+        const submitButton = document.getElementById('submitButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        submitButton.addEventListener('click', function(event) {
+            if (inputField.value.trim() === '') {
+                event.preventDefault();
+                inputField.classList.add('search-bar-input-danger')
+            } else {
+                inputField.classList.rmeove('search-bar-input-danger')
+            }
+        });
+    });
+    </script>
+    
+</form>

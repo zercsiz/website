@@ -10,6 +10,7 @@
     --fs-p: clamp(1rem, 2vw + 1rem, 1.25rem);
 
     --color-brand-3: hsl(254, 74%, 49%);
+    --color-brand-4: hsl(254, 86%, 33%);
 }
 @media (max-width:600px) {
     :root {
@@ -73,4 +74,13 @@ hr {
 
 .background-dark {
     background-color: #333333;
+}
+
+.btn-primary {
+    border-color: var(--color-brand-3);
+    background-color: var(--color-brand-3);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--color-brand-4);
 }
