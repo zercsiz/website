@@ -1,40 +1,36 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
     {% block titel %}
         <title>ورود به حساب کاربری</title>
     {% endblock %}
-    <div class="d-flex flex-column justify-content-center align-items-center p-0 background-dark"
-         style="width: 100vw; object-fit: cover; min-height: 600px;">
-        <main class="form-signin w-100 m-auto text-center background-dark border border-secondary">
-          <form clss="dflex flex-column" method="post"> {% csrf_token %}
-            <h5 class="mb-3 fw-normal text-center text-light">ورود به حساب کاربری</h5>
-            <div class="mb-3">
-              <input type="email" name="email" class="form-control" id="floatingInput" placeholder="آدرس ایمیل">
-            </div>
-            <div class="mb-3">
-              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="رمز عبور">
-            </div>
-              {% if form.non_field_errors %}
-                <ul class='form-errors'>
-                    {% for error in form.non_field_errors %}
-                        <li style="color: red">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-              {% endif %}
-            <button class="w-100 btn btn-primary" type="submit">ورود</button>
-            <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ثبت نام</a>
-            <hr>
-            <a href="{% url 'accounts:password_reset' %}" style="text-decoration: none; color: cornflowerblue;">رمز عبورم را فراموش کردم</a>
-          </form>
-        </main>
-    </div>
+    <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
+      <main class="form-signin w-100 m-auto text-center" style="width: 100%">
+          <h5 class="mb-3 fw-normal text-center">ورود به حساب کاربری</h5>
+          <hr>
+          <form class="" method="post" style="width: 100%">
+              {% csrf_token %}
+              
+              {% render_field form.email class="form-control my-2" placeholder="ایمیل" %}
+              <small class="my-2" style="color: red;">{{ form.email.errors }}</small>
+              
+              {% render_field form.password class="form-control my-2" placeholder="رمز عبور" %}
+              <small class="my-2" style="color: red; list-style: none;">{{ form.password.errors }}</small>
 
+              <small class="my-2" style="color: gray;">{{ form.password.help_text }}</small>
+
+              <button class="w-100 btn btn-primary" type="submit">ورود</button>
+              <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ثبت نام</a>
+              <hr>
+              <a href="{% url 'accounts:password_reset' %}" style="text-decoration: none; color: cornflowerblue;">رمز عبورم را فراموش کردم</a>
+          </form>
+      </main>
+  </div>
     <style>
         .form-signin {
           max-width: 330px;
           padding: 1.5rem;
-          border-radius: 2%;
         }
         .form-signin:focus-within {
           z-index: 2;
