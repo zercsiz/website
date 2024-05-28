@@ -5,10 +5,13 @@ from accounts.models import Account
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import validate_email, EmailValidator
 from django.core.exceptions import ValidationError
+from captcha.fields import CaptchaField
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(label="", max_length=250, required=True, widget=forms.EmailInput())
     password1 = forms.CharField(label="", max_length=250, required=True, widget=forms.PasswordInput())
+
+    captcha = CaptchaField()
 
     class Meta:
         model = Account
@@ -52,6 +55,7 @@ class RegistrationForm(UserCreationForm):
 class UserLoginForm(forms.ModelForm):
 
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    captcha = CaptchaField()
 
     class Meta:
         model = Account
@@ -77,15 +81,13 @@ class UserLoginForm(forms.ModelForm):
 class AccountEditForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('first_name', 'last_name', 'username', 'phone_number', 'email', 'skill', 'description')
+        fields = ('first_name', 'last_name', 'username', 'phone_number', 'email')
         labels = {
             'username': _('نام کاربری'),
             'phone_number': _('شماره همراه'),
             'email': _('ایمیل'),
             'first_name': _('نام'),
             'last_name': _('نام خانوادگی'),
-            'skill': _('مهارت'),
-            'description': _('توضیحات'),
         }
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control my-3'}),
@@ -93,19 +95,7 @@ class AccountEditForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control my-3'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control my-3'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control my-3'}),
-            'skill': forms.Select(attrs={'class': 'form-control my-3'}),
-            'description': forms.Textarea(attrs={'class': 'form-control my-3', 'rows': '8', 'cols': '50', 'style': "resize: none"}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(AccountEditForm, self).__init__(*args, **kwargs)
-        if not self.instance.is_teacher:
-            self.fields.pop('skill')
-            self.fields.pop('description')
-            
-            
-        
-
+        }        
 
     def clean_username(self):
         username = self.cleaned_data['username']

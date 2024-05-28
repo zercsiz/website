@@ -24,7 +24,7 @@ class UserRegistrationView(View):
             user = form.save()
             messages.success(request, "حساب کاربری شما با موفقیت ایجاد شد. برای رزرو کلاس به صفحه اصلی مراجعه کنید.", 'success')
             login(request, user)
-            return redirect('accounts:account_details')
+            return redirect('accounts:user_profile')
         
         return render(request, 'accounts/register.html', {'form': form})
 
@@ -73,7 +73,7 @@ class LogoutView(View):
         return redirect('home:home')
     
 
-class AccountInfoView(LoginRequiredMixin, View):
+class UserProfileView(LoginRequiredMixin, View):
     login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
 
     def dispatch(self, request, *args, **kwargs):
@@ -81,43 +81,13 @@ class AccountInfoView(LoginRequiredMixin, View):
             return redirect('home:home')
         return super().dispatch(request, *args, **kwargs)
     
+    def setup(self, request: http.HttpRequest, *args: Any, **kwargs: Any) -> None:
+        self.courses_instance = request.user.courses.all()
+        return super().setup(request, *args, **kwargs)
+    
     def get(self, request):
-        if request.user.is_teacher:
-            context = {}
-            if not request.user.first_name or not request.user.last_name or not request.user.skill or not request.user.description:
-                context['uncomplete_info'] = True
-            else:
-                context['uncomplete_info'] = False
-            # week days in farsi for teacher plan
-            w_days = ("شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", )
-            context['week_days'] = w_days
-
-            try:
-                teacher_plan = request.user.plan.get()
-                p_times = teacher_plan.teacherPlan_planTimes.all()
-                context['plan_times'] = p_times
-            except:
-                context['plan_times'] = None
-            try:
-                ## teacher_teacherTimes means times when user is teacher, and student_teacherTime means times when user is student
-                teacher_time_as_teacher_list = request.user.teacher_teacherTimes.filter(is_reserved=True).order_by('gdate')
-                context['teacher_times_as_teacher'] = teacher_time_as_teacher_list
-            except:
-                context['teacher_times_as_teacher'] = None
-            try:
-                teacher_time_as_student_list = request.user.student_teacherTimes.filter(is_reserved=True).order_by('gdate')
-                context['teacher_times_as_student'] = teacher_time_as_student_list
-            except:
-                context['teacher_times_as_student'] = None
-        else:
-            context = {}
-            try:
-                teacher_time_as_student_list = request.user.student_teacherTimes.filter(is_reserved=True).order_by('gdate')
-                context['teacher_times_as_student'] = teacher_time_as_student_list
-            except:
-                context['teacher_times_as_student'] = None
-                
-        return render(request, 'accounts/account_information.html', context)
+        context = {'courses': self.courses_instance}        
+        return render(request, 'accounts/user_profile.html', context)
 
 
 class AccountEditView(LoginRequiredMixin, View):

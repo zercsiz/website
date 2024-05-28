@@ -1,22 +1,15 @@
 from django.db import models
 from django.conf import settings
+from courses import models as coursesModels
 
 
 class Order(models.Model):
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="student_orders")
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="teacher_orders")
-
-    planTimes = models.ManyToManyField("courses.PlanTime")
-
-    start_date = models.DateField(null=True, blank=True)
-    sessions_number = models.IntegerField(null=True, blank=True)
-
+    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="orders")
     date_ordered = models.DateTimeField(auto_now_add=True)
-
-    status_choices = {('complete', 'complete'), ('pending', 'pending'), ('incomplete', 'incomplete')}
-
+    status_choices = {('c', 'complete'), ('p', 'pending'), ('i', 'incomplete')}
     status = models.CharField(choices=status_choices, max_length=100, null=True, blank=True, default="incomplete")
     total = models.BigIntegerField(null=True)
+    courseId = models.CharField(max_length=400, null=True, blank=True)
 
     def __str__(self):
         return f"{self.student} - status:{self.status}"

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "jalali_date",
     "django.contrib.humanize",
     "widget_tweaks",
+    "captcha",
 
     # my apps
     "home.apps.HomeConfig",
@@ -63,8 +64,6 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    ## my admin ip middleware
-    # 'home.middleware.admin_ip',
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -157,3 +156,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "/accounts/login/"
+
+
+# django-simple-captcha customization
+CAPTCHA_FONT_SIZE = 30
+CAPTCHA_BACKGROUND_COLOR = '#ffffff'
+CAPTCHA_FOREGROUND_COLOR = '#001100'
+CAPTCHA_LENGTH = 5
+CAPTCHA_2X_IMAGE = True

@@ -16,7 +16,6 @@ class SkillsView(View):
 class SkillDetailsView(View):
 
     def setup(self, request, *args, **kwargs):
-        # gets a particular teacher time
         self.skill_instance = models.Skill.objects.get(slug=kwargs['skill_slug'])
 
         super().setup(request, *args, **kwargs)

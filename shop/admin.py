@@ -1,6 +1,5 @@
 from django.contrib import admin
 from . import models
-from courses import models as coursesModels
 
 
 class TransactionInline(admin.StackedInline):
@@ -22,5 +21,6 @@ class OrderAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('order', 'date', 'hour', 'minute', 'dateIssued', 'card4Digits', 'transactionId', 'amount')
     search_fields = ('transactionId', 'date_issued','order')
+
 
 

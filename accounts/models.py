@@ -36,11 +36,7 @@ class Account(AbstractBaseUser):
     email = models.CharField(verbose_name='Email', max_length=250, unique=True, null=True)
     first_name = models.CharField(verbose_name="First Name", max_length=200, null=True, blank=True)
     last_name = models.CharField(verbose_name="Last Name", max_length=200, null=True, blank=True)
-    description = models.TextField(verbose_name="Description", max_length=1000, null=True, blank=True)
-    skill_choices = {('زبان آلمانی', 'g'), ('زبان انگلیسی', 'e')}
-    skill = models.CharField(verbose_name="Skill", max_length=200, null=True, blank=True, choices=skill_choices)
-    slug = models.SlugField(null=True, blank=True, max_length=300, unique=True, allow_unicode=True)
-    image = models.ImageField(null=True, blank=True, upload_to='images/teachers/')
+    
 
     date_joined = models.DateTimeField(verbose_name="Date Joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
@@ -48,33 +44,15 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=True)
-    is_teacher = models.BooleanField(default=False)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = MyAccountManager()
 
-    # overrides save function , this is commented because i dont know how to farsi slug
-    def save(self, *args, **kwargs):
-        if self.is_teacher:
-            try:
-                slug = "-".join([self.skill, self.first_name, self.last_name])
-                print(slug)
-            except TypeError or ValueError:
-                slug = None
-            if slug:
-                self.slug = slugify(slug, allow_unicode=True)
-        super().save()
-
     def __str__(self):
-        if self.is_superuser:
-            return f"Admin | {self.username} | {self.phone_number} | {self.email}"
-        elif self.is_student and self.is_teacher:
-            return f"Teacher | {self.username} | {self.email} | {self.skill}"
-        else:
-            return f"Student | {self.first_name} {self.last_name}"
+        return f"{self.email}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

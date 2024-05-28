@@ -8,19 +8,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'courses:courses_home' %}">دوره ها</a>
+                    <a class="nav-link" href="{% url 'courses:home' %}">دوره ها</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">راهنما</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:cart' %}"><i class="bi bi-basket3" style="font-size: 1.5rem;"></i></a>
                 </li>
             </ul>
         </div>      
         {% if user.is_authenticated %}
             <div class="dropdown-center">
-                <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle text-light" style="font-size: 2rem;"></i></button>
+                <button type="button" class="dropdown-toggle-split" style="border: none; background-color: transparent;" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle text-light" style="font-size: 1.5rem;"></i></button>
                 <ul class="dropdown-menu dropdown-menu-left">
                     <li class="dropdown-item">
-                        <a class="nav-link dropdown-link" href="{% url 'accounts:account_details' %}"><i class="bi bi-person-lines-fill mx-2"></i>پنل کاربری</a>
+                        <a class="nav-link dropdown-link" href="{% url 'accounts:user_profile' %}"><i class="bi bi-person-lines-fill mx-2"></i>پنل کاربری</a>
                     </li>
                     {% if user.is_teacher %}
                         <li class="dropdown-item">
@@ -118,6 +121,12 @@
 
     .navbar-collapse .navbar-nav .nav-item {
         margin: 0 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .navbar-collapse .navbar-nav .nav-item .nav-link {
+        margin: 0;
     }
     .navbar .container .navbar-collapse .navbar-nav {
         margin-right: auto;

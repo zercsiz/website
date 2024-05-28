@@ -27,7 +27,7 @@
                             <img class="img-fluid" src="{{ course.image.url }}" alt="">
                         </div>
                         <div class="card-body">
-                            <h4>{{ course.title }}</h4>
+                            <a href="{{ course.get_absolute_url }}"><h4>{{ course.title }}</h4></a>
                             <p class="course-description">{{ course.description }}</p>
                             
                         </div>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .course-details{
+        margin-top: 71px;
+    }
+</style>
+<section class="course-details container">
+    <p>{{course.title}}</p>
+    <p>{{course.description}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">ثبت نام</button>
+    </form>
+    
+    
+</section>
+    
+{% endblock %}

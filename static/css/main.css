@@ -84,3 +84,13 @@ hr {
 .btn-primary:hover {
     background-color: var(--color-brand-4);
 }
+
+.captcha-field {
+    margin-top: 15px;
+}
+
+.login-register-hr{
+    border: none;
+    height: 2px;
+    background-image: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgb(123, 123, 123) 50%, rgba(255,255,255,1) 100%);
+}

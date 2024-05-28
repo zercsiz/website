@@ -1,0 +1,38 @@
+{% extends 'accounts/profile_base.html' %}
+
+{% block profile_content %}
+    {% block titel %}
+        <title>حساب کاربری</title>
+    {% endblock %}
+    <style>
+        .course-link{
+            margin-right: auto;
+        }
+    </style>
+    <div class="d-flex flex-column justify-content-center" style="padding: 2% 6%;">
+        <section id="account-information" class="d-flex flex-column">
+            <h5 class="text-center">پنل کاربری</h5>
+            {% if uncomplete_info %}
+                <h5 class="text-center text-danger my-2">لطفا برای نمایش داده شدن در وبسایت اطلاعات خود را <a href="{% url 'accounts:account_edit' %}">تکمیل</a> کنید.</h5>
+            {% endif %}
+            <p><i class="bi bi-person"></i> نام کاربری : {{ user.username|default:""  }}</p>
+            <p><i class="bi bi-telephone"></i>شماره تلفن همراه : {{ user.phone_number|default:""  }}</p>
+            <p><i class="bi bi-envelope"></i>آدرس ایمیل : {{ user.email }}</p>
+            <p>نام : {{ user.first_name|default:"" }}</p>
+            <p>نام خانوادگی : {{ user.last_name|default:""  }}</p>
+            {% if user.is_teacher %}
+                <p>مهارت : {{ user.skill|default:""  }}</p>
+                <p>توضیحات : {{ user.description|default:""  }}</p>
+            {% endif %}
+        </section>
+        <hr>
+        {% if courses %}
+            {% for course in courses %}
+                <div class="d-flex flex-row card p-2 align-items-center">
+                    <p class="m-0">{{ course.title }}</p>
+                    <a class="btn btn-primary course-link" target="_blank" href="{{ course.link }}">اتصال به کلاس</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+{% endblock %}

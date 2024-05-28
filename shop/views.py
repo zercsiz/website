@@ -1,5 +1,3 @@
-from typing import Any
-from django import http
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,11 +5,10 @@ from django.contrib import messages
 from .models import *
 from . import forms
 
-
 class CartView(LoginRequiredMixin, View):
     def get(self, request):
         try:
-            order = request.user.student_orders.get(status='incomplete')
+            order = request.user.orders.get(status='incomplete')
 
         except Order.DoesNotExist:
             order = None
@@ -29,7 +26,7 @@ class removeItem(LoginRequiredMixin, View):
 
 
 class OrderCompleteView(LoginRequiredMixin, View):
-    login_url = '/accounts/login/'  # login Url for LoginRequiredMixin
+    login_url = '/accounts/login/'
 
     def get(self, request, order_id):
         ## this whole section is gonna change because we want to complete the orders by hand in admin panel
@@ -53,16 +50,16 @@ class OrderCompleteView(LoginRequiredMixin, View):
                         already_reserved = True
                 if already_reserved == True:
                     messages.error(request, "تعدادی از جلسات انتخابی از قبل رزور شده اند", 'danger')
-                    return redirect('accounts:account_details')
+                    return redirect('accounts:user_profile')
                 else:
                     messages.success(request, "جلسات انتخابی با موفقیت رزرو شدند", 'success')
-                    return redirect('accounts:account_details')
+                    return redirect('accounts:user_profile')
             except Order.DoesNotExist:
                 messages.success(request, "سفارش یافت نشد", 'danger')
                 return redirect('shop:cart')
 
                 
-class UserOrdersView(View):
+class UserOrdersView(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -112,6 +109,6 @@ class TransactionInfoView(View, LoginRequiredMixin):
             order.status = 'pending'
             order.save()
             messages.success(request, "اطلاعات شما با موفقیت وارد شدند", 'success')
-            return redirect('accounts:account_details')
+            return redirect('accounts:user_profile')
         
         return render(request, 'shop/transaction_info.html' , context)

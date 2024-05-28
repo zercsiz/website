@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from django_jalali.db import models as jmodels
+from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
 
@@ -15,6 +17,10 @@ class Course(models.Model):
     days = models.CharField(max_length=200)
     hour = models.CharField(max_length=200)
     image = models.ImageField(null=True, blank=True, upload_to='images/courses/')
+    price = models.BigIntegerField(null=True)
+    link = models.CharField(max_length=3000, null=True, blank=True)
+
+    students = models.ManyToManyField(get_user_model(), blank=True, related_name="courses")
 
     def __str__(self):
         return f"{self.title} | Start Date:{self.start_date} | {self.description[:60]}... | Days:{self.created} | Hour:{self.edited}"
@@ -23,48 +29,6 @@ class Course(models.Model):
         verbose_name = "Course"
         verbose_name_plural = "Courses"
 
+    def get_absolute_url(self):
+        return reverse('courses:course_details', args=(self.id,))
 
-class TeacherTime(models.Model):
-    from shop.models import Order
-    ## teacher_teacherTimes means times when user is teacher, and student_teacherTime means times when user is student
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="teacher_teacherTimes")
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="student_teacherTimes")
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name="order_teacherTimes")
-
-    date = jmodels.jDateField(null=True)
-    gdate = models.DateField(null=True)
-    week_day = models.CharField(max_length=50, null=True)
-    start = models.TimeField(null=True)
-    end = models.TimeField(null=True)
-    price = models.BigIntegerField(null=True, blank=True)
-    is_reserved = models.BooleanField(default=False)
-    google_meet_link = models.CharField(null=True, max_length=250)
-    report = models.TextField(null=True)
-
-    def __str__(self):
-        return f"{self.gdate} | {self.start} | Reserve Status = {self.is_reserved}"
-
-
-class TeacherPlan(models.Model):
-    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, related_name="plan")
-    google_meet_link = models.CharField(null=True, max_length=250)
-    price = models.BigIntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.teacher.first_name} {self.teacher.last_name} -- {self.teacher.username} -- {self.google_meet_link}"
-
-
-
-class PlanTime(models.Model):
-    teacherplan = models.ForeignKey(TeacherPlan, on_delete=models.CASCADE, null=True, blank=True, related_name="teacherPlan_planTimes")
-
-    week_day = models.CharField(max_length=50, null=True)
-    week_day_number = models.IntegerField(null=True)
-    start = models.TimeField(null=True)
-    end = models.TimeField(null=True)
-
-    def __str__(self):
-        if self.teacherplan:
-            return f"{self.teacherplan.teacher.first_name} {self.teacherplan.teacher.last_name} - {self.week_day} - {self.start}"
-        else:
-            return f"{self.week_day} - {self.start}"

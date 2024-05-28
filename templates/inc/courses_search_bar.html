@@ -11,7 +11,7 @@
         transition: 300ms border-color;
     }
 </style>
-<form action="{% url 'courses:courses_search' %}" method="POST">
+<form action="{% url 'courses:search' %}" method="POST">
     {% csrf_token %}
     <section class="search-bar">
         <div class="d-flex flex-row">

@@ -2,12 +2,17 @@
 
 {% block content %}
     {% load static %}
-<head>
-<title>
-    سبد خرید
-</title>
-</head>
-<body>
+{% block title %}
+    <title>
+        سبد خرید
+    </title>
+{% endblock %}
+<style>
+    .cart-section{
+        margin-top: 71px;
+    }
+</style>
+<section class="cart-section">
     <div class="dflex flex-column">
         <div class="d-flex justify-content-center">
             <div class="col-1" style="margin-left: auto">
@@ -24,7 +29,7 @@
                 <div class="card my-2" style="border-radius: 0.3em; box-shadow: 0 4px 5px 0px rgba(0,0,0,0.1), 0 1px 0px 0px rgba(0,0,0,0.2)">
                     <div class="card-body text-center">
                         <div class="d-flex flex-column">
-                            <p class="">تاریخ سفارش : {{ order.start_date }}</p>
+                            <p class="">دوره : {{ order.course.title }}</p>
                             <p class="">تعداد جلسات : {{ order.sessions_number }}</p>
                         </div>
                     </div>
@@ -58,5 +63,5 @@
             </div>
         </div>
     </div>
-</body>
+</section>
 {% endblock %}

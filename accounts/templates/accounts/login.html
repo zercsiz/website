@@ -8,8 +8,8 @@
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
       <main class="form-signin w-100 m-auto text-center" style="width: 100%">
           <h5 class="mb-3 fw-normal text-center">ورود به حساب کاربری</h5>
-          <hr>
-          <form class="" method="post" style="width: 100%">
+          <hr class="login-register-hr">
+          <form class="" method="post" novalidate style="width: 100%">
               {% csrf_token %}
               
               {% render_field form.email class="form-control my-2" placeholder="ایمیل" %}
@@ -19,7 +19,9 @@
               <small class="my-2" style="color: red; list-style: none;">{{ form.password.errors }}</small>
 
               <small class="my-2" style="color: gray;">{{ form.password.help_text }}</small>
-
+              <div class="captcha-field">
+                {% render_field form.captcha class="form-control form-sm my-2" placeholder="لطفا کد امنیتی را وارد کنید" %}
+              </div>
               <button class="w-100 btn btn-primary" type="submit">ورود</button>
               <a href="{% url 'accounts:user_registration' %}" class="btn btn-outline-secondary w-100 mt-2">ثبت نام</a>
               <hr>

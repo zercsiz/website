@@ -9,9 +9,7 @@ class AccountAdmin(UserAdmin):
                     'email',
                     'date_joined',
                     'last_login',
-                    'is_admin',
-                    'is_student',
-                    'is_teacher')
+                    'is_admin')
     search_fields = ('username', 'email')
     readonly_fields = ('date_joined', 'last_login')
 

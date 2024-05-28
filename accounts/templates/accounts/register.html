@@ -5,11 +5,23 @@
     {% block titel %}
         <title>ثبت نام</title>
     {% endblock %}
-
+    <style>
+        .form-signup {
+          max-width: 340px;
+          padding: 15px;
+        }
+        .form-signup:focus-within {
+          z-index: 2;
+        }
+        .button-signup {
+            max-width: 340px
+        }
+        
+    </style>
     <div class="d-flex flex-column justify-content-center" style="margin-top: 100px">
         <main class="form-signup w-100 m-auto text-center" style="width: 100%">
             <h5 class="mb-3 fw-normal text-center">ثبت نام</h5>
-            <hr>
+            <hr class="login-register-hr">
             <form class="" method="post" style="width: 100%">
                 {% csrf_token %}
                 
@@ -23,7 +35,10 @@
                 <small class="my-2" style="color: red;">{{ form.password1.errors }}</small>
 
                 <small class="my-2" style="color: gray;">{{ form.password1.help_text }}</small>
-
+                <div class="captcha-field">
+                    {% render_field form.captcha class="form-control form-sm my-2" placeholder="لطفا کد امنیتی را وارد کنید" %}
+                    <small class="my-2" style="color: red; list-style: none;">{{ form.captcha.errors }}</small>
+                </div>
                 <button type="submit" class="btn btn-primary button-signup w-100 mt-2">ثبت نام</button>
 
                 <a href="{% url 'accounts:user_login' %}" class="btn btn-outline-secondary w-100 mt-2">ورود به حساب کاربری</a>
@@ -31,17 +46,6 @@
         </main>
     </div>
 
-    <style>
-        .form-signup {
-          max-width: 340px;
-          padding: 15px;
-        }
-        .form-signup:focus-within {
-          z-index: 2;
-        }
-        .button-signup {
-            max-width: 340px
-        }
-    </style>
+    
 
 {% endblock %}
